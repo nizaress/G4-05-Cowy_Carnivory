@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('vendor_id')->nullable();
             $table->string('vendor_email');
             $table->string('vendor_name');
-            $table->unique(['cod','vendor_email']);
+            $table->primary(['cod','vendor_email']);
             $table->timestamps();
         });
     }

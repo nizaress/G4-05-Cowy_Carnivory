@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('lineorder', function (Blueprint $table) {
-            $table->foreign('product_id')->references('id')->on('product')->onDelete('set null');
+        Schema::create('order', function (Blueprint $table) {
+            $table->integer('numOrder');
+            $table->date('Date');
+            $table->time('deliveryTime',0);
+            $table->string('PaymentMethod');
+            $table->string('customer_email');
+            $table->primary(['numOrder','customer_email']);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('lineorder', function (Blueprint $table) {
-            $table->dropForeign(['product_id']);
-        });
+        Schema::dropIfExists('order');
     }
 };
