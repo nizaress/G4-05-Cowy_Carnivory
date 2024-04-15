@@ -10,16 +10,17 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Verdana', sans-serif;  /* o cualquier fuente que prefieras */
+    color: #014E7A;
+    font-family: 'Verdana', sans-serif;  
   }
 
-  /* Estilos del menú de navegación */
+  /* Estilos del menú */
   .navbar {
     display: flex;
     align-items: center;
     list-style: none;
     padding: 16px;
-    margin: 0; /* elimina el margen por defecto */
+    margin: 0; 
     background-color: #fff;
   }
 
@@ -29,58 +30,62 @@
 
   .navbar a {
     text-decoration: none;
-    color: #333;
+    color: #014E7A;
     padding: 8px 16px;
-    font-size: 16px; /* Tamaño de la fuente */
+    font-size: 16px; 
   }
 
   .navbar a.bold {
-    font-weight: bold; /* Hace que el texto sea en negrita */
+    font-weight: bold; 
   }
 
-  /* Fondo fijo y estilos del contenedor del logo */
+
   .background {
-    background-color: #000000; /* Color de fondo oscuro */
+    background-color: #000000; 
     background-image: url('C:\Users\nur29\OneDrive\Escritorio\Laravel\G4-05-Cowy_Carnivory\DSS-Second-Delivery\Work-Project\resources\views\logo.png');
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
     padding: 50px 0;
+    height: 75%;
   }
 
   .logo-container {
     background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
-    padding: 20px;
+    padding: 0;
     text-align: center;
-    position: relative; /* Ajusta el posicionamiento del nombre del logo */
+    position: relative; 
+    z-index: 1; 
+    height: 100%;
   }
 
   .logo {
-    background-image: "logo.png";
-    height: 200px; /* Altura del logo */
-    width: 200px; /* Anchura del logo */
+    background-image: url('images/logo.png');
+    height: 200px; 
+    width: 200px; 
     background-size: contain;
     background-repeat: no-repeat;
-    margin: auto; /* Centra el logo horizontalmente */
-    position: relative; /* Relativo al texto que estará bajo él */
-    z-index: 2; /* Asegura que el logo esté sobre el texto */
+    margin: auto; 
+    position: relative; 
+    z-index: 2; 
+    padding-top: 5%; 
   }
 
   .slogan {
-    font-size: 1.5em; /* Tamaño de la fuente del eslogan */
-    color: #555;
-    margin-top: 15px; /* Ajusta la posición del eslogan si es necesario */
-    z-index: 1; /* Coloca el eslogan debajo del logo */
-    position: relative; /* Importante para el z-index */
+    font-size: 1.5em; 
+    color: #014E7A;
+    margin-top: 15px; 
+    z-index: 1; 
+    position: relative; 
     font-family: Copperplate, Papyrus, fantasy;
   }
 
-  /* Nombre del restaurante bajo el logo */
+  
   .brand-name {
     font: bold;
-    font-size: 2em; /* Tamaño de la fuente del nombre */
-    color: #333;
-    margin-top: 20px; /* Espaciado por encima del nombre */
+    font-size: 2em; 
+    color: #013756;
+    margin-top: 30px; 
     font-family: Copperplate, Papyrus, fantasy;
   }
 </style>
@@ -93,12 +98,12 @@
   <li><a href="#products">Products</a></li>
   <li><a href="#customers">Customers</a></li>
   <li><a href="#orders">Orders</a></li>
-  <li><a href="#linorders">Linorders</a></li> <!-- Añadido nuevo elemento al menú -->
+  <li><a href="#linorders">Linorders</a></li> 
 </ul>
 
 <div class="background">
   <div class="logo-container">
-    <div class="logo"><img src="C:\Users\nur29\OneDrive\Escritorio\Laravel\G4-05-Cowy_Carnivory\DSS-Second-Delivery\Work-Project\resources\views\logo.png" alt="Logo"></div>
+    <div class="logo"><img src="images/logo.png" alt="Logo"></div>
     <div class="brand-name">COWY CARNIVORY</div>
     <p class="slogan">Tasty for the Nasty</p>
   </div>
