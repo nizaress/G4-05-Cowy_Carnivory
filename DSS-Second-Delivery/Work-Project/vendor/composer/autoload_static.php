@@ -6512,6 +6512,7 @@ class ComposerStaticInit24cf3ab5f2f1f7ffd658c335e850dcfa
         'Tests\\Feature\\CustomerOrderAssociationTest' => __DIR__ . '/../..' . '/tests/Feature/CustomerOrderAssociationTest.php',
         'Tests\\Feature\\OrderLineorderAssociationTest' => __DIR__ . '/../..' . '/tests/Feature/OrderLineorderAssociationTest.php',
         'Tests\\Feature\\ProductLineorderAssociationTest' => __DIR__ . '/../..' . '/tests/Feature/ProductLineorderAssociationTest.php',
+        'Tests\\Feature\\VendorProductAssociationTest' => __DIR__ . '/../..' . '/tests/Feature/VendorProductAssociationTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
