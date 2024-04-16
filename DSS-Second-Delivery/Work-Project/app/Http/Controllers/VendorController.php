@@ -31,5 +31,20 @@ class VendorController extends Controller
         $vendor->delete();
         return redirect('/vendor')->with('status', 'Vendor deleted successfully!');
     }
+
+    public function update(Request $request, $id)
+    {
+        $vendor = Vendor::findOrFail($id);
+        $data = $request->validate([
+            'phone_number' => 'nullable|integer|min:1',
+            'address' => 'nullable|string',
+            'accountNumber' => 'nullable|string',
+        ]);
+
+        $vendor->update($data);
+        return back();
+    }
+
+
 }
 
