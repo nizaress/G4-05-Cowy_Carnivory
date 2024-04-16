@@ -29,7 +29,8 @@ class ProductTableSeeder extends Seeder
                     $k++;
                     DB::table('product')->insert([
                         [
-                            'cod' => $k + 1 ,
+                            'id' => $k,
+                            'cod' => $k,
                             'name' => 'Cool Food ' . $i,
                             'description' => 'Cool Description ' . $i,
                             'price' => $i + 1,

@@ -28,7 +28,8 @@ class OrderTableSeeder extends Seeder
                     $k++;
                     DB::table('order')->insert([
                         [
-                            'numOrder' => $k + 1 ,
+                            'id' => $k,
+                            'numOrder' => $k,
                             'Date' => now(),
                             'deliveryTime' => now(), 
                             'PaymentMethod' => 'Payment Method Number ' . $k,
