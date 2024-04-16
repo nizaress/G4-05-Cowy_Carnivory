@@ -62,3 +62,11 @@ Route::get('/example', function () {
 Route::get('/vendor', [VendorController::class, 'index']);
 Route::post('/vendor/delete', [VendorController::class, 'delete']);
 Route::patch('/vendor/update/{id}', [VendorController::class, 'update']);
+Route::get('/listing', function () {
+    return view('list.index');
+})->name('list.blank');
+Route::get('/products', [ProductController::class, 'index'])->name('list.products');
+Route::get('/vendors', [VendorController::class, 'index'])->name('list.vendors');
+Route::get('/customers', [CustomerController::class, 'index'])->name('list.customers');
+Route::get('/orders', [OrderController::class, 'index'])->name('list.orders');
+Route::get('/linorders', [LinorderController::class, 'index'])->name('list.linorders');
