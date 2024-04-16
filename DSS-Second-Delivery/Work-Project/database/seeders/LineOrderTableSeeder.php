@@ -25,6 +25,7 @@ class LineOrderTableSeeder extends Seeder
         $productPriceCollection = DB::table('product')->pluck('price');
 
         $k=0;
+        $j=0;
         for ($i = 0; $i < 100; $i++) {
             $NumOrder=$NumOrderCollection->get($i);
             $productCod=$productCodCollection->get($i);
@@ -33,10 +34,13 @@ class LineOrderTableSeeder extends Seeder
             $productPrice=$productPriceCollection->get($i);
                 for ($j = 1; $j <= 5; $j++) {
                     $k++;
+                    $j++;
                     DB::table('lineorder')->insert([
                         [
-                            'id' => $k + 1 ,
+                            'id' => $k,
+                            'order_id' => $k,
                             'numOrder' => $NumOrder,
+                            'product_id' => $k,
                             'product_code' => $productCod, 
                             'product_name' => $productName,
                             'product_description' => $productDesc,

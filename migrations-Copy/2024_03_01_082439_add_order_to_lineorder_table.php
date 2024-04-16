@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('lineorder', function (Blueprint $table) {
-            $table->foreign('product_id')->references('id')->on('product')->onDelete('set null');
+            $table->foreign('numOrder')->references('numOrder')->on('order')->onDelete('cascade');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('lineorder', function (Blueprint $table) {
-            $table->dropForeign(['product_id']);
+            $table->dropForeign(['numOrder']);
         });
     }
 };

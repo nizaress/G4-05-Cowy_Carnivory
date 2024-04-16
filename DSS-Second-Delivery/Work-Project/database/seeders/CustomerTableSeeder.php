@@ -21,6 +21,7 @@ class CustomerTableSeeder extends Seeder
             // Inserta datos de ejemplo en la tabla 'vendor'
             DB::table('customer')->insert([
                 [
+                    'id' => $i,
                     'email' => 'customer' . $i . "@gmail.com",
                     'name' => 'Customer' . ' ' . $i,
                     'password' => 'Ultra Strong Password ' . $i,

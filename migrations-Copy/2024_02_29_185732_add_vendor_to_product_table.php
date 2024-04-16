@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('product', function (Blueprint $table) {
-            $table->foreign('vendor_id')->references('id')->on('vendor')->onDelete('set null');
+            $table->foreign('vendor_email')->references('email')->on('vendor')->onDelete('cascade');
+            $table->foreign('vendor_name')->references('name')->on('vendor')->onDelete('cascade');
+            $table->primary(['cod','vendor_email']);
             
         });
     }
@@ -27,7 +29,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('product', function (Blueprint $table) {
-            $table->dropForeign(['vendor_id']);
+            $table->dropForeign(['vendor_email']);
+            $table->dropForeign(['vendor_name']);
         });
     }
 };

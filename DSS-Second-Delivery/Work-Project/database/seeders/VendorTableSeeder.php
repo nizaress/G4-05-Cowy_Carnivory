@@ -21,6 +21,7 @@ class VendorTableSeeder extends Seeder
             // Inserta datos de ejemplo en la tabla 'vendor'
             DB::table('vendor')->insert([
                 [
+                    'id' => $i,
                     'email' => 'vendor' . $i . "@gmail.com",
                     'name' => 'Vendor' . ' ' . $i,
                     'phone_number' => 600000000 + $i,

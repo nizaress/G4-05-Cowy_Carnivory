@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vendor', function (Blueprint $table) {
-            $table->id();
-            $table->string('email'); // Define el campo que será la clave primaria
+        Schema::create('product', function (Blueprint $table) {
+            $table->integer('cod'); // Define el campo que será la clave primaria
             $table->string('name');
-            $table->bigInteger('phone_number');
-            $table->string('address');
-            $table->string('accountNumber');
-            $table->unique('email');
-            $table->unique('name');  
+            $table->index('name'); 
+            $table->string('description');
+            $table->index('description'); 
+            $table->float('price',8,2);
+            $table->index('price'); 
+            $table->string('vendor_email');
+            $table->string('vendor_name');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendor');
+        Schema::dropIfExists('product');
     }
 };
