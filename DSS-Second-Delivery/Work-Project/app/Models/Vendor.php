@@ -13,6 +13,8 @@ class Vendor extends Model
 
     protected $fillable = ['email','name','phone_number','address','accountNumber','created_at','updated_at'];
 
+    protected $guarded = [];
+
     public function products()
     {
         return $this->hasMany(Product::class, 'vendor_email', 'email');

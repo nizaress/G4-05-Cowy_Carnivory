@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\VendorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,3 +55,8 @@ Route::get('/example', function () {
 
     return view('welcome');
 });
+
+
+
+
+Route::get('/vendor', [VendorController::class, 'index']);

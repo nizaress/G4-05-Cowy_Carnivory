@@ -1561,3 +1561,14 @@
 #38 /home/cris/UA/thirdYear/secondTerm/DSS/Practicas/Grupal-Github/G4-05-Cowy_Carnivory/DSS-Second-Delivery/Work-Project/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #39 {main}
 "} 
+[2024-04-16 08:35:14] local.INFO: Example route accessed.  
+[2024-04-16 08:35:14] local.INFO: Variable 1: First value  
+[2024-04-16 08:35:14] local.INFO: Variable 2: Second value  
+[2024-04-16 08:35:14] local.INFO: Variable 3: Third value  
+[2024-04-16 08:35:14] local.INFO: Variable 4: Fourth value  
+[2024-04-16 08:35:14] local.INFO: Variable 5: Fifth value  
+[2024-04-16 08:35:14] local.INFO: Variable 6: Sixth value  
+[2024-04-16 08:35:14] local.INFO: Variable 7: Seventh value  
+[2024-04-16 08:35:14] local.INFO: Variable 8: Eighth value  
+[2024-04-16 08:35:14] local.INFO: Variable 9: Ninth value  
+[2024-04-16 08:35:14] local.INFO: Variable 10: Tenth value  
