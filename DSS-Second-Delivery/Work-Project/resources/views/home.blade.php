@@ -42,7 +42,7 @@
 
   .background {
     background-color: #000000; 
-    background-image: url('C:\Users\nur29\OneDrive\Escritorio\Laravel\G4-05-Cowy_Carnivory\DSS-Second-Delivery\Work-Project\resources\views\logo.png');
+    background-image: url('images/fondo.png');
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
