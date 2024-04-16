@@ -60,3 +60,4 @@ Route::get('/example', function () {
 
 
 Route::get('/vendor', [VendorController::class, 'index']);
+Route::post('/vendor/delete', [VendorController::class, 'delete']);
