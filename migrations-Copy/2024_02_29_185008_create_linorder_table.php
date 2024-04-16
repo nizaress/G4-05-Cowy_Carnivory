@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order', function (Blueprint $table) {
-            $table->id();
+        Schema::create('lineorder', function (Blueprint $table) {
+            $table->integer('id'); // Define el campo que será la clave primaria
             $table->integer('numOrder');
-            $table->date('Date');
-            $table->time('deliveryTime',0);
-            $table->string('PaymentMethod');
-            $table->unsignedBigInteger('customer_id')->nullable();
-            $table->string('customer_email');
-            $table->unique(['numOrder','customer_email']);
+            $table->integer('product_code');
+            $table->string('product_name');
+            $table->string('product_description');
+            $table->float('product_price',8,2);
+            $table->primary(['id','numOrder']);
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order');
+        Schema::dropIfExists('lineorder');
     }
 };

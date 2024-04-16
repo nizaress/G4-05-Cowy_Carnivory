@@ -14,13 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('vendor', function (Blueprint $table) {
-            $table->id();
             $table->string('email'); // Define el campo que será la clave primaria
             $table->string('name');
             $table->bigInteger('phone_number');
             $table->string('address');
             $table->string('accountNumber');
-            $table->unique('email');
+            $table->primary('email');
             $table->unique('name');  
             $table->timestamps();
         });

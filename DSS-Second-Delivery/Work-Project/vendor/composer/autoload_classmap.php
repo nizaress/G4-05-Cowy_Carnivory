@@ -5989,6 +5989,7 @@ return array(
     'Tests\\Feature\\CustomerOrderAssociationTest' => $baseDir . '/tests/Feature/CustomerOrderAssociationTest.php',
     'Tests\\Feature\\OrderLineorderAssociationTest' => $baseDir . '/tests/Feature/OrderLineorderAssociationTest.php',
     'Tests\\Feature\\ProductLineorderAssociationTest' => $baseDir . '/tests/Feature/ProductLineorderAssociationTest.php',
+    'Tests\\Feature\\VendorProductAssociationTest' => $baseDir . '/tests/Feature/VendorProductAssociationTest.php',
     'Tests\\TestCase' => $baseDir . '/tests/TestCase.php',
     'Tests\\Unit\\ExampleTest' => $baseDir . '/tests/Unit/ExampleTest.php',
     'TheSeer\\Tokenizer\\Exception' => $vendorDir . '/theseer/tokenizer/src/Exception.php',
