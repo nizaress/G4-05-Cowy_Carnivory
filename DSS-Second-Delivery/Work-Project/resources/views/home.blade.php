@@ -94,7 +94,7 @@
 
 <ul class="navbar">
   <li><a href="#home" class="bold">Home</a></li>
-  <li><a href="#vendors">Vendors</a></li>
+  <li><a href="vendors">Vendors</a></li>
   <li><a href="#products">Products</a></li>
   <li><a href="#customers">Customers</a></li>
   <li><a href="#orders">Orders</a></li>
