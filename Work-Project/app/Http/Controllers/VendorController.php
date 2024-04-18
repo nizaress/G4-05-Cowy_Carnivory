@@ -11,7 +11,7 @@ class VendorController extends Controller
     {
         $vendors = Vendor::all();
 
-        return view('list.vendors', compact('vendors'));
+        return view('vendors.index', ['vendors' => $vendors]);
     }
 
     public function delete(Request $request)
