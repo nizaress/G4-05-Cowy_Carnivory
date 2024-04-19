@@ -93,7 +93,7 @@
                 <input type="number" name="vendor_id" min="1" step="1" required placeholder="Enter Vendor ID" style="flex: 1;">
                 <button type="submit" style="margin-left: 10px;">Delete</button>
             </form>
-            <form method="GET" style="margin-right: 20%;" action="{{ url('/') }}">
+            <form method="GET" style="margin-right: 20%;" action="{{ url('/vendor/create') }}">
                 @csrf
                 <button type="submit" type="button">Add a Vendor</button>
             </form>

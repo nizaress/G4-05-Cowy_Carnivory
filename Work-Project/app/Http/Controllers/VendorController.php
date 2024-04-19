@@ -46,6 +46,25 @@ class VendorController extends Controller
         return back();
     }
 
+    public function create()
+    {
+        return view('vendors.insert');
+    }
 
+    public function store(Request $request)
+    {
+
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'name' => 'required',
+            'phone_number' => 'required',
+            'address' => 'required',
+            'accountNumber' => 'required',
+        ]);
+
+        Vendor::create($validatedData);
+
+        return redirect()->route('vendors.create')->with('success', 'Vendor added successfully!');
+    }
 }
 

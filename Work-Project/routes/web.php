@@ -62,7 +62,10 @@ Route::get('/example', function () {
 Route::get('/vendor', [VendorController::class, 'index'])->name('list.vendors');
 Route::post('/vendor/delete', [VendorController::class, 'delete']);
 Route::patch('/vendor/update/{id}', [VendorController::class, 'update']);
-Route::get('/products', [ProductController::class, 'index'])->name('list.products');
-Route::get('/customers', [CustomerController::class, 'index'])->name('list.customers');
-Route::get('/orders', [OrderController::class, 'index'])->name('list.orders');
-Route::get('/linorders', [LinorderController::class, 'index'])->name('list.linorders');
+Route::get('/vendor/create', [VendorController::class, 'create'])->name('vendors.create');
+Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');;
+
+Route::get('/product', [ProductController::class, 'index'])->name('list.products');
+Route::get('/customer', [CustomerController::class, 'index'])->name('list.customers');
+Route::get('/order', [OrderController::class, 'index'])->name('list.orders');
+Route::get('/linorder', [LinorderController::class, 'index'])->name('list.linorders');
