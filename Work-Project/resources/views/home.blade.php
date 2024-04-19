@@ -42,7 +42,7 @@
 
   .background {
     background-color: #000000; 
-    background-image: url('images/fondo.png');
+    background-image: url('logo.png');
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
@@ -60,7 +60,7 @@
   }
 
   .logo {
-    background-image: url('images/logo.png');
+    background-image: url('logo.png');
     height: 200px; 
     width: 200px; 
     background-size: contain;
@@ -94,7 +94,7 @@
 
 <ul class="navbar">
   <li><a href="#home" class="bold">Home</a></li>
-  <li><a href="#vendors">Vendors</a></li>
+  <li><a href="/vendor">Vendors</a></li>
   <li><a href="#products">Products</a></li>
   <li><a href="#customers">Customers</a></li>
   <li><a href="#orders">Orders</a></li>
@@ -103,7 +103,7 @@
 
 <div class="background">
   <div class="logo-container">
-    <div class="logo"><img src="images/logo.png" alt="Logo"></div>
+    <div class="logo"><img src="logo.png" alt="Logo"></div>
     <div class="brand-name">COWY CARNIVORY</div>
     <p class="slogan">Tasty for the Nasty</p>
   </div>
