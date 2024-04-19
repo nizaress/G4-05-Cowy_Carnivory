@@ -39,19 +39,23 @@
     font-weight: bold; 
   }
 
+  .footer {
+    text-align: center;
+    color: #014E7A;
+
+  }
 
   .background {
-    background-color: #000000; 
-    background-image: url('logo.png');
+    background-image: url('fondo.jpg');
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
     padding: 50px 0;
-    height: 75%;
+    height: 71%;
   }
 
   .logo-container {
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    background-color: rgba(255, 255, 255, 0.3); /* Fondo blanco semitransparente */
     padding: 0;
     text-align: center;
     position: relative; 
@@ -66,48 +70,59 @@
     background-size: contain;
     background-repeat: no-repeat;
     margin: auto; 
-    position: relative; 
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2; 
-    padding-top: 5%; 
+
   }
 
   .slogan {
+    font-weight: 500;
     font-size: 1.5em; 
-    color: #014E7A;
-    margin-top: 15px; 
+    color: #fff;
     z-index: 1; 
-    position: relative; 
-    font-family: Copperplate, Papyrus, fantasy;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    font-family: 'Baskerville', serif;
   }
 
   
   .brand-name {
-    font: bold;
-    font-size: 2em; 
-    color: #013756;
-    margin-top: 30px; 
-    font-family: Copperplate, Papyrus, fantasy;
+    font-weight: 900;
+    font-size: 4em; 
+    color: #fff;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Baskerville', serif;
   }
 </style>
 </head>
 <body>
 
 <ul class="navbar">
-  <li><a href="#home" class="bold">Home</a></li>
+  <li><a href="/home" class="bold">Home</a></li>
   <li><a href="/vendor">Vendors</a></li>
-  <li><a href="#products">Products</a></li>
-  <li><a href="#customers">Customers</a></li>
-  <li><a href="#orders">Orders</a></li>
-  <li><a href="#linorders">Linorders</a></li> 
+  <li><a href="/products">Products</a></li>
+  <li><a href="/customers">Customers</a></li>
+  <li><a href="/orders">Orders</a></li>
+  <li><a href="/linorders">Linorders</a></li> 
 </ul>
 
 <div class="background">
   <div class="logo-container">
-    <div class="logo"><img src="logo.png" alt="Logo"></div>
-    <div class="brand-name">COWY CARNIVORY</div>
+    <div class="logo"></div>
+    <div class="brand-name">Cowy Carnivory</div>
     <p class="slogan">Tasty for the Nasty</p>
   </div>
 </div>
+
+<p class="footer">© 2021 Cowy Carnivory. All rights reserved.</p>
 
 </body>
 </html>
