@@ -61,7 +61,7 @@ class VendorController extends Controller
         $data = $request->validate([
             'phone_number' => 'nullable|integer|min:1',
             'address' => 'nullable|string',
-            'accountNumber' => 'nullable|string',
+            'accountNumber' => 'nullable|integer|min:1',
         ]);
 
         $vendor->update($data);

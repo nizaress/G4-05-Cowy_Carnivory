@@ -65,7 +65,7 @@ class ProductController extends Controller
         $data = $request->validate([
             'name' => 'nullable|string',
             'description' => 'nullable|string',
-            'price' => 'nullable|integer',
+            'price' => 'nullable|numeric',
             'vendor_name' => 'nullable|string',
         ]);
 
@@ -85,7 +85,7 @@ class ProductController extends Controller
             'cod' => 'required|integer|min:1',
             'name' => 'required|string',
             'description' => 'nullable|string',
-            'price' => 'nullable|integer',
+            'price' => 'nullable|numeric',
             'vendor_id' => 'nullable|integer|min:1',
             'vendor_email' => 'required|email',
             'vendor_name' => 'nullable|string',
