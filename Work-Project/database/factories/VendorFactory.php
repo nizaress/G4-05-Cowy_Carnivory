@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Vendor;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -15,7 +16,8 @@ class VendorFactory extends Factory
      *
      * @var string
      */
-    protected $model = Vendor::class;
+
+     protected $model = Vendor::class;
 
     /**
      * Define the model's default state.
@@ -27,7 +29,7 @@ class VendorFactory extends Factory
         return [
             'email' => $this->faker->unique()->safeEmail(),
             'name' => $this->faker->company(),
-            'phone_number' => $this->faker->phoneNumber(),
+            'phone_number' => $this->faker->numerify('##########'),
             'address' => $this->faker->address(),
             'accountNumber' => $this->faker->bankAccountNumber(),
             'created_at' => now(),
