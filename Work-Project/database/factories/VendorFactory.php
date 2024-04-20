@@ -28,7 +28,7 @@ class VendorFactory extends Factory
     {
         return [
             'email' => $this->faker->unique()->safeEmail(),
-            'name' => $this->faker->company(),
+            'name' => $this->faker->unique()->company(),
             'phone_number' => $this->faker->numerify('##########'),
             'address' => $this->faker->address(),
             'accountNumber' => $this->faker->bankAccountNumber(),

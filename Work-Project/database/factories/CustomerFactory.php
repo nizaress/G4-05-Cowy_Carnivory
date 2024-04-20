@@ -23,7 +23,7 @@ class CustomerFactory extends Factory
     {
         return [
             'email' => $this->faker->unique()->safeEmail(),
-            'name' => $this->faker->name(),
+            'name' => $this->faker->unique()->name(),
             'password' => bcrypt('password'), // You may use faker to generate a random password
             'address' => $this->faker->address(),
             'phone_number' => $this->faker->numerify('##########'),
