@@ -148,6 +148,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $vendors->links() }}
         </div>
 
         <footer></footer>
