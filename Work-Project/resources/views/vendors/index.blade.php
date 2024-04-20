@@ -97,6 +97,13 @@
                 @csrf
                 <button type="submit" type="button">Add a Vendor</button>
             </form>
+            <form action="{{ url('/vendor') }}" method="GET" style="margin-bottom: 20px;">
+                <select name="sort" onchange="this.form.submit()" style="padding: 10px; border-radius: 5px; background-color: white; border: 2px solid #ccc;">
+                    <option value="">None</option>
+                    <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Alphabetical Order</option>
+                    <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Reversed Alphabetical Order</option>
+                </select>
+            </form>   
         </div>
 
         @if (session('error'))
