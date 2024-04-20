@@ -10,9 +10,19 @@ class VendorController extends Controller
 {
     public function index()
     {
-        $vendors = Vendor::paginate(10);
-
-        return view('vendors.index', ['vendors' => $vendors]);
+        $sortOrder = request('sort'); // Get the sorting parameter from the request
+        $query = Vendor::query();     // Create a query builder instance for the Vendor model
+    
+        // Apply sorting based on the sort order provided
+        if ($sortOrder == 'asc') {
+            $query->orderBy('name', 'asc');  // Apply ascending order sorting by name
+        } elseif ($sortOrder == 'desc') {
+            $query->orderBy('name', 'desc'); // Apply descending order sorting by name
+        }
+    
+        $vendors = $query->paginate(10); // Paginate the query result
+    
+        return view('vendors.index', ['vendors' => $vendors]); // Return the view with vendors data
     }
 
     public function delete(Request $request)
