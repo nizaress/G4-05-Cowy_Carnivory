@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <title>Add Vendor</title>
+        <title>Add Customer</title>
         <style>
             body {
                 background-color: #e5e5e5;
@@ -80,14 +80,14 @@
 
         <div class="box">
             <div class="container" style="font-family: 'Roboto', sans-serif; padding: 10px; overflow: hidden;">
-                <h1 style="text-align: center; margin-bottom: 7%; font-family: 'Open Sans', sans-serif;">Add New Vendor</h1>
+                <h1 style="text-align: center; margin-bottom: 7%; font-family: 'Open Sans', sans-serif;">Add New Customer</h1>
                 @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('vendor.store') }}">
+                <form method="POST" action="{{ route('customer.store') }}">
                     @csrf
                     <div class="form-group">
                         <label for="email">Email:</label>
@@ -104,8 +104,15 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="name">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="phone_number">Phone Number:</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+                        <input type="integer" class="form-control" id="phone_number" name="phone_number" required>
                         @error('phone_number')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -118,12 +125,13 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="accountNumber">Account Number:</label>
-                        <input type="text" class="form-control" id="accountNumber" name="accountNumber" required>
-                        @error('accountNumber')
+                        <label for="accountNumber">Credit Card:</label>
+                        <input type="text" class="form-control" id="card_number" name="card_number" required>
+                        @error('card_number')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+                    
                     <div style="margin-top: 7%; display: flex;">
                         <button class="redirectButton" onclick="performCustomAction(event)" form=none style="background-color: #ff0000; width: 150px;"
                         onmouseover="this.style.backgroundColor='#b70000'" 
@@ -137,11 +145,10 @@
         <script>
             function performCustomAction(event){
                 event.preventDefault();
-                window.location = "/vendor";
+                window.location = "/customer";
             };
         </script>
 
         <footer></footer>
     </body>
 </html>
-

@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\LinorderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,9 +67,22 @@ Route::get('/vendor', [VendorController::class, 'index'])->name('list.vendors');
 Route::post('/vendor/delete', [VendorController::class, 'delete']);
 Route::patch('/vendor/update/{id}', [VendorController::class, 'update']);
 Route::get('/vendor/create', [VendorController::class, 'create'])->name('vendors.create');
-Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');;
+Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');
 
 Route::get('/product', [ProductController::class, 'index'])->name('list.products');
+Route::post('/product/delete', [ProductController::class, 'delete']);
+Route::patch('/product/update/{id}', [ProductController::class, 'update']);
+Route::get('/product/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+
 Route::get('/customer', [CustomerController::class, 'index'])->name('list.customers');
+Route::post('/customer/delete', [CustomerController::class, 'delete']);
+Route::patch('/customer/update/{id}', [CustomerController::class, 'update']);
+Route::get('/customer/create', [CustomerController::class, 'create'])->name('customers.create');
+Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
+
 Route::get('/order', [OrderController::class, 'index'])->name('list.orders');
+Route::post('/order/delete', [OrderController::class, 'delete']);
+
 Route::get('/linorder', [LinorderController::class, 'index'])->name('list.linorders');
+Route::post('/linorder/delete', [LinorderController::class, 'delete']);

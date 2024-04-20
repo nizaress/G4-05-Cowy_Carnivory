@@ -106,12 +106,12 @@
 <body>
 
 <ul class="navbar">
-  <li><a href="/home" class="bold">Home</a></li>
+  <li><a href="/" class="bold">Home</a></li>
   <li><a href="/vendor">Vendors</a></li>
-  <li><a href="/products">Products</a></li>
-  <li><a href="/customers">Customers</a></li>
-  <li><a href="/orders">Orders</a></li>
-  <li><a href="/linorders">Linorders</a></li> 
+  <li><a href="/product">Products</a></li>
+  <li><a href="/customer">Customers</a></li>
+  <li><a href="/order">Orders</a></li>
+  <li><a href="/linorder">Linorders</a></li> 
 </ul>
 
 <div class="background">

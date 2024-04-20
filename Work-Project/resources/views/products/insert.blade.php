@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <title>Add Vendor</title>
+        <title>Add Product</title>
         <style>
             body {
                 background-color: #e5e5e5;
@@ -80,50 +80,65 @@
 
         <div class="box">
             <div class="container" style="font-family: 'Roboto', sans-serif; padding: 10px; overflow: hidden;">
-                <h1 style="text-align: center; margin-bottom: 7%; font-family: 'Open Sans', sans-serif;">Add New Vendor</h1>
+                <h1 style="text-align: center; margin-bottom: 7%; font-family: 'Open Sans', sans-serif;">Add New Product</h1>
                 @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('vendor.store') }}">
+                <form method="POST" action="{{ route('product.store') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" unique required>
-                        @error('email')
+                        <label for="cod">Product Code:</label>
+                        <input type="text" class="form-control" id="cod" name="cod" unique required>
+                        @error('cod')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" unique required>
+                        <input type="text" class="form-control" id="name" name="name" required>
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="phone_number">Phone Number:</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number" required>
-                        @error('phone_number')
+                        <label for="description">Description:</label>
+                        <input type="text" class="form-control" id="description" name="description" required>
+                        @error('description')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="address">Address:</label>
-                        <input type="text" class="form-control" id="address" name="address" required>
-                        @error('address')
+                        <label for="price">Price:</label>
+                        <input type="text" step="0.01" class="form-control" id="price" name="price" required>
+                        @error('price')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="accountNumber">Account Number:</label>
-                        <input type="text" class="form-control" id="accountNumber" name="accountNumber" required>
-                        @error('accountNumber')
+                        <label for="vendor_id">Vendor's ID Number:</label>
+                        <input type="text" class="form-control" id="vendor_id" name="vendor_id" required>
+                        @error('vendor_id')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="vendor_email">Vendor's Email:</label>
+                        <input type="text" class="form-control" id="vendor_email" name="vendor_email" unique required>
+                        @error('vendor_email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="vendor_name">Vendor's Name:</label>
+                        <input type="text" class="form-control" id="vendor_name" name="vendor_name" required>
+                        @error('vendor_name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    
                     <div style="margin-top: 7%; display: flex;">
                         <button class="redirectButton" onclick="performCustomAction(event)" form=none style="background-color: #ff0000; width: 150px;"
                         onmouseover="this.style.backgroundColor='#b70000'" 
@@ -137,11 +152,10 @@
         <script>
             function performCustomAction(event){
                 event.preventDefault();
-                window.location = "/vendor";
+                window.location = "/product";
             };
         </script>
 
         <footer></footer>
     </body>
 </html>
-

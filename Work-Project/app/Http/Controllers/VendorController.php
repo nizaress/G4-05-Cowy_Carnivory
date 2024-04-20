@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class VendorController extends Controller
 {
@@ -54,17 +55,21 @@ class VendorController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'name' => 'required',
-            'phone_number' => 'required',
-            'address' => 'required',
-            'accountNumber' => 'required',
+            'name' => 'required|string',
+            'phone_number' => 'nullable|integer|min:1',
+            'address' => 'nullable|string',
+            'accountNumber' => 'nullable|string',
         ]);
 
-        Vendor::create($validatedData);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-        return redirect()->route('vendors.create')->with('success', 'Vendor added successfully!');
+        Vendor::create($request->all());
+
+        return redirect()->route('list.vendors')->with('success', 'Vendor added successfully!');
     }
 }
 
