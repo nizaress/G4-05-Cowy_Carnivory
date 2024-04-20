@@ -118,15 +118,8 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="vendor_id">Vendor's ID Number:</label>
-                        <input type="text" class="form-control" id="vendor_id" name="vendor_id" required>
-                        @error('vendor_id')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
                         <label for="vendor_email">Vendor's Email:</label>
-                        <input type="text" class="form-control" id="vendor_email" name="vendor_email" unique required>
+                        <input type="text" class="form-control" id="vendor_email" name="vendor_email" required>
                         @error('vendor_email')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror

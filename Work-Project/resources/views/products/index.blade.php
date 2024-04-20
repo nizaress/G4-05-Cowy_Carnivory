@@ -105,7 +105,7 @@
             </div>
         @endif
 
-        <div style="margin-left: 1%; margin-right: 1%; margin-bottom: 3%;">
+        <div style="margin-left: 1%; margin-right: 1%; margin-bottom: 2%;">
             <table>
                 <thead>
                     <tr>
@@ -114,7 +114,6 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
-                        <th>Vendor ID</th>
                         <th>Vendor Email</th>
                         <th>Vendor Name</th>
                     </tr>
@@ -125,36 +124,29 @@
                             <td><b>{{ $product->id }}</b></td>
                             <td>{{ $product->cod }}</td>
                             <td>
-                                <form action="{{ url('/product/update/'.$product->name) }}" method="POST">
+                                <form action="{{ url('/product/update/'.$product->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="name" value="{{ $product->name }}" onchange="this.form.submit()">
                                 </form>
                             </td>
                             <td>
-                                <form action="{{ url('/product/update/'.$product->description) }}" method="POST">
+                                <form action="{{ url('/product/update/'.$product->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="description" value="{{ $product->description }}" onchange="this.form.submit()">
                                 </form>
                             </td>
                             <td>
-                                <form action="{{ url('/product/update/'.$product->price) }}" method="POST">
+                                <form action="{{ url('/product/update/'.$product->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="price" value="{{ $product->price }}" onchange="this.form.submit()">
                                 </form>
                             </td>
-                            <td>
-                                <form action="{{ url('/product/update/'.$product->vendor_id) }}" method="POST">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="text" name="vendor_id" value="{{ $product->vendor_id }}" onchange="this.form.submit()">
-                                </form>
-                            </td>
                             <td>{{ $product->vendor_email }}</td>
                             <td>
-                                <form action="{{ url('/product/update/'.$product->vendor_name) }}" method="POST">
+                                <form action="{{ url('/product/update/'.$product->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="vendor_name" value="{{ $product->vendor_name }}" onchange="this.form.submit()">
@@ -164,6 +156,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $products->links() }}
         </div>
 
         <footer></footer>

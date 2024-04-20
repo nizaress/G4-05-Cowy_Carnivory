@@ -130,6 +130,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $linorders->links() }}
         </div>
 
         <footer></footer>

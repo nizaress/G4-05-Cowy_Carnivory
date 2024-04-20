@@ -105,7 +105,7 @@
             </div>
         @endif
 
-        <div style="margin-left: 1%; margin-right: 1%; margin-bottom: 3%;">
+        <div style="margin-left: 1%; margin-right: 1%; margin-bottom: 1%;">
             <table>
                 <thead>
                     <tr>
@@ -156,6 +156,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $customers->links() }}
         </div>
 
         <footer></footer>

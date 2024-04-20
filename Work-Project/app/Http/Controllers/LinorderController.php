@@ -10,7 +10,7 @@ class LinorderController extends Controller
 {
     public function index()
     {
-        $linorders = Lineorder::all();
+        $linorders = Lineorder::paginate(15);
 
         return view('linorders', ['linorders' => $linorders]);
     }

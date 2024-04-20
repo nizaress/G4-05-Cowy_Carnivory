@@ -128,6 +128,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $orders->links() }}
         </div>
 
         <footer></footer>

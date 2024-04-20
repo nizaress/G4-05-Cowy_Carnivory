@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -10,7 +11,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(9);
 
         return view('products.index', ['products' => $products]);
     }
@@ -41,7 +42,6 @@ class ProductController extends Controller
             'name' => 'nullable|string',
             'description' => 'nullable|string',
             'price' => 'nullable|integer',
-            'vendor_id' => 'nullable|integer|min:1',
             'vendor_name' => 'nullable|string',
         ]);
 
@@ -71,7 +71,16 @@ class ProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        Product::create($request->all());
+        $vendor = Vendor::where('email', $request->input('vendor_email'))->first();
+
+        if (!$vendor) {
+            return redirect()->back()->withErrors(['vendor_email' => 'Vendor not found for the provided email'])->withInput();
+        }
+
+        $requestData = $request->all();
+        $requestData['vendor_id'] = $vendor->id;
+
+        Product::create($requestData);
 
         return redirect()->route('list.products')->with('success', 'Product added successfully!');
     }
