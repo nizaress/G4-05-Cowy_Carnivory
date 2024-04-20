@@ -79,7 +79,7 @@
         <header>
         </header>
 
-        <div style="display: flex; justify-content: space-between; margin-top: 2%; margin-bottom: 2%;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1%; margin-bottom: 1%;">
             <form method="GET" style="display: flex; align-items: center; margin-left: 2%;" action="{{ url('/') }}">
                 @csrf
                 <button type="submit" style="margin-right: auto; background-color: #4eb8c4;"
@@ -88,19 +88,19 @@
                     Go Back
                 </button>
             </form>
-            <form action="{{ url('/product/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 17%;">
+            <form action="{{ url('/product/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 5%; margin-right: 5%;">
                 @csrf
                 <input type="number" name="product_id" min="1" step="1" required placeholder="Enter Product ID" style="flex: 1;">
                 <button type="submit" style="margin-left: 10px;">Delete</button>
             </form>
-            <form method="GET" style="margin-right: 20%;" action="{{ url('/product/create') }}">
+            <form method="GET" style="margin-right: 6%;" action="{{ url('/product/create') }}">
                 @csrf
                 <button type="submit" type="button">Add a Product</button>
             </form>
 
-            <form action="{{ url('/product') }}" method="GET" style="margin-bottom: 20px; display: flex; justify-content: center; gap: 10px;">
-                <input type="number" name="min_price" placeholder="Price greater than" style="width: 200px; padding: 10px; border-radius: 5px; background-color: #f8f8f8; border: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.15);" min="0" step="0.1" value="{{ request('min_price') }}">
-                <input type="number" name="max_price" placeholder="Price less than" style="width: 200px; padding: 10px; border-radius: 5px; background-color: #f8f8f8; border: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.15);" min="0" step="0.1" value="{{ request('max_price') }}">
+            <form action="{{ url('/product') }}" method="GET" style="margin-right: 5%; display: flex; justify-content: center; gap: 10px;">
+                <input type="number" name="min_price" placeholder="Price greater than" style="width: 77%; padding: 10px; border-radius: 5px; background-color: #f8f8f8; border: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.15);" min="0" step="0.1" value="{{ request('min_price') }}">
+                <input type="number" name="max_price" placeholder="Price less than" style="width: 65%; padding: 10px; border-radius: 5px; background-color: #f8f8f8; border: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.15);" min="0" step="0.1" value="{{ request('max_price') }}">
                 <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 5px; border: none; cursor: pointer; font-size: 16px;">Filter</button>
             </form>
         </div>
@@ -111,7 +111,7 @@
             </div>
         @endif
 
-        <div style="margin-left: 1%; margin-right: 1%; margin-bottom: 2%;">
+        <div style="margin-left: 1%; margin-right: 1%; margin-bottom: 1%;">
             <table>
                 <thead>
                     <tr>
@@ -162,7 +162,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $products->links() }}
+            {{ $products->appends(['min_price' => $minPrice, 'max_price' => $maxPrice])->links() }}
         </div>
 
         <footer></footer>

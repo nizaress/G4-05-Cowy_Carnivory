@@ -8,11 +8,32 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::paginate(15);
+        $sortOrder = $request->input('sort', 'none');
 
-        return view('orders', ['orders' => $orders]);
+        if (!in_array($sortOrder, ['asc', 'desc', 'none'])) {
+            $sortOrder = 'none';
+        }
+
+        $query = Order::query();
+
+        if ($sortOrder == 'asc') {
+            $query->orderBy('numOrder', 'asc');
+        } elseif ($sortOrder == 'desc') {
+            $query->orderBy('numOrder', 'desc');
+        } else {
+            $query->getQuery()->orders = [];
+        }
+
+        $orders = $query->paginate(15);
+
+        $orders->appends(['sort' => $sortOrder]);
+
+        return view('orders', [
+            'orders' => $orders,
+            'sortOrder' => $sortOrder,
+        ]);
     }
 
     public function delete(Request $request)

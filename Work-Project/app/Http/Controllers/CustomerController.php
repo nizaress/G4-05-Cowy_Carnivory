@@ -8,11 +8,32 @@ use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::paginate(10);
+        $sortOrder = $request->input('sort', 'none');
 
-        return view('customers.index', ['customers' => $customers]);
+        if (!in_array($sortOrder, ['asc', 'desc', 'none'])) {
+            $sortOrder = 'none';
+        }
+
+        $query = Customer::query();
+
+        if ($sortOrder == 'asc') {
+            $query->orderBy('name', 'asc');
+        } elseif ($sortOrder == 'desc') {
+            $query->orderBy('name', 'desc');
+        } else {
+            $query->getQuery()->orders = [];
+        }
+
+        $customers = $query->paginate(10);
+
+        $customers->appends(['sort' => $sortOrder]);
+
+        return view('customers.index', [
+            'customers' => $customers,
+            'sortOrder' => $sortOrder,
+        ]);
     }
 
     public function delete(Request $request)

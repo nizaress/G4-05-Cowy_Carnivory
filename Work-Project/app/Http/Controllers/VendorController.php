@@ -8,21 +8,32 @@ use Illuminate\Support\Facades\Validator;
 
 class VendorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $sortOrder = request('sort'); // Get the sorting parameter from the request
-        $query = Vendor::query();     // Create a query builder instance for the Vendor model
-    
-        // Apply sorting based on the sort order provided
-        if ($sortOrder == 'asc') {
-            $query->orderBy('name', 'asc');  // Apply ascending order sorting by name
-        } elseif ($sortOrder == 'desc') {
-            $query->orderBy('name', 'desc'); // Apply descending order sorting by name
+        $sortOrder = $request->input('sort', 'none');
+
+        if (!in_array($sortOrder, ['asc', 'desc', 'none'])) {
+            $sortOrder = 'none';
         }
-    
-        $vendors = $query->paginate(10); // Paginate the query result
-    
-        return view('vendors.index', ['vendors' => $vendors]); // Return the view with vendors data
+
+        $query = Vendor::query();
+
+        if ($sortOrder == 'asc') {
+            $query->orderBy('name', 'asc');
+        } elseif ($sortOrder == 'desc') {
+            $query->orderBy('name', 'desc');
+        } else {
+            $query->getQuery()->orders = [];
+        }
+
+        $vendors = $query->paginate(10);
+
+        $vendors->appends(['sort' => $sortOrder]);
+
+        return view('vendors.index', [
+            'vendors' => $vendors,
+            'sortOrder' => $sortOrder,
+        ]);
     }
 
     public function delete(Request $request)

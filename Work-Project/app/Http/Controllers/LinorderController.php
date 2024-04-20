@@ -8,11 +8,32 @@ use Illuminate\Support\Facades\Validator;
 
 class LinorderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $linorders = Lineorder::paginate(10);
+        $sortOrder = $request->input('sort', 'none');
 
-        return view('linorders', ['linorders' => $linorders]);
+        if (!in_array($sortOrder, ['asc', 'desc', 'none'])) {
+            $sortOrder = 'none';
+        }
+
+        $query = Lineorder::query();
+
+        if ($sortOrder == 'asc') {
+            $query->orderBy('product_name', 'asc');
+        } elseif ($sortOrder == 'desc') {
+            $query->orderBy('product_name', 'desc');
+        } else {
+            $query->getQuery()->orders = [];
+        }
+
+        $linorders = $query->paginate(15);
+
+        $linorders->appends(['sort' => $sortOrder]);
+
+        return view('linorders', [
+            'linorders' => $linorders,
+            'sortOrder' => $sortOrder,
+        ]);
     }
 
     public function delete(Request $request)

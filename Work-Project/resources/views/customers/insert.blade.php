@@ -105,14 +105,14 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <input type="text" class="form-control" id="password" name="password" required>
                         @error('password')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="phone_number">Phone Number:</label>
-                        <input type="integer" class="form-control" id="phone_number" name="phone_number" required>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" required>
                         @error('phone_number')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror

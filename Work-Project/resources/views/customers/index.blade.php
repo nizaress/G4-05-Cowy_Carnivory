@@ -79,7 +79,7 @@
         <header>
         </header>
 
-        <div style="display: flex; justify-content: space-between; margin-top: 2%; margin-bottom: 2%;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1%; margin-bottom: 1%;">
             <form method="GET" style="display: flex; align-items: center; margin-left: 2%;" action="{{ url('/') }}">
                 @csrf
                 <button type="submit" style="margin-right: auto; background-color: #4eb8c4;"
@@ -88,15 +88,25 @@
                     Go Back
                 </button>
             </form>
-            <form action="{{ url('/customer/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 17%;">
+            <form action="{{ url('/customer/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 6%;">
                 @csrf
                 <input type="number" name="customer_id" min="1" step="1" required placeholder="Enter Customer ID" style="flex: 1;">
                 <button type="submit" style="margin-left: 10px;">Delete</button>
             </form>
-            <form method="GET" style="margin-right: 20%;" action="{{ url('/customer/create') }}">
+            <form method="GET" style="margin-right: 5%; margin-left: 4%;" action="{{ url('/customer/create') }}">
                 @csrf
                 <button type="submit" type="button">Add a Customer</button>
             </form>
+            <div style="display: flex; align-items: center; margin-right: 6%; margin-left: 2%; flex-wrap: nowrap;">
+                <h4 style="margin-right: 10px; font-family: Arial, sans-serif; color: rgb(116, 116, 116); white-space: nowrap;">Sort by:</h4>
+                <form action="{{ url('/customer') }}" method="GET" style="margin-left: 0; margin-right: 4%;">
+                    <select name="sort" onchange="this.form.submit()" style="padding: 13px; border-radius: 5px; background-color: white; border: 2px solid #ccc;">
+                        <option value="none" {{ request('sort') == 'none' ? 'selected' : '' }}>None</option>
+                        <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Alphabetical Order</option>
+                        <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Reversed Alphabetical Order</option>
+                    </select>
+                </form>
+            </div>
         </div>
 
         @if (session('error'))

@@ -12,18 +12,31 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $query = Product::query();
-    
-        if ($request->has('min_price') && $request->min_price != '') {
-            $query->where('price', '>=', $request->min_price);
+        
+        $minPrice = $request->input('min_price', null);
+        $maxPrice = $request->input('max_price', null);
+
+        if ($minPrice !== null && $minPrice !== '') {
+            $query->where('price', '>=', $minPrice);
         }
 
-        if ($request->has('max_price') && $request->max_price != '') {
-            $query->where('price', '<=', $request->max_price);
+        if ($maxPrice !== null && $maxPrice !== '') {
+            $query->where('price', '<=', $maxPrice);
         }
 
-        $products = $query->get();
+        $currentPage = $request->query('page') ?? 1;
 
-        return view('products.index', ['products' => $products]);
+        $products = $query->paginate(9)->appends([
+            'min_price' => $minPrice,
+            'max_price' => $maxPrice,
+        ]);
+
+        return view('products.index', [
+            'products' => $products,
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice,
+            'currentPage' => $currentPage,
+        ]);
     }
     
 
