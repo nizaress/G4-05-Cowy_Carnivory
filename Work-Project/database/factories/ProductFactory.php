@@ -28,6 +28,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 1, 1000),
             'vendor_email' => $this->faker->email(),
             'vendor_name' => $this->faker->company(),
+            'vendor_id' => $this->faker->numberBetween(1, 100),
             'created_at' => now(),
             'updated_at' => now(),
         ];

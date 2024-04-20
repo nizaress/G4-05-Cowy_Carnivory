@@ -27,6 +27,7 @@ class OrderFactory extends Factory
             'deliveryTime' => $this->faker->time(),
             'PaymentMethod' => $this->faker->word(),
             'customer_email' => $this->faker->email(),
+            'customer_id' => $this->faker->numberBetween(1, 100),
             'created_at' => now(),
             'updated_at' => now(),
         ];
