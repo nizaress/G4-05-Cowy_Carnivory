@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Order;
 
 
 class OrderTableSeeder extends Seeder
@@ -17,29 +18,10 @@ class OrderTableSeeder extends Seeder
     public function run()
     {
         DB::table('order')->delete();
-        
-        $customerEmailCollection = DB::table('customer')->pluck('email');
-        $k=0;
-        $w=0;
-        for ($i = 0; $i < 100; $i++) {
-            $w++;
-            $customerEmail=$customerEmailCollection->get($i);
-                for ($j = 1; $j <= 5; $j++) {
-                    $k++;
-                    DB::table('order')->insert([
-                        [
-                            'id' => $k,
-                            'numOrder' => $k,
-                            'Date' => now(),
-                            'deliveryTime' => now(), 
-                            'PaymentMethod' => 'Payment Method Number ' . $k,
-                            'customer_id' => $w,
-                            'customer_email' => $customerEmail,
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ]
-                    ]);
-                }
-        }
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Order::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        // Seed the database with random data using the factory
+        Order::factory()->count(500)->create();
     }
 }
