@@ -8,12 +8,28 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-
+        // Start building the query for products
+        $query = Product::query();
+    
+        // Check if minimum price is provided and apply it to the query
+        if ($request->has('min_price') && $request->min_price != '') {
+            $query->where('price', '>=', $request->min_price);
+        }
+    
+        // Check if maximum price is provided and apply it to the query
+        if ($request->has('max_price') && $request->max_price != '') {
+            $query->where('price', '<=', $request->max_price);
+        }
+    
+        // Get the results of the query
+        $products = $query->get();
+    
+        // Return the view with the filtered or unfiltered list of products
         return view('products.index', ['products' => $products]);
     }
+    
 
     public function delete(Request $request)
     {
