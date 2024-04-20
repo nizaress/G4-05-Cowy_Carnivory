@@ -97,6 +97,12 @@
                 @csrf
                 <button type="submit" type="button">Add a Product</button>
             </form>
+
+            <form action="{{ url('/product') }}" method="GET" style="margin-bottom: 20px; display: flex; justify-content: center; gap: 10px;">
+                <input type="number" name="min_price" placeholder="Price greater than" style="width: 200px; padding: 10px; border-radius: 5px; background-color: #f8f8f8; border: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.15);" min="0" step="0.1" value="{{ request('min_price') }}">
+                <input type="number" name="max_price" placeholder="Price less than" style="width: 200px; padding: 10px; border-radius: 5px; background-color: #f8f8f8; border: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.15);" min="0" step="0.1" value="{{ request('max_price') }}">
+                <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 5px; border: none; cursor: pointer; font-size: 16px;">Filter</button>
+            </form>
         </div>
 
         @if (session('error'))
