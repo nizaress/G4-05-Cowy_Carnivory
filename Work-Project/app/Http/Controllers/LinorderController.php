@@ -26,7 +26,7 @@ class LinorderController extends Controller
             $query->getQuery()->orders = [];
         }
 
-        $linorders = $query->paginate(15);
+        $linorders = $query->paginate(30);
 
         $linorders->appends(['sort' => $sortOrder]);
 

@@ -26,7 +26,7 @@ class OrderController extends Controller
             $query->getQuery()->orders = [];
         }
 
-        $orders = $query->paginate(15);
+        $orders = $query->paginate(50);
 
         $orders->appends(['sort' => $sortOrder]);
 

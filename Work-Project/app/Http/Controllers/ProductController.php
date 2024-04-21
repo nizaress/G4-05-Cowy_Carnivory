@@ -26,7 +26,7 @@ class ProductController extends Controller
 
         $currentPage = $request->query('page') ?? 1;
 
-        $products = $query->paginate(9)->appends([
+        $products = $query->paginate(50)->appends([
             'min_price' => $minPrice,
             'max_price' => $maxPrice,
         ]);
