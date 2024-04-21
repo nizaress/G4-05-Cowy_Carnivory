@@ -12,32 +12,44 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $query = Product::query();
-        
-        $minPrice = $request->input('min_price', null);
-        $maxPrice = $request->input('max_price', null);
-
+    
+        // Handling price filtering
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+    
         if ($minPrice !== null && $minPrice !== '') {
             $query->where('price', '>=', $minPrice);
         }
-
         if ($maxPrice !== null && $maxPrice !== '') {
             $query->where('price', '<=', $maxPrice);
         }
-
+    
+        // Handling sorting
+        $sortOrder = $request->input('sort', 'none');
+        if ($sortOrder === 'asc') {
+            $query->orderBy('name', 'asc');
+        } elseif ($sortOrder === 'desc') {
+            $query->orderBy('name', 'desc');
+        }
         $currentPage = $request->query('page') ?? 1;
-
+        // Pagination with appended query strings to maintain state across page navigation
         $products = $query->paginate(50)->appends([
             'min_price' => $minPrice,
             'max_price' => $maxPrice,
+            'sort' => $sortOrder,
         ]);
-
+    
+        // Current page handling isn't necessary as it's managed internally by Laravel's paginator
         return view('products.index', [
             'products' => $products,
             'minPrice' => $minPrice,
             'maxPrice' => $maxPrice,
+            'sortOrder' => $sortOrder,
             'currentPage' => $currentPage,
         ]);
     }
+    
+    
     
 
     public function delete(Request $request)

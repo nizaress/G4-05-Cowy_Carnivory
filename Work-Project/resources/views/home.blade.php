@@ -21,7 +21,7 @@
     list-style: none;
     padding: 16px;
     margin: 0; 
-    background-color: #fff;
+    background-color: #e6e6fa;
   }
 
   .navbar li {
@@ -152,7 +152,7 @@
   @endphp
 
   <ul class="navbar">
-    <li><a href="/" class="bold">Home</a></li>
+    <li><a class="bold">Home</a></li>
     <li><a href="/vendor">Vendors</a></li>
     <li><a href="/product">Products</a></li>
     <li><a href="/customer">Customers</a></li>
@@ -168,7 +168,8 @@
     </div>
 </div>
 
+      <footer>
   <p class="footer">© 2021 Cowy Carnivory. All rights reserved.</p>
-
+    </footer>
 </body>
 </html>

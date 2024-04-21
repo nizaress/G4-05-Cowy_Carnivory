@@ -6,6 +6,33 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <title>Cowy Carnivory</title>
         <style>
+
+            /* Estilos del menú */
+            .navbar {
+                display: flex;
+                align-items: center;
+                list-style: none;
+                padding: 16px;
+                margin: 0; 
+                background-color: #e6e6fa;
+            }
+
+            .navbar li {
+                margin-right: 20px; /* Espaciado entre los elementos del menú */
+            }
+
+            .navbar a {
+                text-decoration: none;
+                color: #014E7A;
+                padding: 8px 16px;
+                font-size: 16px; 
+            }
+
+            .navbar a.bold {
+                font-weight: bold; 
+            }
+
+
             table {
                 font-family: "Helvetica", Arial, sans-serif;
                 font-size: 15px;
@@ -73,21 +100,25 @@
             button[type=submit]:hover {
                 background-color: #31814a;
             }
+
+
         </style>
     </head>
     <body>
         <header>
         </header>
+        <ul class="navbar" style="margin: 0; padding: 10; height: 100%; color: #014E7A; font-family: 'Verdana', sans-serif;">
+            <li><a href="/" class="bold">Home</a></li>
+            <li><a> Vendors </a></li>
+            <li><a href="/product">Products</a></li>
+            <li><a href="/customer">Customers</a></li>
+            <li><a href="/order">Orders</a></li>
+            <li><a href="/linorder">Linorders</a></li> 
+        </ul>
+
+        <br>
 
         <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1%; margin-bottom: 1%;">
-            <form method="GET" style="display: flex; align-items: center; margin-left: 2%;" action="{{ url('/') }}">
-                @csrf
-                <button type="submit" style="margin-right: auto; background-color: #4eb8c4;"
-                onmouseover="this.style.backgroundColor='#2c7a89'" 
-                onmouseout="this.style.backgroundColor='#45a0aa'">
-                    Go Back
-                </button>
-            </form>
             <form action="{{ url('/vendor/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 6%;">
                 @csrf
                 <input type="number" name="vendor_id" min="1" step="1" required placeholder="Enter Vendor ID" style="flex: 1;">
