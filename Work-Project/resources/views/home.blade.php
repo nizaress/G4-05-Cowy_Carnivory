@@ -133,12 +133,16 @@
 </head>
   @php
       Log::info("Debugging starts here");
-      $seconds = now()->second % 12; // Cycle every 12 seconds
+      $seconds = now()->second % 28; // Cycle every 12 seconds
 
       $backgroundUrls = [
           '/images/backgrounds/fondo1.jpg',
-          '/images/backgrounds/fondo2.png',
-          '/images/backgrounds/fondo3.jpg'
+          '/images/backgrounds/fondo2.jpg',
+          '/images/backgrounds/fondo3.png',
+          '/images/backgrounds/fondo4.jpg',
+          '/images/backgrounds/fondo5.jpg',
+          '/images/backgrounds/fondo6.jpg',
+          '/images/backgrounds/fondo7.jpg'
       ];
 
       // Determine which backgrounds to display
