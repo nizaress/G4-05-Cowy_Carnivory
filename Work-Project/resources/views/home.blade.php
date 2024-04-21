@@ -46,13 +46,37 @@
   }
 
   .background {
-    background-image: url('fondo.jpg');
+    position: relative;
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
     padding: 50px 0;
     height: 71%;
-  }
+}
+
+.background::before, .background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transition: opacity 4s ease-in-out;
+    z-index: -1;
+}
+
+
+/* Ensure that only the ::before element is visible initially */
+.background.start::after {
+    opacity: 1;
+}
+.background.start::before {
+    opacity: 0;
+}
+
 
   .logo-container {
     background-color: rgba(255, 255, 255, 0.3); /* Fondo blanco semitransparente */
@@ -104,25 +128,43 @@
 </style>
 </head>
 <body>
+<head>
+    <meta http-equiv="refresh" content="4"> <!-- Refresh page every 6 seconds -->
+</head>
+  @php
+      Log::info("Debugging starts here");
+      $seconds = now()->second % 12; // Cycle every 12 seconds
 
-<ul class="navbar">
-  <li><a href="/" class="bold">Home</a></li>
-  <li><a href="/vendor">Vendors</a></li>
-  <li><a href="/product">Products</a></li>
-  <li><a href="/customer">Customers</a></li>
-  <li><a href="/order">Orders</a></li>
-  <li><a href="/linorder">Linorders</a></li> 
-</ul>
+      $backgroundUrls = [
+          '/images/backgrounds/fondo1.jpg',
+          '/images/backgrounds/fondo2.png',
+          '/images/backgrounds/fondo3.jpg'
+      ];
 
-<div class="background">
-  <div class="logo-container">
-    <div class="logo"></div>
-    <div class="brand-name">Cowy Carnivory</div>
-    <p class="slogan">Tasty for the Nasty</p>
-  </div>
+      // Determine which backgrounds to display
+      $currentImageIndex = floor($seconds / 4);
+      $currentBackgroundUrl = $backgroundUrls[$currentImageIndex];
+      $previousBackgroundUrl = $backgroundUrls[($currentImageIndex == 0 ? 2 : $currentImageIndex - 1)];
+  @endphp
+
+  <ul class="navbar">
+    <li><a href="/" class="bold">Home</a></li>
+    <li><a href="/vendor">Vendors</a></li>
+    <li><a href="/product">Products</a></li>
+    <li><a href="/customer">Customers</a></li>
+    <li><a href="/order">Orders</a></li>
+    <li><a href="/linorder">Linorders</a></li> 
+  </ul>
+
+  <div class="background" style="background-image: url('{{ asset($currentBackgroundUrl) }}');">
+    <div class="logo-container">
+        <div class="logo"></div>
+        <div class="brand-name">Cowy Carnivory</div>
+        <p class="slogan">Tasty for the Nasty</p>
+    </div>
 </div>
 
-<p class="footer">© 2021 Cowy Carnivory. All rights reserved.</p>
+  <p class="footer">© 2021 Cowy Carnivory. All rights reserved.</p>
 
 </body>
 </html>
