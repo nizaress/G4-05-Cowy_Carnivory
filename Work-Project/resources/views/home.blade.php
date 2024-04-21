@@ -149,7 +149,7 @@
     // Calculate opacity based on the phase of the cycle
     $phase = ($currentSecond % $totalDuration) / $phaseDuration;
 
-    if ($phase < 1) {
+    if ($phase < 1) { 
         // Fade in
         $opacity = $phase; // From 0 to 1
     } elseif ($phase < 2) {
