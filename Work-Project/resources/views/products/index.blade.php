@@ -18,7 +18,7 @@
             }
 
             .navbar li {
-                margin-right: 20px; /* Espaciado entre los elementos del menú */
+                margin-right: 20px; 
             }
 
             .navbar a {

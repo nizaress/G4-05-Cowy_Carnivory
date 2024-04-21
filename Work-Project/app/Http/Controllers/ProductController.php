@@ -13,7 +13,7 @@ class ProductController extends Controller
     {
         $query = Product::query();
     
-        // Handling price filtering
+
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
     
@@ -24,7 +24,7 @@ class ProductController extends Controller
             $query->where('price', '<=', $maxPrice);
         }
     
-        // Handling sorting
+
         $sortOrder = $request->input('sort', 'none');
         if ($sortOrder === 'asc') {
             $query->orderBy('name', 'asc');
@@ -32,14 +32,14 @@ class ProductController extends Controller
             $query->orderBy('name', 'desc');
         }
         $currentPage = $request->query('page') ?? 1;
-        // Pagination with appended query strings to maintain state across page navigation
+
         $products = $query->paginate(50)->appends([
             'min_price' => $minPrice,
             'max_price' => $maxPrice,
             'sort' => $sortOrder,
         ]);
     
-        // Current page handling isn't necessary as it's managed internally by Laravel's paginator
+
         return view('products.index', [
             'products' => $products,
             'minPrice' => $minPrice,
