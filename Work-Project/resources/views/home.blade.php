@@ -52,27 +52,30 @@
     background-position: center;
     padding: 50px 0;
     height: 71%;
+}
 
-  @keyframes fadeInOut {
-    0% { opacity: 0; }
-    33% { opacity: 1; }
-    66% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-
-.background {
-    animation: fadeInOut 9s infinite;
-    position: relative;
-    background-attachment: fixed;
+.background::before, .background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-size: cover;
     background-position: center;
-    padding: 50px 0;
-    height: 71%;
+    background-attachment: fixed;
+    transition: opacity 4s ease-in-out;
+    z-index: -1;
 }
 
+
+/* Ensure that only the ::before element is visible initially */
+.background.start::after {
+    opacity: 1;
 }
-
-
+.background.start::before {
+    opacity: 0;
+}
 
 
   .logo-container {
@@ -126,46 +129,24 @@
 </head>
 <body>
 <head>
-    <meta http-equiv="refresh" content="0.5"> <!-- Refresh page every 6 seconds -->
+    <meta http-equiv="refresh" content="4"> <!-- Refresh page every 6 seconds -->
 </head>
-@php
-    Log::info("Debugging starts here");
-    $totalDuration = 9; // Duration for each image cycle
-    $currentSecond = now()->second % ($totalDuration * 3); // Total duration for all images
-    $phaseDuration = 3; // Duration of each phase (in and out)
-    
-    // Default values
-    $opacity = 1; // Default full opacity
-    $backgroundUrls = [
-        '/images/backgrounds/fondo1.jpg',
-        '/images/backgrounds/fondo2.png',
-        '/images/backgrounds/fondo3.jpg'
-    ];
-    
-    // Calculate which background to display
-    $currentImageIndex = floor($currentSecond / $totalDuration) % count($backgroundUrls);
-    $currentBackgroundUrl = $backgroundUrls[$currentImageIndex];
+  @php
+      Log::info("Debugging starts here");
+      $seconds = now()->second % 12; // Cycle every 12 seconds
 
-    // Calculate opacity based on the phase of the cycle
-    $phase = ($currentSecond % $totalDuration) / $phaseDuration;
+      $backgroundUrls = [
+          '/images/backgrounds/fondo1.jpg',
+          '/images/backgrounds/fondo2.png',
+          '/images/backgrounds/fondo3.jpg'
+      ];
 
-    if ($phase < 1) { 
-        // Fade in
-        $opacity = $phase; // From 0 to 1
-    } elseif ($phase < 2) {
-        // Stay
-        $opacity = 1;
-    } elseif ($phase < 3) {
-        // Fade out
-        $opacity = 3 - $phase; // From 1 to 0
-    }
-@endphp
+      // Determine which backgrounds to display
+      $currentImageIndex = floor($seconds / 4);
+      $currentBackgroundUrl = $backgroundUrls[$currentImageIndex];
+      $previousBackgroundUrl = $backgroundUrls[($currentImageIndex == 0 ? 2 : $currentImageIndex - 1)];
+  @endphp
 
-<div style="display: none;">
-        @foreach ($backgroundUrls as $url)
-        <img src="{{ asset($url) }}" alt="Preloaded Image">
-        @endforeach
-    </div>
   <ul class="navbar">
     <li><a href="/" class="bold">Home</a></li>
     <li><a href="/vendor">Vendors</a></li>
@@ -175,7 +156,7 @@
     <li><a href="/linorder">Linorders</a></li> 
   </ul>
 
-  <div class="background" style="background-image: url('{{ asset($currentBackgroundUrl) }}'); opacity: {{ $opacity }};">
+  <div class="background" style="background-image: url('{{ asset($currentBackgroundUrl) }}');">
     <div class="logo-container">
         <div class="logo"></div>
         <div class="brand-name">Cowy Carnivory</div>
@@ -187,6 +168,3 @@
 
 </body>
 </html>
-
-
-
