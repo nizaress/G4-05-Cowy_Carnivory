@@ -105,7 +105,7 @@
   .slogan {
     font-weight: 500;
     font-size: 1.5em; 
-    color: #fff;
+    color: 	#000000;
     z-index: 1; 
     position: absolute;
     top: 70%;
@@ -118,7 +118,7 @@
   .brand-name {
     font-weight: 900;
     font-size: 4em; 
-    color: #fff;
+    color: 	#000000;
     position: absolute;
     top: 65%;
     left: 50%;
