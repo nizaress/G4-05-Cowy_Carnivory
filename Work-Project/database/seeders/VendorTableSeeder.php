@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Vendor;
 
 class VendorTableSeeder extends Seeder
 {
@@ -16,22 +17,10 @@ class VendorTableSeeder extends Seeder
     public function run()
     {
         DB::table('vendor')->delete();
-
-        for ($i = 1; $i <= 100; $i++) {
-            // Inserta datos de ejemplo en la tabla 'vendor'
-            DB::table('vendor')->insert([
-                [
-                    'id' => $i,
-                    'email' => 'vendor' . $i . "@gmail.com",
-                    'name' => 'Vendor' . ' ' . $i,
-                    'phone_number' => 600000000 + $i,
-                    'address' => 'Street Picasso, City Alicante, Number' . ' ' . $i,
-                    'accountNumber' => 'ACC' . $i,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]
-            ]);
-        }
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Vendor::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        Vendor::factory()->count(100)->create();
         
     }
 }
