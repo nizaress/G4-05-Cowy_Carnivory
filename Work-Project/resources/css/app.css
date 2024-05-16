@@ -1,0 +1,15 @@
+.quantity-text {
+    margin-left: auto;
+}
+
+.btn-group {
+    margin-left: 20px;
+}
+
+.btn-increment, .btn-decrement {
+    margin-right: 10px;
+}
+
+.btn-decrement {
+    margin-right: 30px; /* Increase the separation */
+}

@@ -7,6 +7,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LinorderController;
+use App\Http\Controllers\BasketController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -86,3 +88,9 @@ Route::post('/order/delete', [OrderController::class, 'delete']);
 
 Route::get('/linorder', [LinorderController::class, 'index'])->name('list.linorders');
 Route::post('/linorder/delete', [LinorderController::class, 'delete']);
+
+Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
+Route::post('/basket/add', [BasketController::class, 'add'])->name('basket.add');
+Route::post('/basket/remove', [BasketController::class, 'remove'])->name('basket.remove');
+Route::post('/basket/increment', [BasketController::class, 'increment'])->name('basket.increment');
+Route::post('/basket/decrement', [BasketController::class, 'decrement'])->name('basket.decrement');
