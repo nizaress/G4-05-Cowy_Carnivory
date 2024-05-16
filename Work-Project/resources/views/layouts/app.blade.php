@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <!-- Header content here -->
+
     </header>
 
     <div class="container">
@@ -16,7 +16,7 @@
     </div>
 
     <footer>
-        <!-- Footer content here -->
+
     </footer>
 </body>
 </html>

@@ -20,7 +20,6 @@ class CustomerTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Customer::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
-        // Seed the database with random data using the factory
         Customer::factory()->count(100)->create();
     }
 }

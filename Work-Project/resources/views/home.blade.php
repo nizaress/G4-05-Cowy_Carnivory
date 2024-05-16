@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cowy Carnivory</title>
 <style>
-  /* Estilos base */
+
   body, html {
     margin: 0;
     padding: 0;
@@ -14,7 +14,7 @@
     font-family: 'Verdana', sans-serif;  
   }
 
-  /* Estilos del menú */
+
   .navbar {
     display: flex;
     align-items: center;
@@ -25,7 +25,7 @@
   }
 
   .navbar li {
-    margin-right: 20px; /* Espaciado entre los elementos del menú */
+    margin-right: 20px; 
   }
 
   .navbar a {
@@ -69,7 +69,7 @@
 }
 
 
-/* Ensure that only the ::before element is visible initially */
+
 .background.start::after {
     opacity: 1;
 }
@@ -79,7 +79,7 @@
 
 
   .logo-container {
-    background-color: rgba(255, 255, 255, 0.3); /* Fondo blanco semitransparente */
+    background-color: rgba(255, 255, 255, 0.3); 
     padding: 0;
     text-align: center;
     position: relative; 
@@ -129,11 +129,11 @@
 </head>
 <body>
 <head>
-    <meta http-equiv="refresh" content="4"> <!-- Refresh page every 6 seconds -->
+    <meta http-equiv="refresh" content="4"> 
 </head>
   @php
       Log::info("Debugging starts here");
-      $seconds = now()->second % 28; // Cycle every 12 seconds
+      $seconds = now()->second % 28; 
 
       $backgroundUrls = [
           '/images/backgrounds/fondo1.jpg',
@@ -145,7 +145,7 @@
           '/images/backgrounds/fondo7.jpg'
       ];
 
-      // Determine which backgrounds to display
+
       $currentImageIndex = floor($seconds / 4);
       $currentBackgroundUrl = $backgroundUrls[$currentImageIndex];
       $previousBackgroundUrl = $backgroundUrls[($currentImageIndex == 0 ? 2 : $currentImageIndex - 1)];
