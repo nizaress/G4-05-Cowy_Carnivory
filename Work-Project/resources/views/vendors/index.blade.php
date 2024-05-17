@@ -7,32 +7,6 @@
         <title>Cowy Carnivory</title>
         <style>
 
-
-            .navbar {
-                display: flex;
-                align-items: center;
-                list-style: none;
-                padding: 16px;
-                margin: 0; 
-                background-color: #e6e6fa;
-            }
-
-            .navbar li {
-                margin-right: 20px; 
-            }
-
-            .navbar a {
-                text-decoration: none;
-                color: #014E7A;
-                padding: 8px 16px;
-                font-size: 16px; 
-            }
-
-            .navbar a.bold {
-                font-weight: bold; 
-            }
-
-
             table {
                 font-family: "Helvetica", Arial, sans-serif;
                 font-size: 15px;
@@ -58,7 +32,7 @@
                 border-bottom: 2px solid #ddd;
             }
 
-            form {
+            .frm {
                 max-width: 400px;
                 margin: 0 auto;
                 text-align: center;
@@ -73,7 +47,7 @@
                 font-size: 15px;
             }
 
-            button{
+            .btn{
                 background-color: #4bb350;
                 color: white;
                 padding: 10px 20px;
@@ -83,11 +57,11 @@
                 font-size: 16px;
             }
 
-            button:hover {
+            .btn:hover {
                 background-color: #31814a;
             }
 
-            button[type=submit] {
+            .btn[type=submit] {
                 background-color: #4bb350;
                 color: white;
                 padding: 10px 20px;
@@ -97,40 +71,40 @@
                 font-size: 16px;
             }
 
-            button[type=submit]:hover {
+            .btn[type=submit]:hover {
                 background-color: #31814a;
             }
 
+            .footer {
+                text-align: center;
+                color: #014E7A;
+
+            }
 
         </style>
     </head>
+    
     <body>
         <header>
         </header>
-        <ul class="navbar" style="margin: 0; padding: 10; height: 100%; color: #014E7A; font-family: 'Verdana', sans-serif;">
-            <li><a href="/" class="bold">Home</a></li>
-            <li><a> Vendors </a></li>
-            <li><a href="/product">Products</a></li>
-            <li><a href="/customer">Customers</a></li>
-            <li><a href="/order">Orders</a></li>
-            <li><a href="/linorder">Linorders</a></li> 
-        </ul>
+
+        @include('layouts.nbadmin')
 
         <br>
 
         <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1%; margin-bottom: 1%;">
-            <form action="{{ url('/vendor/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 6%;">
+            <form class="frm" action="{{ url('/vendor/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 6%;">
                 @csrf
                 <input type="number" name="vendor_id" min="1" step="1" required placeholder="Enter Vendor ID" style="flex: 1;">
-                <button type="submit" style="margin-left: 10px;">Delete</button>
+                <button class="btn" type="submit" style="margin-left: 10px;">Delete</button>
             </form>
-            <form method="GET" style="margin-right: 5%; margin-left: 4%;" action="{{ url('/vendor/create') }}">
+            <form class="frm" method="GET" style="margin-right: 5%; margin-left: 4%;" action="{{ url('/vendor/create') }}">
                 @csrf
-                <button type="submit" type="button">Add a Vendor</button>
+                <button class="btn" type="submit" type="button">Add a Vendor</button>
             </form>
             <div style="display: flex; align-items: center; margin-right: 6%; margin-left: 2%; flex-wrap: nowrap;">
                 <h4 style="margin-right: 10px; font-family: Arial, sans-serif; color: rgb(116, 116, 116); white-space: nowrap;">Sort by:</h4>
-                <form action="{{ url('/vendor') }}" method="GET" style="margin-left: 0; margin-right: 4%;">
+                <form class="frm" action="{{ url('/vendor') }}" method="GET" style="margin-left: 0; margin-right: 4%;">
                     <select name="sort" onchange="this.form.submit()" style="padding: 13px; border-radius: 5px; background-color: white; border: 2px solid #ccc;">
                         <option value="none" {{ request('sort') == 'none' ? 'selected' : '' }}>None</option>
                         <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Alphabetical Order</option>
@@ -165,21 +139,21 @@
                             <td>{{ $vendor->email }}</td>
                             <td>{{ $vendor->name }}</td>
                             <td>
-                                <form action="{{ url('/vendor/update/'.$vendor->id) }}" method="POST">
+                                <form class="frm" action="{{ url('/vendor/update/'.$vendor->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="phone_number" value="{{ $vendor->phone_number }}" onchange="this.form.submit()">
                                 </form>
                             </td>
                             <td>
-                                <form action="{{ url('/vendor/update/'.$vendor->id) }}" method="POST">
+                                <form class="frm" action="{{ url('/vendor/update/'.$vendor->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="address" value="{{ $vendor->address }}" onchange="this.form.submit()">
                                 </form>
                             </td>
                             <td>
-                                <form action="{{ url('/vendor/update/'.$vendor->id) }}" method="POST">
+                                <form class="frm" action="{{ url('/vendor/update/'.$vendor->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="accountNumber" value="{{ $vendor->accountNumber }}" onchange="this.form.submit()">
@@ -192,6 +166,8 @@
             {{ $vendors->appends(['sort' => $sortOrder])->links() }}
         </div>
 
-        <footer></footer>
+        <footer>
+            <p class="footer">© 2021 Cowy Carnivory. All rights reserved.</p>
+        </footer>
     </body>
 </html>

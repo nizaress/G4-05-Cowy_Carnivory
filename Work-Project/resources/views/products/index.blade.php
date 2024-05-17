@@ -7,32 +7,6 @@
         <title>Cowy Carnivory</title>
         <style>
 
-
-            .navbar {
-                display: flex;
-                align-items: center;
-                list-style: none;
-                padding: 16px;
-                margin: 0; 
-                background-color: #e6e6fa;
-            }
-
-            .navbar li {
-                margin-right: 20px; 
-            }
-
-            .navbar a {
-                text-decoration: none;
-                color: #014E7A;
-                padding: 8px 16px;
-                font-size: 16px; 
-            }
-
-            .navbar a.bold {
-                font-weight: bold; 
-            }
-
-
             table {
                 font-family: "Helvetica", Arial, sans-serif;
                 font-size: 15px;
@@ -58,7 +32,7 @@
                 border-bottom: 2px solid #ddd;
             }
 
-            form {
+            .frm {
                 max-width: 400px;
                 margin: 0 auto;
                 text-align: center;
@@ -73,7 +47,7 @@
                 font-size: 15px;
             }
 
-            button{
+            .btn{
                 background-color: #4bb350;
                 color: white;
                 padding: 10px 20px;
@@ -83,11 +57,11 @@
                 font-size: 16px;
             }
 
-            button:hover {
+            .btn:hover {
                 background-color: #31814a;
             }
 
-            button[type=submit] {
+            .btn[type=submit] {
                 background-color: #4bb350;
                 color: white;
                 padding: 10px 20px;
@@ -97,7 +71,7 @@
                 font-size: 16px;
             }
 
-            button[type=submit]:hover {
+            .btn[type=submit]:hover {
                 background-color: #31814a;
             }
         </style>
@@ -105,28 +79,21 @@
     <body>
         <header>
         </header>
-        <ul class="navbar" style="margin: 0; padding: 10; height: 100%; color: #014E7A; font-family: 'Verdana', sans-serif;">
-            <li><a href="/" class="bold">Home</a></li>
-            <li><a href="/vendor">Vendors</a></li>
-            <li><a>Products</a></li>
-            <li><a href="/customer">Customers</a></li>
-            <li><a href="/order">Orders</a></li>
-            <li><a href="/linorder">Linorders</a></li> 
-        </ul>
+        @include('layouts.nbadmin')
 
         <br>
 
         <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1%; margin-bottom: 1%;">
-            <form action="{{ url('/product/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 5%; margin-right: 5%;">
+            <form class="frm" action="{{ url('/product/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 5%; margin-right: 5%;">
                 @csrf
                 <input type="number" name="product_id" min="1" step="1" required placeholder="Enter Product ID" style="flex: 1;">
-                <button type="submit" style="margin-left: 10px;">Delete</button>
+                <button class="btn" type="submit" style="margin-left: 10px;">Delete</button>
             </form>
-            <form method="GET" style="margin-right: 6%;" action="{{ url('/product/create') }}">
+            <form class="frm" method="GET" style="margin-right: 6%;" action="{{ url('/product/create') }}">
                 @csrf
-                <button type="submit" type="button">Add a Product</button>
+                <button class="btn" type="submit" type="button">Add a Product</button>
             </form>
-            <form action="{{ url('/product') }}" method="GET" style="display: flex; justify-content: center; gap: 10px; align-items: center; margin-bottom: 1%;">
+            <form class="frm" action="{{ url('/product') }}" method="GET" style="display: flex; justify-content: center; gap: 10px; align-items: center; margin-bottom: 1%;">
         <div>
             <input type="number" name="min_price" placeholder="Price greater than" style="width: 150px; padding: 10px; border-radius: 5px; background-color: #f8f8f8; border: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.15);" min="0" step="0.1" value="{{ request('min_price') }}">
             <input type="number" name="max_price" placeholder="Price less than" style="width: 150px; padding: 10px; border-radius: 5px; background-color: #f8f8f8; border: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.15);" min="0" step="0.1" value="{{ request('max_price') }}">
@@ -167,21 +134,21 @@
                             <td><b>{{ $product->id }}</b></td>
                             <td>{{ $product->cod }}</td>
                             <td>
-                                <form action="{{ url('/product/update/'.$product->id) }}" method="POST">
+                                <form class="frm" action="{{ url('/product/update/'.$product->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="name" value="{{ $product->name }}" onchange="this.form.submit()">
                                 </form>
                             </td>
                             <td>
-                                <form action="{{ url('/product/update/'.$product->id) }}" method="POST">
+                                <form class="frm" action="{{ url('/product/update/'.$product->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="description" value="{{ $product->description }}" onchange="this.form.submit()">
                                 </form>
                             </td>
                             <td>
-                                <form action="{{ url('/product/update/'.$product->id) }}" method="POST">
+                                <form class="frm" action="{{ url('/product/update/'.$product->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="price" value="{{ $product->price }}" onchange="this.form.submit()">
@@ -189,7 +156,7 @@
                             </td>
                             <td>{{ $product->vendor_email }}</td>
                             <td>
-                                <form action="{{ url('/product/update/'.$product->id) }}" method="POST">
+                                <form class="frm" action="{{ url('/product/update/'.$product->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" name="vendor_name" value="{{ $product->vendor_name }}" onchange="this.form.submit()">
