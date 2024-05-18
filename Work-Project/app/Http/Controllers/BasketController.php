@@ -3,71 +3,141 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use App\Models\Product;
+use App\Mail\PaymentSuccess;
+use Illuminate\Support\Facades\Mail;
 
 class BasketController extends Controller
 {
     public function index()
     {
-        $basket = Session::get('basket', []);
-        return view('basket.index', compact('basket'));
+        // Retrieve the basket from session
+        $basket = session()->get('basket', []);
+
+        // Fetch product details for items in the basket
+        $products = Product::whereIn('id', array_keys($basket))->get();
+
+        // Calculate the total price
+        $totalPrice = 0;
+        foreach ($products as $product) {
+            $totalPrice += $product->price * $basket[$product->id];
+        }
+
+        return view('basket.index', compact('basket', 'products', 'totalPrice'));
     }
 
     public function add(Request $request)
     {
-        $item = $request->input('item');
-        $quantity = $request->input('quantity', 1);
+        // Validate the request
+        $request->validate([
+            'product_id' => 'required|integer|exists:product,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
 
-        $basket = Session::get('basket', []);
-        if (isset($basket[$item])) {
-            $basket[$item] += $quantity;
+        $productId = $request->input('product_id');
+        $quantity = $request->input('quantity');
+
+        // Get the basket from the session
+        $basket = session()->get('basket', []);
+
+        // Add or update the quantity for the product
+        if (isset($basket[$productId])) {
+            $basket[$productId] += $quantity;
         } else {
-            $basket[$item] = $quantity;
+            $basket[$productId] = $quantity;
         }
-        Session::put('basket', $basket);
 
-        return redirect()->route('basket.index');
-    }
-
-    public function remove(Request $request)
-    {
-        $item = $request->input('item');
-
-        $basket = Session::get('basket', []);
-        if (isset($basket[$item])) {
-            unset($basket[$item]);
-        }
-        Session::put('basket', $basket);
+        // Save the basket back to the session
+        session(['basket' => $basket]);
 
         return redirect()->route('basket.index');
     }
 
     public function increment(Request $request)
     {
-        $item = $request->input('item');
+        $productId = $request->input('product_id');
 
-        $basket = Session::get('basket', []);
-        if (isset($basket[$item])) {
-            $basket[$item]++;
+        $basket = session()->get('basket', []);
+        if (isset($basket[$productId])) {
+            $basket[$productId]++;
+            session(['basket' => $basket]);
         }
-        Session::put('basket', $basket);
 
         return redirect()->route('basket.index');
     }
 
     public function decrement(Request $request)
     {
-        $item = $request->input('item');
+        $productId = $request->input('product_id');
 
-        $basket = Session::get('basket', []);
-        if (isset($basket[$item]) && $basket[$item] > 1) {
-            $basket[$item]--;
-        } elseif (isset($basket[$item]) && $basket[$item] == 1) {
-            unset($basket[$item]);
+        $basket = session()->get('basket', []);
+        if (isset($basket[$productId])) {
+            if ($basket[$productId] > 1) {
+                $basket[$productId]--;
+            } else {
+                unset($basket[$productId]);
+            }
+            session(['basket' => $basket]);
         }
-        Session::put('basket', $basket);
 
         return redirect()->route('basket.index');
     }
-}
 
+    public function remove(Request $request)
+    {
+        $productId = $request->input('product_id');
+
+        $basket = session()->get('basket', []);
+        if (isset($basket[$productId])) {
+            unset($basket[$productId]);
+            session(['basket' => $basket]);
+        }
+
+        return redirect()->route('basket.index');
+    }
+
+    public function pay()
+    {
+        $basket = session()->get('basket', []);
+        $products = Product::whereIn('id', array_keys($basket))->get();
+
+        $totalPrice = 0;
+        foreach ($products as $product) {
+            $totalPrice += $product->price * $basket[$product->id];
+        }
+
+        return view('basket.pay', compact('totalPrice'));
+    }
+
+    public function completePayment(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'postal_code' => 'required|string',
+            'card_number' => 'required|digits:16',
+            'expiry_date' => 'required|date_format:m/y',
+            'cvv' => 'required|digits:3',
+        ]);
+
+        $basket = session('basket', []);
+        $products = Product::whereIn('id', array_keys($basket))->get();
+        $totalPrice = $products->reduce(function ($carry, $product) use ($basket) {
+            return $carry + ($product->price * $basket[$product->id]);
+        }, 0);
+
+        session()->forget('basket');
+
+        try {
+            Mail::to($request->email)->send(new PaymentSuccess($request, $totalPrice));
+        } catch (\Exception $e) {
+            return redirect()->route('basket.index')->with('error', 'Email failed but payment was suuccessful. ' . $e->getMessage());
+        }
+
+        return redirect()->route('basket.index')->with('success', 'Payment completed successfully!');
+    }
+
+}
