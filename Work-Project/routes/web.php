@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
@@ -68,6 +69,10 @@ Route::post('/vendor/delete', [VendorController::class, 'delete']);
 Route::patch('/vendor/update/{id}', [VendorController::class, 'update']);
 Route::get('/vendor/create', [VendorController::class, 'create'])->name('vendors.create');
 Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');
+Route::get('/vendors/{id}', [VendorController::class, 'show'])->name('vendors.show');
+Route::get('/vendor/sortaz', [VendorController::class, 'sortaz'])->name('vendors.sortaz');
+Route::get('/vendor/sortza', [VendorController::class, 'sortza'])->name('vendors.sortza');
+Route::get('/vendor/search', [VendorController::class, 'search'])->name('vendors.search');
 
 Route::get('/product', [ProductController::class, 'index'])->name('list.products');
 Route::post('/product/delete', [ProductController::class, 'delete']);
@@ -86,3 +91,7 @@ Route::post('/order/delete', [OrderController::class, 'delete']);
 
 Route::get('/linorder', [LinorderController::class, 'index'])->name('list.linorders');
 Route::post('/linorder/delete', [LinorderController::class, 'delete']);
+
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');

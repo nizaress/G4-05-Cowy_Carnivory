@@ -1,32 +1,69 @@
+<!-- resources/views/vendor/pagination/bootstrap-4.blade.php -->
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+    }
+    .pagination li {
+        margin: 0 3px;
+    }
+    .pagination li a, .pagination li span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid #411acc;
+        color: #411acc;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+        font-size: 0.9em; /* Tamaño de la fuente más pequeño */
+    }
+    .pagination li a:hover, .pagination li span:hover {
+        background-color: #411acc;
+        color: #fafcff;
+    }
+    .pagination li.active span {
+        background-color: #411acc;
+        color: #fafcff;
+    }
+    .pagination li.disabled span {
+        border-color: #dbdfec;
+        color: #dbdfec;
+    }
+</style>
 @if ($paginator->hasPages())
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
+    <nav>
+        <ul class="pagination">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
-                <span class="page-link page-item disabled" style="background-color: #e9ecef; color: #6c757d; font-size: 20px; padding: 3px; border-radius: 50%; border: 2px solid #4CAF50;">&lsaquo;</span>
-                <br>
-                <br>
-                
+                <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                    <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                </li>
             @else
-                <a class="page-link page-item" href="{{ $paginator->previousPageUrl() }}" style="background-color: #4CAF50; color: white; font-size: 20px; padding: 3px; border-radius: 50%; border: 2px solid #45a0aa;" rel="prev">&lsaquo;</a>
-                <br>
-                <br>
+                <li class="page-item">
+                    <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                </li>
             @endif
 
             {{-- Pagination Elements --}}
             @foreach ($elements as $element)
                 {{-- "Three Dots" Separator --}}
                 @if (is_string($element))
-                    <li class="page-item disabled"><span class="page-link" style="background-color: #4CAF50; color: white; font-size: 20px;">{{ $element }}</span></li>
+                    <li class="page-item disabled" aria-disabled="true"><span class="page-link">{{ $element }}</span></li>
                 @endif
 
                 {{-- Array Of Links --}}
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
-                            <span class="page-item active" style="background-color: #4CAF50; font-size: 20px; padding: 5px; border-radius: 50%; border: 2px solid #45a0aa;"><span class="page-link" style="background-color: #45a0aa; color: white; border-color: #4CAF50; border-radius: 50%; padding: 5px;">{{ $page }}</span></span>
+                            <li class="page-item active" aria-current="page"><span class="page-link">{{ $page }}</span></li>
                         @else
-                            <span class="page-item"><a class="page-link" href="{{ $url }}" style="background-color: white; color: #4CAF50; font-size: 20px; padding: 5px; border-radius: 50%; border: 2px solid #4CAF50;">{{ $page }}</a></span>
+                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
                         @endif
                     @endforeach
                 @endif
@@ -34,14 +71,13 @@
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <br>
-                <br>
-                <a class="page-link page-item" href="{{ $paginator->nextPageUrl() }}" style="background-color: #4CAF50; color: white; font-size: 20px; padding: 3px; border-radius: 50%; border: 2px solid #45a0aa;" rel="next">&rsaquo;</a>
-                
+                <li class="page-item">
+                    <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                </li>
             @else
-                <br>
-                <br>
-                <span class="page-link page-item disabled" style="background-color: #e9ecef; color: #6c757d; font-size: 20px; padding: 3px; border-radius: 50%; border: 2px solid #4CAF50;">&rsaquo;</span>
+                <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
+                    <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                </li>
             @endif
         </ul>
     </nav>

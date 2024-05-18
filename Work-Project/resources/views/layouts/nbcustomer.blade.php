@@ -11,7 +11,6 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            color: #014E7A;
             font-family: 'Verdana', sans-serif;  
             <!--background-color: #120903;-->
         }
@@ -21,7 +20,8 @@
             align-items: center;
             width: 100%;
             margin: 0; 
-            background-color: #e6e6fa;
+            background-color: #07080c;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .navbar {
@@ -30,6 +30,7 @@
             list-style: none;
             padding: 16px;
             margin: 0; 
+            
         }
 
         .navbar li {
@@ -38,7 +39,7 @@
 
         .navbar a {
             text-decoration: none;
-            color: #014E7A;
+            color: #fafcff;
             padding: 8px 16px;
             font-size: 16px; 
         }
@@ -47,31 +48,31 @@
             font-weight: bold; 
         }
 
+        .navbar a:hover {
+            color: #411acc;
+        }
+
         .btn-logout {
             font-family: 'Verdana', sans-serif;
             font-size: 14px;
             float: right;
             margin-left: 800px;
-            background-color: rgba(255, 255, 255, 0.3);
-            color: #014E7A;
+            background-color: rgba(243, 246, 255, 0.1);
+            color: #fafcff;
             padding: 7px 16px;
-            border: 1px solid rgba(1, 80, 160, 0.3);
+            border: 1px solid #fafcff;
             border-radius: 5px;
         }
 
         .btn-logout:hover {
             float: right;
-            background-color: rgba(1, 80, 160, 0.3);
-            color: #014E7A;
-            border: 1px solid #014E7A;
+            background-color: rgba(243, 246, 255, 0.3);
+            color: #fafcff;
+            border: 1px solid;
         }
 
         .btn-logout:active {
-            float: right;
-            background-color: rgba(1, 80, 160, 0.3);
-            color: #014E7A;
-            border: 1px solid #014E7A;
-            transform: translateY(4px);
+            transform: translateY(2px);
         }
 
         .btn-profile {
@@ -79,25 +80,22 @@
             font-family: 'Verdana', sans-serif;
             font-size: 16px;
             font-weight: bold;
-            background-color: #014E7A;
-            color: white;
+            background-color: #411acc;
+            color: #fafcff;
             padding: 7px 16px;
-            margin-left: 20px;
+            margin-left: 10px;
             border: none;
             border-radius: 5px;
         }
 
         .btn-profile:hover {
             float: left;
-            background-color: #FFFFFF;
-            color: #014E7A;
+            background-color: #fafcff;
+            color: #07080c;
         }
 
         .btn-profile:active {
-            float: left;
-            background-color: #014E7A;
-            color: white;
-            transform: translateY(4px);
+            transform: translateY(2px);
         }
     </style>
 </head>

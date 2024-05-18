@@ -92,5 +92,30 @@ class VendorController extends Controller
 
         return redirect()->route('list.vendors')->with('success', 'Vendor added successfully!');
     }
+
+    public function show($id)
+    {
+        $vendor = Vendor::findOrFail($id);
+        return view('vendors.show', compact('vendor'));
+    }
+
+    public function sortaz()
+    {
+        $vendors = Vendor::orderBy('name', 'asc')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
+
+    public function sortza()
+    {
+        $vendors = Vendor::orderBy('name', 'desc')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $vendors = Vendor::where('name', 'like', '%' . $search . '%')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
 }
 
