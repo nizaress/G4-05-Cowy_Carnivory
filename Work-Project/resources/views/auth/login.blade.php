@@ -1,14 +1,20 @@
 @extends('layouts.app')
-
+@include('layouts.nbcustomer')
 @section('content')
 
 <style>
-    body, html {
+
+
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
         height: 100%;
-        font-family: 'Verdana', sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        background-size: cover;
+        background-position: center;
+        z-index: -1;
+        transition: background-image 1s ease-in-out;
     }
 
     .container {
@@ -18,6 +24,9 @@
     .card {
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff; /* Ensure the card background is set */
+        position: relative; /* Make sure it stacks correctly */
+        z-index: 1; /* Ensure it appears above the background */
     }
 
     .card-header {
@@ -81,8 +90,9 @@
     }
 </style>
 
-<div class="content-wrapper">
+<div class="background" id="background"></div>
 
+<div class="content-wrapper">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -153,4 +163,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backgroundUrls = [
+            '/images/backgrounds/fondo1.jpg',
+            '/images/backgrounds/fondo2.jpg',
+            '/images/backgrounds/fondo3.png',
+            '/images/backgrounds/fondo4.jpg',
+            '/images/backgrounds/fondo5.jpg',
+            '/images/backgrounds/fondo6.jpg',
+            '/images/backgrounds/fondo7.jpg'
+        ];
+
+        let currentImageIndex = 0;
+        const backgroundElement = document.getElementById('background');
+
+        function changeBackground() {
+            currentImageIndex = (currentImageIndex + 1) % backgroundUrls.length;
+            backgroundElement.style.backgroundImage = `url(${backgroundUrls[currentImageIndex]})`;
+        }
+
+        setInterval(changeBackground, 4000); // Change the image every 4 seconds
+        changeBackground(); // Initialize with the first background
+    });
+</script>
 @endsection
