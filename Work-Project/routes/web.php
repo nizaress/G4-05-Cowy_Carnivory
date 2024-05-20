@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LinorderController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,11 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+// Authentication routes
+Auth::routes();
+
+// Home route
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/example', function () {
     Log::info('Example route accessed.');
