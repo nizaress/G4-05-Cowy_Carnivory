@@ -119,7 +119,7 @@
         <button id="logout-button" class="btn-logout" type="button">Log Out</button>
 
         <!-- Profile Button -->
-        <form method="GET" action="{{ url('/login') }}">
+        <form method="GET" action="{{ route('profile.show') }}">
             @csrf
             <button class="btn-profile" type="submit" type="button">Profile</button>
         </form>
