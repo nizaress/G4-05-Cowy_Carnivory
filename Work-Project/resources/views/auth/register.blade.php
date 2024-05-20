@@ -3,6 +3,70 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    body, html {
+        height: 100%;
+        font-family: 'Verdana', sans-serif;
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #411acc;
+        color: #fafcff;
+        font-weight: bold;
+        text-align: center;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .btn-primary, .btn-success, .btn-secondary {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #411acc;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #320e99;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
