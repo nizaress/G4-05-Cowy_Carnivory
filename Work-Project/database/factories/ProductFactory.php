@@ -22,13 +22,12 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'cod' => $this->faker->unique()->randomNumber(),
-            'name' => $this->faker->sentence(),
-            'description' => $this->faker->sentence(),
-            'price' => $this->faker->randomFloat(2, 1, 1000),
-            'vendor_email' => $this->faker->email(),
-            'vendor_name' => $this->faker->company(),
-            'vendor_id' => $this->faker->numberBetween(1, 100),
+            'cod' => $this->faker->unique()->randomNumber(5, true), // Código aleatorio de 5 dígitos
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence,
+            'price' => $this->faker->randomFloat(2, 1, 20),
+            'vendor_email' => null, // Se llenará en el seeder
+            'vendor_name' => null, // Se llenará en el seeder
             'created_at' => now(),
             'updated_at' => now(),
         ];

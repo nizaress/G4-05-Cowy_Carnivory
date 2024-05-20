@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Product;
 
 class VendorController extends Controller
 {
@@ -91,6 +92,85 @@ class VendorController extends Controller
         Vendor::create($request->all());
 
         return redirect()->route('list.vendors')->with('success', 'Vendor added successfully!');
+    }
+
+    public function show($id)
+    {   
+        $basket = session()->get('basket', []);
+        foreach ($basket as $productId => $quantity) {
+            $product = Product::findOrFail($productId);
+            $email = $product->vendor_email;
+            $vend_id = Vendor::where('email', $email)->first()->id;
+            if ($vend_id != $id) {
+                unset($basket[$productId]);
+            }
+        }
+        session(['basket' => $basket]);
+
+        $products = Product::whereIn('id', array_keys($basket))->get();
+        $totalPrice = 0;
+        foreach ($products as $product) {
+            $totalPrice += $product->price * $basket[$product->id];
+        }
+        $vendor = Vendor::findOrFail($id);
+        return view('vendors.show', compact('vendor', 'basket', 'products', 'totalPrice'));
+    }
+
+    public function sortaz()
+    {
+        $vendors = Vendor::orderBy('name', 'asc')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
+
+    public function sortza()
+    {
+        $vendors = Vendor::orderBy('name', 'desc')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $vendors = Vendor::where('name', 'like', '%' . $search . '%')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
+
+    public function increment(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $vendorId = $request->input('vendor_id');
+        $basket = session()->get('basket', []);
+
+        $basket = session()->get('basket', []);
+        if (isset($basket[$productId])) {
+            $basket[$productId]++;
+        }
+        else {
+            $basket[$productId] = 1;
+        }
+
+        session(['basket' => $basket]);
+        return redirect()->route('vendors.show', $vendorId);
+    }
+
+    public function decrement(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $vendorId = $request->input('vendor_id');
+        $basket = session()->get('basket', []);
+
+        $basket = session()->get('basket', []);
+        if (isset($basket[$productId])) {
+            if ($basket[$productId] == 0) {
+                unset($basket[$productId]);
+            }
+            else {
+                $basket[$productId]--;
+            }
+        }
+
+        session(['basket' => $basket]);
+        return redirect()->route('vendors.show', $vendorId);
     }
 }
 

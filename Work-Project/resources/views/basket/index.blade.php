@@ -9,7 +9,7 @@
             <img src="{{ asset('/basket.png') }}" alt="Logo" style="width: 70px; height:45px">
             <h1>Your Basket</h1>
         </div>
-        <a href="/product" class="btn btn-primary">Go Back</a>
+        <a href="vendors/{{$vendorId}}" class="btn btn-primary">Go Back</a>
     </div>
     
     @if(empty($basket))
@@ -32,16 +32,19 @@
                                 <form action="{{ route('basket.increment') }}" method="POST" class="mr-1">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="vendor_id" value="{{ $vendorId }}">
                                     <button type="submit" class="btn btn-secondary btn-sm"><b>+</b></button>
                                 </form>
                                 <form action="{{ route('basket.decrement') }}" method="POST" class="mr-3">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="vendor_id" value="{{ $vendorId }}">
                                     <button type="submit" class="btn btn-secondary btn-sm"><b>-</b></button>
                                 </form>
                                 <form action="{{ route('basket.remove') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="vendor_id" value="{{ $vendorId }}">
                                     <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                                 </form>
                             </div>
@@ -53,26 +56,12 @@
 
         <div class="text-right mb-4">
             <h5>Total Price: {{ number_format($totalPrice, 2) }}€</h5>
-            <a href="{{ route('basket.pay') }}" class="btn btn-success">Pay</a>
-        </div>
-    @endif
-
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Add Item</h5>
-            <form action="{{ route('basket.add') }}" method="POST">
+            <form action="{{ route('basket.pay') }}" method="GET" class="mr-1">
                 @csrf
-                <div class="form-group">
-                    <label for="product_id">Product ID</label>
-                    <input type="number" id="product_id" name="product_id" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="quantity" class="form-control" value="1" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Add to Basket</button>
+                <input type="hidden" name="vendor_id" value="{{ $vendorId }}">
+                <button type="submit" class="btn btn-success">Pay</button>
             </form>
         </div>
-    </div>
+    @endif
 </div>
 @endsection

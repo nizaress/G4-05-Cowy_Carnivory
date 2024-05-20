@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
@@ -70,6 +71,12 @@ Route::post('/vendor/delete', [VendorController::class, 'delete']);
 Route::patch('/vendor/update/{id}', [VendorController::class, 'update']);
 Route::get('/vendor/create', [VendorController::class, 'create'])->name('vendors.create');
 Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');
+Route::get('/vendors/{id}', [VendorController::class, 'show'])->name('vendors.show');
+Route::post('/vendor/increment', [VendorController::class, 'increment'])->name('vendor.increment');
+Route::post('/vendor/decrement', [VendorController::class, 'decrement'])->name('vendor.decrement');
+Route::get('/vendor/sortaz', [VendorController::class, 'sortaz'])->name('vendors.sortaz');
+Route::get('/vendor/sortza', [VendorController::class, 'sortza'])->name('vendors.sortza');
+Route::get('/vendor/search', [VendorController::class, 'search'])->name('vendors.search');
 
 Route::get('/product', [ProductController::class, 'index'])->name('list.products');
 Route::post('/product/delete', [ProductController::class, 'delete']);
@@ -96,3 +103,7 @@ Route::post('/basket/decrement', [BasketController::class, 'decrement'])->name('
 Route::post('/basket/remove', [BasketController::class, 'remove'])->name('basket.remove');
 Route::get('/basket/pay', [BasketController::class, 'pay'])->name('basket.pay'); // Add this line
 Route::post('/basket/completePayment', [BasketController::class, 'completePayment'])->name('basket.completePayment'); // Add this line
+
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');

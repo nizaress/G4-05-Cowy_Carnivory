@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Mail\PaymentSuccess;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Vendor;
 
 class BasketController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $vendorId = $request->input('vendor_id');
         // Retrieve the basket from session
         $basket = session()->get('basket', []);
 
@@ -23,38 +25,12 @@ class BasketController extends Controller
             $totalPrice += $product->price * $basket[$product->id];
         }
 
-        return view('basket.index', compact('basket', 'products', 'totalPrice'));
-    }
-
-    public function add(Request $request)
-    {
-        // Validate the request
-        $request->validate([
-            'product_id' => 'required|integer|exists:product,id',
-            'quantity' => 'required|integer|min:1',
-        ]);
-
-        $productId = $request->input('product_id');
-        $quantity = $request->input('quantity');
-
-        // Get the basket from the session
-        $basket = session()->get('basket', []);
-
-        // Add or update the quantity for the product
-        if (isset($basket[$productId])) {
-            $basket[$productId] += $quantity;
-        } else {
-            $basket[$productId] = $quantity;
-        }
-
-        // Save the basket back to the session
-        session(['basket' => $basket]);
-
-        return redirect()->route('basket.index');
+        return view('basket.index', compact('vendorId', 'basket', 'products', 'totalPrice'));
     }
 
     public function increment(Request $request)
     {
+        $vendorId = $request->input('vendor_id');
         $productId = $request->input('product_id');
 
         $basket = session()->get('basket', []);
@@ -63,11 +39,12 @@ class BasketController extends Controller
             session(['basket' => $basket]);
         }
 
-        return redirect()->route('basket.index');
+        return redirect()->route('basket.index', ['vendor_id' => $vendorId]);
     }
 
     public function decrement(Request $request)
     {
+        $vendorId = $request->input('vendor_id');
         $productId = $request->input('product_id');
 
         $basket = session()->get('basket', []);
@@ -80,11 +57,12 @@ class BasketController extends Controller
             session(['basket' => $basket]);
         }
 
-        return redirect()->route('basket.index');
+        return redirect()->route('basket.index', ['vendor_id' => $vendorId]);
     }
 
     public function remove(Request $request)
     {
+        $vendorId = $request->input('vendor_id');
         $productId = $request->input('product_id');
 
         $basket = session()->get('basket', []);
@@ -93,11 +71,12 @@ class BasketController extends Controller
             session(['basket' => $basket]);
         }
 
-        return redirect()->route('basket.index');
+        return redirect()->route('basket.index', ['vendor_id' => $vendorId]);
     }
 
-    public function pay()
+    public function pay(Request $request)
     {
+        $vendorId = $request->input('vendor_id');
         $basket = session()->get('basket', []);
         $products = Product::whereIn('id', array_keys($basket))->get();
 
@@ -106,12 +85,11 @@ class BasketController extends Controller
             $totalPrice += $product->price * $basket[$product->id];
         }
 
-        return view('basket.pay', compact('totalPrice'));
+        return view('basket.pay', compact('totalPrice', 'vendorId'));
     }
 
     public function completePayment(Request $request)
     {
-
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',

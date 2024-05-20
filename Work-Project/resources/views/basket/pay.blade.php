@@ -4,7 +4,11 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Payment</h1>
-        <a href="{{ route('basket.index') }}" class="btn btn-primary">Back to Basket</a>
+        <form action="{{ route('basket.index') }}" method="GET" class="mr-1">
+            @csrf
+            <input type="hidden" name="vendor_id" value="{{ $vendorId }}">
+            <button type="submit" class="btn btn-primary">Back to Basket</button>
+        </form>
     </div>
 
     @if($errors->any())
