@@ -95,3 +95,7 @@ Route::post('/linorder/delete', [LinorderController::class, 'delete']);
 Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
