@@ -1,7 +1,6 @@
 # DSS_Proyect-G4-05-Cowy-Carnivory  
 
 <h1>Instructions to build up the Project</h1>
-<br>
 <p> First, create a database ‘dss’ and a user ‘dss’ with password‘dss’ in order to access the database in an uniform way.</p>
 <p> Type the following commands in the mysql console:</p>
  <p> sudo mysql </p>
