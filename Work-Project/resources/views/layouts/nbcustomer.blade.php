@@ -101,21 +101,24 @@
 </head>
 <body>
     <header>
-
+        <!-- Header content -->
     </header>
     
-    <div class= "nav">
+    <div class="nav">
         <ul class="navbar">
-        <li><a class="bold" href="/">Home</a></li>
-        <li><a href="/vendor">Vendors</a></li>
-        <li><a href="/info">Information</a></li>
-        <li><a href="/contact">Contact</a></li>
+            <li><a class="bold" href="/">Home</a></li>
+            <li><a href="/vendor">Vendors</a></li>
+            <li><a href="/info">Information</a></li>
+            <li><a href="/contact">Contact</a></li>
         </ul>
 
-        <form method="GET" action="{{ url('/login') }}">
+        <!-- Logout Form with Confirmation Alert -->
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
-            <button class="btn-logout" type="submit" type="button">Log Out</button>
         </form>
+        <button id="logout-button" class="btn-logout" type="button">Log Out</button>
+
+        <!-- Profile Button -->
         <form method="GET" action="{{ url('/login') }}">
             @csrf
             <button class="btn-profile" type="submit" type="button">Profile</button>
@@ -123,7 +126,17 @@
     </div>
 
     <footer>
-
+        <!-- Footer content -->
     </footer>
+
+    <script>
+        document.getElementById('logout-button').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (confirm('Are you sure you want to log out?')) {
+                document.getElementById('logout-form').submit();
+            }
+        });
+    </script>
 </body>
+
 </html>
