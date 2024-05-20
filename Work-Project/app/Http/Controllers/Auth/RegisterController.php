@@ -24,6 +24,17 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    protected function redirectTo()
+    {
+        if (auth()->user()->role == 'customer') {
+            return '/';
+        } elseif (auth()->user()->role == 'vendor') {
+            return '/vendor-dashboard';
+        } elseif (auth()->user()->role == 'admin') {
+            return '/admin-dashboard';
+        }
+    }
+
     /**
      * Where to redirect users after registration.
      *
@@ -74,6 +85,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'phone_number' => $data['phone_number'],
             'card_number' => $data['card_number'],
+            'role' => 'customer',
         ]);
 
         Customer::create([
