@@ -1,10 +1,17 @@
 # DSS_Proyect-G4-05-Cowy-Carnivory  
 
 <h1>Instructions to build up the Project</h1>
-
+<p> First, create a database ‘dss’ and a user ‘dss’ with password‘dss’ in order to access the database in an uniform way.</p>
+<p> Type the following commands in the mysql console:</p>
+ <p> sudo mysql </p>
+ <p> mysql> CREATE DATABASE dss CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; </p>
+ <p> mysql> CREATEUSER 'dss'@'localhost' IDENTIFIED BY 'dss'; </p>
+ <p> mysql> GRANT ALL PRIVILEGES ON *.* TO 'dss'@'localhost'; </p>
+ <p> mysql> FLUSH PRIVILEGES; </p>
+<br>
 <p> 1º Go to the folder "Work-Project" and open it in a terminal</p>
 <p> 2º Type the command "composer install" for installing the PHP dependencies in vendor/</p>
-<p> 3º Type the command "cp .env example .env" to manually recreate production environment</p>
+<p> 3º Type the command "cp .env.example .env" to manually recreate production environment</p>
 <p> 4º Type the command "nano .env" to open the .env file</p>
 <p> 
 5º Inside the .env file, change the following database requirements:

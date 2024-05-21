@@ -211,9 +211,23 @@
                                 <p>{{ $product->description }}</p>
                                 <p><span class="product-price">{{ $product->price }}€</span></p>
                                 <div class="quantity-controls">
-                                    <button class="decrease">-</button>
-                                    <span class="quantity">0</span>
-                                    <button class="increase">+</button>
+                                    <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                        <button class="decrease" type="submit">-</button>
+                                    </form>
+                                    @if (isset($basket[$product->id]))
+                                        <span class="quantity">{{ $basket[$product->id] }}</span>
+                                    @else
+                                        <span class="quantity">0</span>
+                                    @endif
+                                    <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                        <button type="submit" class="increase">+</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -224,9 +238,13 @@
             <div class="total-column">
                 <div class="fixed-bottom-container">
                     <div class="total-container">
-                        <span class="total-price"><span id="total">0.00€</span></span>
+                        <span class="total-price"><span id="total">{{ number_format($totalPrice, 2) }}€</span></span>
                     </div>
-                    <a href="#" class="order-button">Go to order</a>
+                    <form action="{{ route('basket.index') }}" method="GET" class="mr-1">
+                        @csrf
+                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                        <button type="submit" class="order-button">Go to order</button>
+                    </form>
                 </div>
             </div>
         </div>

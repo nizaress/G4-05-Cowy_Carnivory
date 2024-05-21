@@ -8,6 +8,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LinorderController;
+use App\Http\Controllers\BasketController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +26,17 @@ tion. These
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+// Authentication routes
+Auth::routes();
+
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+// Home route
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 
 Route::get('/example', function () {
@@ -70,6 +84,8 @@ Route::patch('/vendor/update/{id}', [VendorController::class, 'update']);
 Route::get('/vendor/create', [VendorController::class, 'create'])->name('vendors.create');
 Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');
 Route::get('/vendors/{id}', [VendorController::class, 'show'])->name('vendors.show');
+Route::post('/vendor/increment', [VendorController::class, 'increment'])->name('vendor.increment');
+Route::post('/vendor/decrement', [VendorController::class, 'decrement'])->name('vendor.decrement');
 Route::get('/vendor/sortaz', [VendorController::class, 'sortaz'])->name('vendors.sortaz');
 Route::get('/vendor/sortza', [VendorController::class, 'sortza'])->name('vendors.sortza');
 Route::get('/vendor/search', [VendorController::class, 'search'])->name('vendors.search');
@@ -92,6 +108,18 @@ Route::post('/order/delete', [OrderController::class, 'delete']);
 Route::get('/linorder', [LinorderController::class, 'index'])->name('list.linorders');
 Route::post('/linorder/delete', [LinorderController::class, 'delete']);
 
+Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
+Route::post('/basket/add', [BasketController::class, 'add'])->name('basket.add');
+Route::post('/basket/increment', [BasketController::class, 'increment'])->name('basket.increment');
+Route::post('/basket/decrement', [BasketController::class, 'decrement'])->name('basket.decrement');
+Route::post('/basket/remove', [BasketController::class, 'remove'])->name('basket.remove');
+Route::get('/basket/pay', [BasketController::class, 'pay'])->name('basket.pay'); // Add this line
+Route::post('/basket/completePayment', [BasketController::class, 'completePayment'])->name('basket.completePayment'); // Add this line
+
 Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
