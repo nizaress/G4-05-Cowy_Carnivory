@@ -221,7 +221,7 @@
   @endauth
 
   @guest
-    @include('layouts.nbadmin')
+    @include('layouts.nbguest')
   @endguest
 
   <div class="background" id="background">

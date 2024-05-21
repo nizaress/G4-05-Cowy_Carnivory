@@ -100,9 +100,6 @@
     </style>
 </head>
 <body>
-    <header>
-        <!-- Header content -->
-    </header>
     
     <div class="nav">
         <ul class="navbar">

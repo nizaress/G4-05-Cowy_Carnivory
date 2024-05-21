@@ -203,12 +203,8 @@
 </head>
 
 <body>
-    <header>
-    </header>
     
     @auth
-
-    <h1 style="text-align: center; font-family: Arial, sans-serif; color: rgb(116, 116, 116);">Vendors</h1>
 
     @if (Auth::user()->role == 'admin')
     {
@@ -287,8 +283,7 @@
             {{ $vendors->appends(['sort' => $sortOrder])->links() }}
         </div>
     }
-    @elseif (Auth::user()->role == 'customer')
-    {
+    @elseif (Auth::user()->role == 'customer') {
         @include('layouts.nbcustomer')
         <div class="container">
             <div class="search-form">
