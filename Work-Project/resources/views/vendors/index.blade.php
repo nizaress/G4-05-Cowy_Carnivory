@@ -291,37 +291,51 @@
     {
         @include('layouts.nbcustomer')
         <div class="container">
-            <div class="sidebar">
-                <div class="sort-title">Sort By</div>
-                <div class="sort-options">
-                    <a href="{{ route('vendors.sortaz')}}" ><i class="fa-solid fa-arrow-down-a-z"></i> Alphabetical order</a>
-                    <a href="{{ route('vendors.sortza')}}"><i class="fa-solid fa-arrow-down-z-a"></i> Reverse Alphabetical order</a>
-                    <a href="?sort=delivery_fee"><i class="fas fa-star"></i> Ratings</a>
-                </div>
-
-                <div class="filter-title">Filters</div>
-                <div class="filters">
-                    <a href="?filter=americana"><i class="fas fa-hamburger"></i> Hamburguer</a>
-                    <a href="?filter=hamburguesas"><i class="fas fa-pizza-slice"></i> Pizza</a>
-                    <a href="?filter=pizza"><i class="fa-solid fa-shrimp"></i> Asian</a>
-                    <a href="?filter=arabe"><i class="fa-solid fa-bread-slice"></i> Sandwich</a>
-                    <a href="?filter=asiatica"><i class="fa-solid fa-pepper-hot"></i> Mexican</a>
-                </div>
+            <div class="search-form">
+                <form method="GET" action="{{ route('vendors.search')}}" style="display: flex; align-items: center;">
+                    <input type="text" name="search" class="search-input" placeholder="  Search our restaurants..." value="{{ request('search') }}">
+                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                </form>
             </div>
 
-            <div class="content">
-                <div class="vendor-title">Vendors</div>
-                @foreach ($vendors as $vendor)
-                    <div class="vendor">
-                        <img src="{{ $vendor->image }}" alt="{{ $vendor->name }}">
-                        <div class="vendor-details">
-                            <h3><a href="{{ route('vendors.show', $vendor->id) }}">{{ $vendor->name }}</a></h3>
-                            <p>{{ $vendor->description }}</p>
-                            <p>{{ $vendor->address }}</p>
-                        </div>
+            <div class="sidebar-and-content">
+                <div class="sidebar">
+                    <div class="sort-title">Sort By</div>
+                    <div class="sort-options">
+                        <a href="{{ route('vendors.sortaz')}}" ><i class="fa-solid fa-arrow-down-a-z"></i> Alphabetical order</a>
+                        <a href="{{ route('vendors.sortza')}}"><i class="fa-solid fa-arrow-down-z-a"></i> Reverse Alphabetical order</a>
+                        <a href="?sort=delivery_fee"><i class="fas fa-star"></i> Ratings</a>
                     </div>
-                @endforeach
+
+                    <div class="filter-title">Filters</div>
+                    <div class="filters">
+                        <a href="?filter=americana"><i class="fas fa-hamburger"></i> Hamburguer</a>
+                        <a href="?filter=hamburguesas"><i class="fas fa-pizza-slice"></i> Pizza</a>
+                        <a href="?filter=pizza"><i class="fa-solid fa-shrimp"></i> Asian</a>
+                        <a href="?filter=arabe"><i class="fa-solid fa-bread-slice"></i> Sandwich</a>
+                        <a href="?filter=asiatica"><i class="fa-solid fa-pepper-hot"></i> Mexican</a>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="vendor-title">Restaurants</div>
+                    @if (count($vendors) == 0)
+                        <p >No vendors found :/</p>
+                    @endif
+                    @foreach ($vendors as $vendor)
+                        <div class="vendor">
+                            <img src="/images/vendors/{{ $vendor->name }}.jpg" alt="{{ $vendor->name }}">
+                            <div class="vendor-details">
+                                <h3><a href="{{ route('vendors.show', $vendor->id) }}">{{ $vendor->name }}</a></h3>
+                                <p>{{ $vendor->description }}</p>
+                                <p>{{ $vendor->address }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                    {{ $vendors->links() }}
+                </div>
             </div>
+            
         </div>
     }
     @endif
