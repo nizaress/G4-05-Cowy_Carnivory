@@ -100,7 +100,6 @@
     </style>
 </head>
 <body>
-    
     <div class="nav">
         <ul class="navbar">
             <li><a class="bold" href="/">Home</a></li>

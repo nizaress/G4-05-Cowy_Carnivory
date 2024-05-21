@@ -180,6 +180,9 @@
     @auth
     @if (Auth::user()->role == 'customer')
         @include('layouts.nbcustomer')
+    @elseif (Auth::user()->role == 'vendor')
+        @include('layouts.nbvendor')
+        // aqui escribe criscor
     @endif
     @endauth
 
