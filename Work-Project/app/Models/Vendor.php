@@ -17,7 +17,7 @@ class Vendor extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class, 'vendor_email', 'email');
+        return $this->hasMany(Product::class, 'vendor_id', 'id');
     }
     
 }
