@@ -20,6 +20,18 @@ class CustomerTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Customer::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+        Customer::create([
+            'email' => 'customer@default.com',
+            'name' => 'customer-default',
+            'password' => bcrypt('customer-default'),
+            'address' => 'customer default Street',
+            'phone_number' => '616614321',
+            'card_number' => '1111111122222222',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        
         Customer::factory()->count(100)->create();
     }
 }

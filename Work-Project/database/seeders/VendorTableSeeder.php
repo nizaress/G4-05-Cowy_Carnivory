@@ -25,6 +25,15 @@ class VendorTableSeeder extends Seeder
         // Crear ejemplos específicos
         $vendors = [
             [
+                'email' => 'vendor@default.com',
+                'name' => 'vendor-default',
+                'phone_number' => '643218999',
+                'address' => 'vendor default Street',
+                'accountNumber' => '5555666677778888',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'email' => 'info@mcdonalds.com',
                 'name' => 'McDonald\'s',
                 'phone_number' => '123456789',
