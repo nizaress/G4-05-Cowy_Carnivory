@@ -11,7 +11,7 @@ class Vendor extends Model
 
     protected $table = 'vendor';
 
-    protected $fillable = ['email','name','phone_number','address','accountNumber','created_at','updated_at'];
+    protected $fillable = ['email','name','phone_number','address','accountNumber', 'category','created_at','updated_at'];
 
     protected $guarded = [];
 

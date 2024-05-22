@@ -89,6 +89,11 @@ Route::post('/vendor/decrement', [VendorController::class, 'decrement'])->name('
 Route::get('/vendor/sortaz', [VendorController::class, 'sortaz'])->name('vendors.sortaz');
 Route::get('/vendor/sortza', [VendorController::class, 'sortza'])->name('vendors.sortza');
 Route::get('/vendor/search', [VendorController::class, 'search'])->name('vendors.search');
+Route::get('/vendor/filter_hamburguer', [VendorController::class, 'filter_hamburguer'])->name('vendors.filter_hamburguer');
+Route::get('/vendor/filter_pizza', [VendorController::class, 'filter_pizza'])->name('vendors.filter_pizza');
+Route::get('/vendor/filter_asian', [VendorController::class, 'filter_asian'])->name('vendors.filter_asian');
+Route::get('/vendor/filter_mexican', [VendorController::class, 'filter_mexican'])->name('vendors.filter_mexican');
+Route::get('/vendor/filter_sandwich', [VendorController::class, 'filter_sandwich'])->name('vendors.filter_sandwich');
 
 Route::get('/product', [ProductController::class, 'index'])->name('list.products');
 Route::post('/product/delete', [ProductController::class, 'delete']);

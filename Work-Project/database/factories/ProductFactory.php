@@ -26,6 +26,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
             'price' => $this->faker->randomFloat(2, 1, 20),
+            'category' => $this->faker->word,
             'vendor_email' => null, // Se llenará en el seeder
             'vendor_name' => null, // Se llenará en el seeder
             'created_at' => now(),

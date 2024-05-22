@@ -22,6 +22,8 @@ return new class extends Migration
             $table->index('description'); 
             $table->float('price',8,2);
             $table->index('price'); 
+            $table->string('category');
+            $table->index('category');
             $table->unsignedBigInteger('vendor_id')->nullable();
             $table->string('vendor_email');
             $table->string('vendor_name');

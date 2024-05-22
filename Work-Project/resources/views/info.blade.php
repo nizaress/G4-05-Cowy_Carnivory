@@ -76,6 +76,11 @@
             text-align: center;
         }
 
+        .info-box h3 {
+            color: #fafcff;
+            font-size: 1.5em;
+        }
+
         .team-member {
             background-color: #F3F6FF;
             padding: 20px;
