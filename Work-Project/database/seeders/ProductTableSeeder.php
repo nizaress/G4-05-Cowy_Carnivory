@@ -31,6 +31,7 @@ class ProductTableSeeder extends Seeder
                 'price' => 5.99,
                 'vendor_email' => 'info@mcdonalds.com',
                 'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -41,6 +42,7 @@ class ProductTableSeeder extends Seeder
                 'price' => 4.99,
                 'vendor_email' => 'info@mcdonalds.com',
                 'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -51,6 +53,7 @@ class ProductTableSeeder extends Seeder
                 'price' => 2.99,
                 'vendor_email' => 'info@mcdonalds.com',
                 'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -61,6 +64,7 @@ class ProductTableSeeder extends Seeder
                 'price' => 6.99,
                 'vendor_email' => 'contact@burgerking.com',
                 'vendor_name' => 'Burger King',
+                'vendor_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -71,6 +75,7 @@ class ProductTableSeeder extends Seeder
                 'price' => 3.99,
                 'vendor_email' => 'contact@burgerking.com',
                 'vendor_name' => 'Burger King',
+                'vendor_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -81,6 +86,7 @@ class ProductTableSeeder extends Seeder
                 'price' => 2.49,
                 'vendor_email' => 'contact@burgerking.com',
                 'vendor_name' => 'Burger King',
+                'vendor_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -91,6 +97,7 @@ class ProductTableSeeder extends Seeder
                 'price' => 7.49,
                 'vendor_email' => 'info@wendys.com',
                 'vendor_name' => 'Wendy\'s',
+                'vendor_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -101,6 +108,7 @@ class ProductTableSeeder extends Seeder
                 'price' => 1.99,
                 'vendor_email' => 'info@wendys.com',
                 'vendor_name' => 'Wendy\'s',
+                'vendor_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -111,6 +119,7 @@ class ProductTableSeeder extends Seeder
                 'price' => 5.49,
                 'vendor_email' => 'info@wendys.com',
                 'vendor_name' => 'Wendy\'s',
+                'vendor_id' => 3,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -127,7 +136,9 @@ class ProductTableSeeder extends Seeder
         $vendors = Vendor::all();
 
         foreach ($vendors as $vendor) {
+            $vendorId = rand(1, 19);
             Product::factory()->count(3)->create([
+                'vendor_id' => $vendorId,
                 'vendor_email' => $vendor->email,
                 'vendor_name' => $vendor->name,
             ]);
