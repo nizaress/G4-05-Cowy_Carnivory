@@ -64,8 +64,8 @@
         <ul class="navbar">
             <li><a class="bold" href="/">Home</a></li>
             <li><a href="/vendor">Vendors</a></li>
-            <li><a href="/product">Information</a></li>
-            <li><a href="/product">Contact</a></li>
+            <li><a href="/info">Information</a></li>
+            <li><a href="/contact">Contact</a></li>
         </ul>
 
     </div>

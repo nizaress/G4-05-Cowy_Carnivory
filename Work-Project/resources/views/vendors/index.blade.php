@@ -207,7 +207,6 @@
     @auth
 
     @if (Auth::user()->role == 'admin')
-    {
         @include('layouts.nbadmin')
         <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1%; margin-bottom: 1%;">
             <form class="frm" action="{{ url('/vendor/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 6%;">
@@ -282,8 +281,8 @@
             </table>
             {{ $vendors->appends(['sort' => $sortOrder])->links() }}
         </div>
-    }
-    @elseif (Auth::user()->role == 'customer') {
+    
+    @elseif (Auth::user()->role == 'customer') 
         @include('layouts.nbcustomer')
         <div class="container">
             <div class="search-form">
@@ -332,7 +331,7 @@
             </div>
             
         </div>
-    }
+    
     @endif
 
     @endauth
