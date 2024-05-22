@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('email'); // Define el campo que será la clave primaria
             $table->string('name');
-            $table->string('password')->default('vendor-default');
+            $table->string('password');
             $table->string('phone_number');
             $table->string('address');
             $table->string('accountNumber');
