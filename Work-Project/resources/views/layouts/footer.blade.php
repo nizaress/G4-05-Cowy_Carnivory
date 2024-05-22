@@ -88,9 +88,9 @@
             <div class="col">
                 <h3>Important links</h3>
                 <ul>
-                    <li><a href="#">Project Information</a></li>
+                    <li><a href="{{ route('info') }}">Project Information</a></li>
                     <li><a href="{{ route('faq') }}">FAQ</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>
             </div>
             <div class="col">
