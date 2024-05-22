@@ -108,13 +108,15 @@ Route::post('/order/delete', [OrderController::class, 'delete']);
 Route::get('/linorder', [LinorderController::class, 'index'])->name('list.linorders');
 Route::post('/linorder/delete', [LinorderController::class, 'delete']);
 
-Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
-Route::post('/basket/add', [BasketController::class, 'add'])->name('basket.add');
-Route::post('/basket/increment', [BasketController::class, 'increment'])->name('basket.increment');
-Route::post('/basket/decrement', [BasketController::class, 'decrement'])->name('basket.decrement');
-Route::post('/basket/remove', [BasketController::class, 'remove'])->name('basket.remove');
-Route::get('/basket/pay', [BasketController::class, 'pay'])->name('basket.pay'); // Add this line
-Route::post('/basket/completePayment', [BasketController::class, 'completePayment'])->name('basket.completePayment'); // Add this line
+Route::middleware(['auth'])->group(function () {
+    Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
+    Route::post('/basket/add', [BasketController::class, 'add'])->name('basket.add');
+    Route::post('/basket/increment', [BasketController::class, 'increment'])->name('basket.increment');
+    Route::post('/basket/decrement', [BasketController::class, 'decrement'])->name('basket.decrement');
+    Route::post('/basket/remove', [BasketController::class, 'remove'])->name('basket.remove');
+    Route::get('/basket/pay', [BasketController::class, 'pay'])->name('basket.pay'); // Add this line
+    Route::post('/basket/completePayment', [BasketController::class, 'completePayment'])->name('basket.completePayment'); // Add this line
+});
 
 Route::get('/faq', function () {
     return view('faq');
