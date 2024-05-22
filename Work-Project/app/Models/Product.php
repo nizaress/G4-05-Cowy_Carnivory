@@ -15,12 +15,11 @@ class Product extends Model
 
     public function vendor()
     {
-    return $this->belongsTo(Vendor::class, 'vendor_email', 'email');
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
     }
-
 
     public function lineorders()
     {
-        return $this->hasMany(Lineorder::class,'product_code','cod');
+        return $this->hasMany(LineOrder::class, 'product_id', 'id');
     }
 }

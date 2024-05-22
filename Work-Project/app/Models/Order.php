@@ -15,11 +15,11 @@ class Order extends Model
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class,'customer_email','email');
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
 
     public function lineorders()
     {
-        return $this->hasMany(Lineorder::class,'numOrder','numOrder');
+        return $this->hasMany(LineOrder::class, 'order_id', 'id');
     }
 }
