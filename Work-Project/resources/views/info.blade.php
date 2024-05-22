@@ -197,8 +197,8 @@
                 <p>Frontend Developer</p>
             </div>
             <div class="team-member">
-                <img src="/images/team/nizar.jpg" alt="Nízar Nortes Pastor">
-                <h4>Nízar Nortes Pastor</h4>
+                <img src="/images/team/nizar.jpg" alt="Nizar Nortes Pastor">
+                <h4>Nizar Nortes Pastor</h4>
                 <p>Backend Developer</p>
             </div>
             <div style="text-align: center; width: 100%; margin-top: 20px;">

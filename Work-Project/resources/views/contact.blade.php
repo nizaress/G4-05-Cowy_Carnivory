@@ -132,11 +132,11 @@
         </div>
 
         <div class="team-member">
-            <img src="/images/team/nizar.jpg" alt="Nízar Nortes Pastor">
+            <img src="/images/team/nizar.jpg" alt="Nizar Nortes Pastor">
             <div class="content">
-                <h3>Nízar Nortes Pastor</h3>
+                <h3>Nizar Nortes Pastor</h3>
                 <p>Backend Developer</p>
-                <p>Nízar focuses on back-end development, managing the server, database, and application logic. He ensures the system is robust, scalable, and performs optimally.</p>
+                <p>Nizar focuses on back-end development, managing the server, database, and application logic. He ensures the system is robust, scalable, and performs optimally.</p>
                 <p>nnpn1@alu.ua.es</p>
                 <p>+34 644964126</p>
             </div>
