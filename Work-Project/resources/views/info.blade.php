@@ -84,10 +84,10 @@
             margin: 10px;
             text-align: center;
             display: inline-block;
-            width: 20%; /* Adjust to ensure three items per row */
+            width: 20%;
             height: 325px;
             box-sizing: border-box;
-            vertical-align: top; /* Aligns the boxes to the top */
+            vertical-align: top;
         }
 
         .team-member h4 {

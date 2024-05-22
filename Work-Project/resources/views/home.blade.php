@@ -291,7 +291,7 @@
         backgroundElement.style.backgroundImage = `url(${backgroundUrls[currentImageIndex]})`;
       }
 
-      setInterval(changeBackground, 4000); // Cambia la imagen cada 4 segundos
+      setInterval(changeBackground, 4000);
     });
   </script>
 </body>
