@@ -112,10 +112,10 @@ class BasketController extends Controller
         try {
             Mail::to($request->email)->send(new PaymentSuccess($request, $totalPrice));
         } catch (\Exception $e) {
-            return redirect()->route('basket.index')->with('error', 'Email failed but payment was suuccessful. ' . $e->getMessage());
+            return redirect()->route('home')->with('error', 'Email failed but payment was suuccessful. ' . $e->getMessage());
         }
 
-        return redirect()->route('basket.index')->with('success', 'Payment completed successfully!');
+        return redirect()->route('home')->with('success', 'Payment completed successfully!');
     }
 
 }
