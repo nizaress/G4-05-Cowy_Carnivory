@@ -137,10 +137,12 @@ class ProductTableSeeder extends Seeder
 
         foreach ($vendors as $vendor) {
             $vendorId = rand(1, 19);
+            $vendorDetails = Vendor::find($vendorId);
+            
             Product::factory()->count(3)->create([
                 'vendor_id' => $vendorId,
-                'vendor_email' => $vendor->email,
-                'vendor_name' => $vendor->name,
+                'vendor_email' => $vendorDetails->email,
+                'vendor_name' => $vendorDetails->name,
             ]);
         }
 
