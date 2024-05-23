@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@include('layouts.nbcustomer')
+@include('layouts.nbguest')
 @section('content')
 
 <style>

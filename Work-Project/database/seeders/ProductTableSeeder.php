@@ -406,11 +406,10 @@ class ProductTableSeeder extends Seeder
             $vendorId = $vendor->id;
             $vendorDetails = Vendor::find($vendorId);
 
-            Product::factory()->count(3)->create([
+            Product::factory()->count(6)->create([
                 'vendor_id' => $vendorId,
                 'vendor_email' => $vendorDetails->email,
                 'vendor_name' => $vendorDetails->name,
-                'category' => array_rand(['Starter', 'Main Course', 'Dessert']),
             ]);
         }
 
