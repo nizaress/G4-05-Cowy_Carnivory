@@ -32,6 +32,7 @@ class VendorFactory extends Factory
             'phone_number' => $this->faker->numerify('##########'),
             'address' => $this->faker->address(),
             'accountNumber' => $this->faker->bankAccountNumber(),
+            'category' => $this->faker->word,
             'created_at' => now(),
             'updated_at' => now(),
         ];

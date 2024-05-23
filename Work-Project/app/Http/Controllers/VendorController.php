@@ -135,6 +135,36 @@ class VendorController extends Controller
         return view('vendors.index', compact('vendors'));
     }
 
+    public function filter_hamburguer()
+    {
+        $vendors = Vendor::where('category', 'Hamburguer')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
+
+    public function filter_pizza()
+    {
+        $vendors = Vendor::where('category', 'Pizza')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
+
+    public function filter_asian()
+    {
+        $vendors = Vendor::where('category', 'Asian')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
+
+    public function filter_mexican()
+    {
+        $vendors = Vendor::where('category', 'Mexican')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
+
+    public function filter_sandwich()
+    {
+        $vendors = Vendor::where('category', 'Sandwich')->paginate(10);
+        return view('vendors.index', compact('vendors'));
+    }
+
     public function increment(Request $request)
     {
         $productId = $request->input('product_id');

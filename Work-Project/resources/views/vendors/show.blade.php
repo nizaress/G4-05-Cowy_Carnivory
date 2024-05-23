@@ -12,7 +12,6 @@
             height: 100%;
             background-color: #fafcff;
             font-family: 'Verdana', sans-serif;  
-            <!--background-color: #120903;-->
         }
         .container {
             padding: 20px;
@@ -51,14 +50,14 @@
         .main-content {
             display: flex;
             margin-top: 40px;
-            gap: 30px; /* Espacio entre columnas */
+            gap: 30px;
         }
         .products-column {
-            flex: 3; /* La columna de productos tomará 2/3 del espacio */
+            flex: 3;
         }
         .total-column {
             margin-top: 40px;
-            flex: 1; /* La columna del total tomará 1/3 del espacio */
+            flex: 1;
         }
         .products-title {
             font-size: 1.5em;
@@ -69,7 +68,7 @@
             border-radius: 8px;
         }
         .product {
-            position: relative; /* Añadido para el posicionamiento absoluto */
+            position: relative;
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 15px;
@@ -99,9 +98,9 @@
             color: #444956;
         }
         .quantity-controls {
-            position: absolute; /* Posicionamiento absoluto */
-            bottom: 15px; /* Espaciado desde la parte inferior */
-            right: 15px; /* Espaciado desde la parte derecha */
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -121,11 +120,9 @@
             align-items: center;
             justify-content: center;
         }
-
         .quantity-controls button:hover {
             background-color: rgba(65, 26, 204, 1);
         }
-
         .quantity-controls button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -137,7 +134,7 @@
         }
         .fixed-bottom-container {
             position: sticky;
-            top: 20px; /* Hace que el contenedor sea pegajoso y se quede en la parte superior */
+            top: 20px;
             background-color: #fafcff;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
             border-top: 1px solid #ddd;
@@ -152,12 +149,12 @@
             flex-direction: column;
             align-items: center;
             margin-top: 10px; 
-            margin-bottom: 10px; /* Espaciado entre el total y el botón */
+            margin-bottom: 10px;
         }
         .total-price {
             font-size: 1.5em;
             color: #07080c;
-            margin-bottom: 10px; /* Espaciado entre el total y el botón */
+            margin-bottom: 10px;
         }
         .order-button {
             padding: 10px 20px;
@@ -182,7 +179,6 @@
         @include('layouts.nbcustomer')
     @elseif (Auth::user()->role == 'vendor')
         @include('layouts.nbvendor')
-        // aqui escribe criscor
     @endif
     @endauth
 
@@ -205,8 +201,76 @@
         <div class="main-content">
             <div class="products-column">
                 <div class="products">
-                    <div class="products-title">Products</div>
-                    @foreach ($vendor->products as $product)
+                    <div class="products-title">Starters</div>
+                    @foreach ($vendor->products->where('category', 'Starter') as $product)
+                        <div class="product" data-price="{{ $product->price }}">
+                            <img src="{{ $product->image }}" alt="{{ $product->name }}">
+                            <div class="product-details">
+                                <h3>{{ $product->name }}</h3>
+                                <p>{{ $product->description }}</p>
+                                <p><span class="product-price">{{ $product->price }}€</span></p>
+                                <div class="quantity-controls">
+                                    <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                        <button class="decrease" type="submit">-</button>
+                                    </form>
+                                    @if (isset($basket[$product->id]))
+                                        <span class="quantity">{{ $basket[$product->id] }}</span>
+                                    @else
+                                        <span class="quantity">0</span>
+                                    @endif
+                                    <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                        <button type="submit" class="increase">+</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <br>
+
+                <div class="products">
+                    <div class="products-title">Main Courses</div>
+                    @foreach ($vendor->products->where('category', 'Main Course') as $product)
+                        <div class="product" data-price="{{ $product->price }}">
+                            <img src="{{ $product->image }}" alt="{{ $product->name }}">
+                            <div class="product-details">
+                                <h3>{{ $product->name }}</h3>
+                                <p>{{ $product->description }}</p>
+                                <p><span class="product-price">{{ $product->price }}€</span></p>
+                                <div class="quantity-controls">
+                                    <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                        <button class="decrease" type="submit">-</button>
+                                    </form>
+                                    @if (isset($basket[$product->id]))
+                                        <span class="quantity">{{ $basket[$product->id] }}</span>
+                                    @else
+                                        <span class="quantity">0</span>
+                                    @endif
+                                    <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                        <button type="submit" class="increase">+</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <br>
+                <div class="products">
+                    <div class="products-title">Desserts</div>
+                    @foreach ($vendor->products->where('category', 'Dessert') as $product)
                         <div class="product" data-price="{{ $product->price }}">
                             <img src="{{ $product->image }}" alt="{{ $product->name }}">
                             <div class="product-details">
