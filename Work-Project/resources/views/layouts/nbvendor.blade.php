@@ -105,16 +105,17 @@
 
     </header>
     
-    <div class= "nav">
+    <div class="nav">
         <ul class="navbar">
-        <li><a class="bold" href="/">Home</a></li>
-        <li><a href="/product">My Products</a></li>
+            <li><a class="bold" href="/">Home</a></li>
+            <li><a href="/product">My Products</a></li>
         </ul>
 
-        <form method="GET" action="{{ url('/login') }}">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
-            <button class="btn-logout" type="submit" type="button">Log Out</button>
         </form>
+        <button id="logout-button" class="btn-logout" type="button">Log Out</button>
+
         <form method="GET" action="{{ url('/login') }}">
             @csrf
             <button class="btn-profile" type="submit" type="button">Profile</button>
@@ -124,5 +125,14 @@
     <footer>
 
     </footer>
+
+    <script>
+        document.getElementById('logout-button').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (confirm('Are you sure you want to log out?')) {
+                document.getElementById('logout-form').submit();
+            }
+        });
+    </script>
 </body>
 </html>
