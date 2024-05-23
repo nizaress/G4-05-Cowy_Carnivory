@@ -108,11 +108,11 @@ class BasketController extends Controller
 
         $numOrder = Order::max('numOrder') + 1;
 
-        $deliveryTime = Carbon::now()->addMinutes(rand(5, 15));
+        $deliveryTime = Carbon::now('Europe/Madrid')->addMinutes(rand(5, 15));
 
         $order = Order::create([
             'numOrder' => $numOrder,
-            'Date' => Carbon::now()->toDateString(),
+            'Date' => $deliveryTime->toDateString(),
             'deliveryTime' => $deliveryTime->toTimeString(),
             'PaymentMethod' => 'Card',
             'customer_id' => auth()->id(),

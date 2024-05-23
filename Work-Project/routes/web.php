@@ -94,6 +94,12 @@ Route::post('/customer/store', [CustomerController::class, 'store'])->name('cust
 
 Route::get('/order', [OrderController::class, 'index'])->name('list.orders');
 Route::post('/order/delete', [OrderController::class, 'delete']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/pending', [OrderController::class, 'pendingOrders'])->name('pending');
+});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/last', [OrderController::class, 'lastOrders'])->name('last');
+});
 
 Route::get('/linorder', [LinorderController::class, 'index'])->name('list.linorders');
 Route::post('/linorder/delete', [LinorderController::class, 'delete']);
