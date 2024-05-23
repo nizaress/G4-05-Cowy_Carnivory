@@ -138,6 +138,13 @@
             color: #444956;
         }
 
+        .vendor-name {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-right: 20px;
+        }
+
         .category {
             font-weight: light;
             background-color: #dbdfec;
@@ -308,18 +315,18 @@
                 <div class="sidebar">
                     <div class="sort-title">Sort By</div>
                     <div class="sort-options">
-                        <a href="{{ route('vendors.sortaz')}}" ><i class="fa-solid fa-arrow-down-a-z"></i> Alphabetical order</a>
-                        <a href="{{ route('vendors.sortza')}}"><i class="fa-solid fa-arrow-down-z-a"></i> Reverse Alphabetical order</a>
-                        <a href="?sort=delivery_fee"><i class="fas fa-star"></i> Ratings</a>
+                        <a href="{{ route('vendors.sortaz')}}" ><i class="fa-solid fa-arrow-down-a-z"></i>Alphabetical order</a>
+                        <a href="{{ route('vendors.sortza')}}"><i class="fa-solid fa-arrow-down-z-a"></i>Reverse Alphabetical order</a>
+                        <a href="?sort=delivery_fee"><i class="fas fa-star"></i>Ratings</a>
                     </div>
 
                     <div class="filter-title">Filters</div>
                     <div class="filters">
-                        <a href="?filter=americana"><i class="fas fa-hamburger"></i> Hamburguer</a>
-                        <a href="?filter=hamburguesas"><i class="fas fa-pizza-slice"></i> Pizza</a>
-                        <a href="?filter=pizza"><i class="fa-solid fa-shrimp"></i> Asian</a>
-                        <a href="?filter=arabe"><i class="fa-solid fa-bread-slice"></i> Sandwich</a>
-                        <a href="?filter=asiatica"><i class="fa-solid fa-pepper-hot"></i> Mexican</a>
+                        <a href="{{ route('vendors.filter_hamburguer')}}" ><i class="fas fa-hamburger"></i>Hamburguer</a>
+                        <a href="{{ route('vendors.filter_pizza')}}"><i class="fas fa-pizza-slice"></i>Pizza</a>
+                        <a href="{{ route('vendors.filter_asian')}}"><i class="fa-solid fa-shrimp"></i>Asian</a>
+                        <a href="{{ route('vendors.filter_sandwich')}}"><i class="fa-solid fa-bread-slice"></i>Sandwich</a>
+                        <a href="{{ route('vendors.filter_mexican')}}"><i class="fa-solid fa-pepper-hot"></i>Mexican</a>
                     </div>
                 </div>
 
@@ -332,9 +339,16 @@
                         <div class="vendor">
                             <img src="/images/vendors/{{ $vendor->name }}.jpg" alt="{{ $vendor->name }}">
                             <div class="vendor-details">
-                                <h3><a href="{{ route('vendors.show', $vendor->id) }}">{{ $vendor->name }}</a></h3>
+                                <div class="vendor-name">
+                                    <h3><a href="{{ route('vendors.show', $vendor->id) }}">{{ $vendor->name }}</a></h3>
+                                    <div style="display:flex;align-items:center">
+                                        <p>{{ number_format($vendor->average_rating, 1) }}</p>
+                                        <i class="fas fa-star" style="font-size:1.5em;margin-left:13px"></i>
+                                    </div>
+                                </div>
                                 <p>{{ $vendor->description }}</p>
                                 <p>{{ $vendor->address }}</p>
+                                <p class="category" style="margin-top:20px">{{ $vendor->category }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -388,7 +402,13 @@
                         <div class="vendor">
                             <img src="/images/vendors/{{ $vendor->name }}.jpg" alt="{{ $vendor->name }}">
                             <div class="vendor-details">
-                                <h3><a href="{{ route('vendors.show', $vendor->id) }}">{{ $vendor->name }}</a></h3>
+                                <div class="vendor-name">
+                                    <h3><a href="{{ route('vendors.show', $vendor->id) }}">{{ $vendor->name }}</a></h3>
+                                    <div style="display:flex;align-items:center">
+                                        <p>{{ number_format($vendor->average_rating, 1) }}</p>
+                                        <i class="fas fa-star" style="font-size:1.5em;margin-left:13px"></i>
+                                    </div>
+                                </div>
                                 <p>{{ $vendor->description }}</p>
                                 <p>{{ $vendor->address }}</p>
                                 <p class="category" style="margin-top:20px">{{ $vendor->category }}</p>

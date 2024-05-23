@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Cowy Carnivory</title>
     <style>
         body, html {
@@ -46,6 +47,13 @@
         .vendor-details p {
             margin: 5px 0;
             color: #444956
+        }
+
+        .vendor-name {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-right: 20px;
         }
         .main-content {
             display: flex;
@@ -169,6 +177,71 @@
         .order-button:hover {
             background-color: #07080c;
         }
+
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: right;
+            margin-right: 20px;
+            align-items: center;
+
+        }
+
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 2.4em;
+            color: #dbdfec;
+            cursor: pointer;
+        }
+
+        .star-rating label:before {
+            content: '★';
+        }
+
+        .star-rating input[type="radio"]:checked ~ label {
+            color: #411acc;
+        }
+
+        .star-rating input[type="radio"]:checked + label {
+            color: #411acc;
+        }
+
+        .star-rating input[type="radio"]:not(:checked) + label:hover,
+        .star-rating input[type="radio"]:not(:checked) + label:hover ~ label {
+            color: #411acc;
+        }
+
+        .star-rating input[type="radio"]:checked + label:hover,
+        .star-rating input[type="radio"]:checked + label:hover ~ label,
+        .star-rating input[type="radio"]:checked ~ label:hover,
+        .star-rating input[type="radio"]:checked ~ label:hover ~ label {
+            color: #411acc;
+        }
+
+        .rate-button {
+            padding: 8px 15px;
+            margin-left: 20px;
+            margin-top: 5px;
+            height: 80%;
+            border: 1px solid #07080c;
+            background-color: #07080c;
+            color: #fafcff;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .rate-button:hover {
+            border: 1px solid #07080c;
+            background-color: #fafcff;
+            color: #07080c;
+        }
+
+
     </style>
 </head>
 <body>
@@ -190,11 +263,59 @@
         <div class="vendor-info">
             <img src="/images/vendors/{{ $vendor->name }}.jpg" alt="{{ $vendor->name }}">
             <div class="vendor-details">
-                <h1>{{ $vendor->name }}</h1>
+                <div class="vendor-name">
+                    <h1>{{ $vendor->name }}</h1>
+                    <div style="display:flex;align-items:center">
+                        <p>{{ number_format($vendor->average_rating, 1) }}</p>
+                        <i class="fas fa-star" style="font-size:1.5em;margin-left:13px"></i>
+                    </div>
+                </div>
                 <br>
                 <p>{{ $vendor->address }}</p>
                 <p>{{ $vendor->email }}</p>
                 <p>{{ $vendor->phone_number }}</p>
+                @auth 
+                    @if(!\App\Models\VendorVote::where('user_id', Auth::id())->where('vendor_id', $vendor->id)->exists())
+                        <form action="{{ route('vendor.rate', $vendor->id) }}" method="POST">
+                            @csrf
+                            <div class="star-rating">
+                                <button class="rate-button" type="submit">Rate</button>
+                                <input type="radio" id="5-stars" name="rating" value="5">
+                                <label for="5-stars" class="star"></label>
+                                <input type="radio" id="4-stars" name="rating" value="4">
+                                <label for="4-stars" class="star"></label>
+                                <input type="radio" id="3-stars" name="rating" value="3">
+                                <label for="3-stars" class="star"></label>
+                                <input type="radio" id="2-stars" name="rating" value="2">
+                                <label for="2-stars" class="star"></label>
+                                <input type="radio" id="1-star" name="rating" value="1">
+                                <label for="1-star" class="star"></label>
+                            </div>
+                        </form>
+                    @else
+                        <div class="star-rating">
+                            <p style="padding:11px">You have already rated this vendor.</p>
+                        </div>
+                    @endif
+                @endauth
+                @guest 
+                    <form action="{{ url('/login') }}" method="GET">
+                        @csrf
+                        <div class="star-rating">
+                            <button class="rate-button" type="submit">Rate</button>
+                            <input type="radio" id="5-stars" name="rating" value="5">
+                            <label for="5-stars" class="star"></label>
+                            <input type="radio" id="4-stars" name="rating" value="4">
+                            <label for="4-stars" class="star"></label>
+                            <input type="radio" id="3-stars" name="rating" value="3">
+                            <label for="3-stars" class="star"></label>
+                            <input type="radio" id="2-stars" name="rating" value="2">
+                            <label for="2-stars" class="star"></label>
+                            <input type="radio" id="1-star" name="rating" value="1">
+                            <label for="1-star" class="star"></label>
+                        </div>
+                    </form>
+                @endguest
             </div>
         </div>
         

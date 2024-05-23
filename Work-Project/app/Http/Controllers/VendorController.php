@@ -6,6 +6,8 @@ use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
+use App\Models\VendorVote;
+use Illuminate\Support\Facades\Auth;
 
 class VendorController extends Controller
 {
@@ -201,6 +203,33 @@ class VendorController extends Controller
 
         session(['basket' => $basket]);
         return redirect()->route('vendors.show', $vendorId);
+    }
+
+    public function rate(Request $request, $id)
+    {
+        $vendor = Vendor::findOrFail($id);
+        $user = Auth::user();
+
+        if (VendorVote::where('user_id', $user->id)->where('vendor_id', $vendor->id)->exists()) {
+            return redirect()->route('vendors.show', $vendor->id)->with('error', 'You have already rated this vendor.');
+        }
+
+        $rating = $request->input('rating');
+
+        if ($rating >= 1 && $rating <= 5) {
+            VendorVote::create([
+                'user_id' => $user->id,
+                'vendor_id' => $vendor->id,
+                'rating' => $rating,
+            ]);
+
+            // Actualizar el promedio de la valoración
+            $vendor->refresh();
+
+            return redirect()->route('vendors.show', $vendor->id)->with('success', 'Thank you for your rating!');
+        }
+
+        return redirect()->route('vendors.show', $vendor->id)->with('error', 'Invalid rating value.');
     }
 }
 
