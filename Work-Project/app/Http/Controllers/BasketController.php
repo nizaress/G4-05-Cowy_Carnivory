@@ -6,20 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Mail\PaymentSuccess;
 use Illuminate\Support\Facades\Mail;
-use App\Models\Vendor;
+use App\Models\Order;
+use App\Models\Lineorder;
+use Carbon\Carbon;
 
 class BasketController extends Controller
 {
     public function index(Request $request)
     {
         $vendorId = $request->input('vendor_id');
-        // Retrieve the basket from session
         $basket = session()->get('basket', []);
 
-        // Fetch product details for items in the basket
         $products = Product::whereIn('id', array_keys($basket))->get();
 
-        // Calculate the total price
         $totalPrice = 0;
         foreach ($products as $product) {
             $totalPrice += $product->price * $basket[$product->id];
@@ -100,22 +99,50 @@ class BasketController extends Controller
             'expiry_date' => 'required|date_format:m/y',
             'cvv' => 'required|digits:3',
         ]);
-
+    
         $basket = session('basket', []);
         $products = Product::whereIn('id', array_keys($basket))->get();
         $totalPrice = $products->reduce(function ($carry, $product) use ($basket) {
             return $carry + ($product->price * $basket[$product->id]);
         }, 0);
 
+        $numOrder = Order::max('numOrder') + 1;
+
+        $deliveryTime = Carbon::now()->addMinutes(rand(5, 15));
+
+        $order = Order::create([
+            'numOrder' => $numOrder,
+            'Date' => Carbon::now()->toDateString(),
+            'deliveryTime' => $deliveryTime->toTimeString(),
+            'PaymentMethod' => 'Card',
+            'customer_id' => auth()->id(),
+            'customer_email' => $request->email,
+        ]);
+    
+        foreach ($products as $product) {
+            $quantity = $basket[$product->id];
+            for ($i = 0; $i < $quantity; $i++) {
+                Lineorder::create([
+                    'order_id' => $order->id,
+                    'numOrder' => $numOrder,
+                    'product_id' => $product->id,
+                    'product_code' => $product->cod,
+                    'product_name' => $product->name,
+                    'product_description' => $product->description,
+                    'product_price' => $product->price,
+                ]);
+            }
+        }
+    
         session()->forget('basket');
 
         try {
             Mail::to($request->email)->send(new PaymentSuccess($request, $totalPrice));
         } catch (\Exception $e) {
-            return redirect()->route('basket.index')->with('error', 'Email failed but payment was suuccessful. ' . $e->getMessage());
+            return redirect()->route('home')->with('error', 'Email failed but payment was suuccessful. ' . $e->getMessage());
         }
 
-        return redirect()->route('basket.index')->with('success', 'Payment completed successfully!');
+        return redirect()->route('home')->with('success', 'Payment completed successfully!');
     }
 
 }

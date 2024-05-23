@@ -11,17 +11,7 @@ use App\Http\Controllers\LinorderController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your applica
-tion. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('home');
@@ -113,13 +103,15 @@ Route::post('/order/delete', [OrderController::class, 'delete']);
 Route::get('/linorder', [LinorderController::class, 'index'])->name('list.linorders');
 Route::post('/linorder/delete', [LinorderController::class, 'delete']);
 
-Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
-Route::post('/basket/add', [BasketController::class, 'add'])->name('basket.add');
-Route::post('/basket/increment', [BasketController::class, 'increment'])->name('basket.increment');
-Route::post('/basket/decrement', [BasketController::class, 'decrement'])->name('basket.decrement');
-Route::post('/basket/remove', [BasketController::class, 'remove'])->name('basket.remove');
-Route::get('/basket/pay', [BasketController::class, 'pay'])->name('basket.pay'); // Add this line
-Route::post('/basket/completePayment', [BasketController::class, 'completePayment'])->name('basket.completePayment'); // Add this line
+Route::middleware(['auth'])->group(function () {
+    Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
+    Route::post('/basket/add', [BasketController::class, 'add'])->name('basket.add');
+    Route::post('/basket/increment', [BasketController::class, 'increment'])->name('basket.increment');
+    Route::post('/basket/decrement', [BasketController::class, 'decrement'])->name('basket.decrement');
+    Route::post('/basket/remove', [BasketController::class, 'remove'])->name('basket.remove');
+    Route::get('/basket/pay', [BasketController::class, 'pay'])->name('basket.pay'); // Add this line
+    Route::post('/basket/completePayment', [BasketController::class, 'completePayment'])->name('basket.completePayment'); // Add this line
+});
 
 Route::get('/faq', function () {
     return view('faq');

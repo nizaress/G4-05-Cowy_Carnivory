@@ -11,7 +11,7 @@ class Lineorder extends Model
 
     protected $table = 'lineorder';
 
-    protected $fillable = ['id','numOrder','product_code','product_name','product_description','product_price','created_at','updated_at'];
+    protected $fillable = ['id','order_id','numOrder','product_id','product_code','product_name','product_description','product_price','created_at','updated_at'];
 
     public function order()
     {
