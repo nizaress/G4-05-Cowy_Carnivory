@@ -8,6 +8,7 @@
     align-items: center;
     min-height: 100vh; /* Ensure the container takes the full height */
     padding: 20px;
+    margin-top: 0%;
 }
 
 .profile-card {
@@ -76,7 +77,10 @@
     background-color: #5a6268;
 }
 </style>
-
+<div style="margin-top:2%; margin-bottom:0%; display: flex; justify-content: flex-end;">
+    <a href="/last" class="btn btn-primary" style="margin-right:2%;">Last Orders</a>
+    <a href="/pending" class="btn btn-primary">Pending Orders</a>
+</div>
 <div class="profile-container">
     <div class="profile-card">
         <div class="profile-card-header">
