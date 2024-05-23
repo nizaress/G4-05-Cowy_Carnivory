@@ -108,7 +108,7 @@
     <div class="nav">
         <ul class="navbar">
             <li><a class="bold" href="/">Home</a></li>
-            <li><a href="/product">My Products</a></li>
+            <li><a href="{{ url('/vendors/' . Auth::user()->id) }}">My Products</a></li>
         </ul>
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
