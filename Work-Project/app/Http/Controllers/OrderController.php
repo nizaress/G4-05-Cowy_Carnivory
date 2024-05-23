@@ -125,7 +125,7 @@ class OrderController extends Controller
                     $orderData['lineorders'][] = [
                         'product_name' => $lineorder->product_name,
                         'product_price' => $lineorder->product_price,
-                        'vendor_name' => $lineorder->product->vendor->name ?? 'N/A'
+                        'vendor_name' => $lineorder->product->vendor->name ?? 'Generic'
                     ];
                 }
 

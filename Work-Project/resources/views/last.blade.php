@@ -6,7 +6,7 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Last Orders</h1>
-        <a href="/home" class="btn btn-primary">Go Back</a>
+        <a href="/profile" class="btn btn-primary">Go Back</a>
     </div>
     
     @if(empty($ordersWithVendorNames))
@@ -15,7 +15,11 @@
         @foreach($ordersWithVendorNames as $orderData)
             <div class="card mb-4">
                 <div class="card-body">
-                    <h4 class="card-title"><b>{{ $orderData['lineorders'][0]['vendor_name'] }} Order</b></h4>
+                    @if ($orderData['lineorders'] == null)
+                        <h4 class="card-title"><b>Generic Order</b></h4>
+                    @else
+                        <h4 class="card-title"><b>{{ $orderData['lineorders'][0]['vendor_name'] }} Order</b></h4>
+                    @endif
                     <p><strong>Date:</strong> {{ $orderData['order']->Date }}</p>
                     <p><strong>Delivery Time:</strong> {{ $orderData['order']->deliveryTime }}</p>
                     <p><strong>Payment Method:</strong> {{ $orderData['order']->PaymentMethod }}</p>

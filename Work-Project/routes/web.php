@@ -67,7 +67,6 @@ Route::get('/example', function () {
 
 
 
-
 Route::get('/vendor', [VendorController::class, 'index'])->name('list.vendors');
 Route::post('/vendor/delete', [VendorController::class, 'delete']);
 Route::patch('/vendor/update/{id}', [VendorController::class, 'update']);
