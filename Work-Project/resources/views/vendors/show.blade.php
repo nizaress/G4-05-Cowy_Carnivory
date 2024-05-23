@@ -182,7 +182,6 @@
         @include('layouts.nbcustomer')
     @elseif (Auth::user()->role == 'vendor')
         @include('layouts.nbvendor')
-        // aqui escribe criscor
     @endif
     @endauth
 
@@ -213,6 +212,7 @@
                                 <h3>{{ $product->name }}</h3>
                                 <p>{{ $product->description }}</p>
                                 <p><span class="product-price">{{ $product->price }}€</span></p>
+                                @if (!Auth::check() || Auth::user()->role == 'customer')
                                 <div class="quantity-controls">
                                     <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
                                         @csrf
@@ -232,12 +232,13 @@
                                         <button type="submit" class="increase">+</button>
                                     </form>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
-            
+            @if (!Auth::check() || Auth::user()->role == 'customer')
             <div class="total-column">
                 <div class="fixed-bottom-container">
                     <div class="total-container">
@@ -250,6 +251,7 @@
                     </form>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 
