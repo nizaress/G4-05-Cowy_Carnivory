@@ -58,11 +58,13 @@
 
     .register-btn-primary {
         background-color: #411acc;
+        color: #fafcff;
         border: none;
     }
 
     .register-btn-primary:hover {
-        background-color: #320e99;
+        background-color: #07080c;
+        color: #fafcff;
     }
 
     .register-btn-success {

@@ -83,7 +83,9 @@ Route::get('/vendor/filter_pizza', [VendorController::class, 'filter_pizza'])->n
 Route::get('/vendor/filter_asian', [VendorController::class, 'filter_asian'])->name('vendors.filter_asian');
 Route::get('/vendor/filter_mexican', [VendorController::class, 'filter_mexican'])->name('vendors.filter_mexican');
 Route::get('/vendor/filter_sandwich', [VendorController::class, 'filter_sandwich'])->name('vendors.filter_sandwich');
+Route::get('/vendor/filter_rating', [VendorController::class, 'filter_rating'])->name('vendors.filter_rating');
 Route::post('/vendor/rate/{id}', [VendorController::class, 'rate'])->name('vendor.rate');
+
 
 Route::get('/product', [ProductController::class, 'index'])->name('list.products');
 Route::post('/product/delete', [ProductController::class, 'delete']);

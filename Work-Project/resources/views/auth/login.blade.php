@@ -60,10 +60,12 @@
     .login-btn-primary {
         background-color: #411acc;
         border: none;
+        color: #fafcff;
     }
 
     .login-btn-primary:hover {
-        background-color: #320e99;
+        background-color: #07080c;
+        color: #fafcff;
     }
 
     .login-btn-success {

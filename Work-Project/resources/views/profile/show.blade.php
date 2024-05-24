@@ -52,11 +52,13 @@
 
 .profile-btn-primary {
     background-color: #411acc;
+    color: #fafcff;
     border: none;
 }
 
 .profile-btn-primary:hover {
-    background-color: #320e99;
+    background-color: #07080c;
+    color: #fafcff;
 }
 
 .profile-btn-success {
@@ -120,7 +122,7 @@
                 <label for="password_confirmation">Confirm Password</label>
                 <input type="password" id="password_confirmation" name="password_confirmation" class="profile-form-control" placeholder="Confirm new password" readonly>
             </div>
-            <div class="profile-form-group">
+            <div class="profile-form-group" style="display:flex;justify-content:center">
                 <button type="button" id="edit-button" class="profile-btn-primary">Edit</button>
                 <button type="submit" id="save-button" class="profile-btn-success" style="display: none;">Save Changes</button>
                 <button type="button" id="cancel-button" class="profile-btn-secondary" style="display: none;">Cancel</button>

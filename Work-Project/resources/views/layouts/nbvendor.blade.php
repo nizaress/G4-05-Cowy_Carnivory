@@ -52,11 +52,18 @@
             color: #411acc;
         }
 
+        .navbar-buttons {
+            float: right;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            padding-right: 16px;
+        }
+
         .btn-logout {
             font-family: 'Verdana', sans-serif;
             font-size: 14px;
             float: right;
-            margin-left: 1025px;
             background-color: rgba(243, 246, 255, 0.1);
             color: #fafcff;
             padding: 7px 16px;
@@ -84,6 +91,7 @@
             color: #fafcff;
             padding: 7px 16px;
             margin-left: 10px;
+            margin-right: 20px;
             border: none;
             border-radius: 5px;
         }
@@ -111,14 +119,19 @@
         <li><a href="/product">My Products</a></li>
         </ul>
 
-        <form method="GET" action="{{ url('/login') }}">
-            @csrf
-            <button class="btn-logout" type="submit" type="button">Log Out</button>
-        </form>
-        <form method="GET" action="{{ url('/login') }}">
-            @csrf
-            <button class="btn-profile" type="submit" type="button">Profile</button>
-        </form>
+        <div class="navbar-buttons">
+            <!-- Logout Form with Confirmation Alert -->
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            <button id="logout-button" class="btn-logout" type="button">Log Out</button>
+
+            <!-- Profile Button -->
+            <form method="GET" action="{{ route('profile.show') }}">
+                @csrf
+                <button class="btn-profile" type="submit" type="button">Profile</button>
+            </form>
+        </div>
     </div>
 
     <footer>

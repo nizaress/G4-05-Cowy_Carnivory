@@ -317,7 +317,7 @@
                     <div class="sort-options">
                         <a href="{{ route('vendors.sortaz')}}" ><i class="fa-solid fa-arrow-down-a-z"></i>Alphabetical order</a>
                         <a href="{{ route('vendors.sortza')}}"><i class="fa-solid fa-arrow-down-z-a"></i>Reverse Alphabetical order</a>
-                        <a href="?sort=delivery_fee"><i class="fas fa-star"></i>Ratings</a>
+                        <a href="{{ route('vendors.filter_rating')}}"><i class="fas fa-star"></i>Ratings</a>
                     </div>
 
                     <div class="filter-title">Filters</div>
@@ -380,7 +380,7 @@
                     <div class="sort-options">
                         <a href="{{ route('vendors.sortaz')}}" ><i class="fa-solid fa-arrow-down-a-z"></i>Alphabetical order</a>
                         <a href="{{ route('vendors.sortza')}}"><i class="fa-solid fa-arrow-down-z-a"></i>Reverse Alphabetical order</a>
-                        <a href="?sort=delivery_fee"><i class="fas fa-star"></i>Ratings</a>
+                        <a href="{{ route('vendors.filter_rating')}}"><i class="fas fa-star"></i>Ratings</a>
                     </div>
 
                     <div class="filter-title">Filters</div>

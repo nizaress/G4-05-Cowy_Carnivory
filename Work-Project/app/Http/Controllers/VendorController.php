@@ -167,6 +167,15 @@ class VendorController extends Controller
         return view('vendors.index', compact('vendors'));
     }
 
+    public function filter_rating()
+    {
+        $vendors = Vendor::withCount(['votes as average_rating' => function($query) {
+            $query->select(\DB::raw('coalesce(avg(rating),0)'));
+        }])->orderBy('average_rating', 'desc')->paginate(10);
+
+        return view('vendors.index', compact('vendors'));
+    }
+
     public function increment(Request $request)
     {
         $productId = $request->input('product_id');
