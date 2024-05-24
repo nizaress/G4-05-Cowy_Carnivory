@@ -330,6 +330,7 @@
                                 <h3>{{ $product->name }}</h3>
                                 <p>{{ $product->description }}</p>
                                 <p><span class="product-price">{{ $product->price }}€</span></p>
+                                @if (!Auth::check() || Auth::user()->role == 'customer')
                                 <div class="quantity-controls">
                                     <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
                                         @csrf
@@ -349,6 +350,7 @@
                                         <button type="submit" class="increase">+</button>
                                     </form>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -365,6 +367,7 @@
                                 <h3>{{ $product->name }}</h3>
                                 <p>{{ $product->description }}</p>
                                 <p><span class="product-price">{{ $product->price }}€</span></p>
+                                @if (!Auth::check() || Auth::user()->role == 'customer')
                                 <div class="quantity-controls">
                                     <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
                                         @csrf
@@ -384,6 +387,7 @@
                                         <button type="submit" class="increase">+</button>
                                     </form>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     @endforeach
