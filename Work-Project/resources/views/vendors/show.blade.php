@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Cowy Carnivory</title>
     <style>
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             height: 100%;
             background-color: #fafcff;
-            font-family: 'Verdana', sans-serif;  
+            font-family: 'Verdana', sans-serif;
         }
+
         .container {
             padding: 20px;
             max-width: 1200px;
@@ -22,6 +25,7 @@
             margin-top: 20px;
             background-color: #fafcff;
         }
+
         .vendor-info {
             display: flex;
             align-items: center;
@@ -30,6 +34,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
+
         .vendor-info img {
             width: 250px;
             height: 250px;
@@ -37,14 +42,17 @@
             margin-right: 20px;
             border-radius: 8px;
         }
+
         .vendor-details {
             flex-grow: 1;
         }
+
         .vendor-details h1 {
             margin: 0;
             font-size: 2em;
             color: #411acc;
         }
+
         .vendor-details p {
             margin: 5px 0;
             color: #444956
@@ -56,26 +64,32 @@
             justify-content: space-between;
             margin-right: 20px;
         }
+
         .main-content {
             display: flex;
             margin-top: 40px;
             gap: 30px;
         }
+
         .products-column {
             flex: 3;
         }
+
         .total-column {
             margin-top: 40px;
             flex: 1;
         }
+
         .products-title {
             font-size: 1.5em;
             margin-bottom: 15px;
             color: #07080c;
         }
+
         .products {
             border-radius: 8px;
         }
+
         .product {
             position: relative;
             border-radius: 8px;
@@ -87,6 +101,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .product img {
             width: 100px;
             height: 100px;
@@ -94,18 +109,22 @@
             margin-right: 20px;
             border-radius: 8px;
         }
+
         .product-details {
             flex-grow: 1;
         }
+
         .product-details h3 {
             margin: 0 0 10px;
             font-size: 1.2em;
             color: #411acc;
         }
+
         .product-details p {
             margin: 5px 0;
             color: #444956;
         }
+
         .quantity-controls {
             position: absolute;
             bottom: 15px;
@@ -116,6 +135,7 @@
             margin-top: 10px;
             color: #444956;
         }
+
         .quantity-controls button {
             width: 30px;
             height: 30px;
@@ -129,18 +149,22 @@
             align-items: center;
             justify-content: center;
         }
+
         .quantity-controls button:hover {
             background-color: rgba(65, 26, 204, 1);
         }
+
         .quantity-controls button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             background-color: #dbdfec;
             color: #fafcff;
         }
+
         .quantity-controls span {
             font-size: 1.2em;
         }
+
         .fixed-bottom-container {
             position: sticky;
             top: 20px;
@@ -153,18 +177,21 @@
             flex-direction: column;
             align-items: center;
         }
+
         .total-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 10px; 
+            margin-top: 10px;
             margin-bottom: 10px;
         }
+
         .total-price {
             font-size: 1.5em;
             color: #07080c;
             margin-bottom: 10px;
         }
+
         .order-button {
             padding: 10px 20px;
             border: none;
@@ -175,6 +202,7 @@
             cursor: pointer;
             text-decoration: none;
         }
+
         .order-button:hover {
             background-color: #07080c;
         }
@@ -202,23 +230,23 @@
             content: '★';
         }
 
-        .star-rating input[type="radio"]:checked ~ label {
+        .star-rating input[type="radio"]:checked~label {
             color: #411acc;
         }
 
-        .star-rating input[type="radio"]:checked + label {
+        .star-rating input[type="radio"]:checked+label {
             color: #411acc;
         }
 
-        .star-rating input[type="radio"]:not(:checked) + label:hover,
-        .star-rating input[type="radio"]:not(:checked) + label:hover ~ label {
+        .star-rating input[type="radio"]:not(:checked)+label:hover,
+        .star-rating input[type="radio"]:not(:checked)+label:hover~label {
             color: #411acc;
         }
 
-        .star-rating input[type="radio"]:checked + label:hover,
-        .star-rating input[type="radio"]:checked + label:hover ~ label,
-        .star-rating input[type="radio"]:checked ~ label:hover,
-        .star-rating input[type="radio"]:checked ~ label:hover ~ label {
+        .star-rating input[type="radio"]:checked+label:hover,
+        .star-rating input[type="radio"]:checked+label:hover~label,
+        .star-rating input[type="radio"]:checked~label:hover,
+        .star-rating input[type="radio"]:checked~label:hover~label {
             color: #411acc;
         }
 
@@ -258,7 +286,8 @@
         .add-product-container {
             display: flex;
             justify-content: center;
-            margin-top: 20px; /* Add some gap between the div and the button */
+            margin-top: 20px;
+            /* Add some gap between the div and the button */
         }
 
         .add-product-button {
@@ -279,18 +308,18 @@
         .add-product-button:active {
             transform: translateY(2px);
         }
-
     </style>
 </head>
+
 <body>
     <header></header>
 
     @auth
-    @if (Auth::user()->role == 'customer')
-        @include('layouts.nbcustomer')
-    @elseif (Auth::user()->role == 'vendor')
-        @include('layouts.nbvendor')
-    @endif
+        @if (Auth::user()->role == 'customer')
+            @include('layouts.nbcustomer')
+        @elseif (Auth::user()->role == 'vendor')
+            @include('layouts.nbvendor')
+        @endif
     @endauth
 
     @guest
@@ -358,9 +387,10 @@
         </div>
 
         @if (Auth::check() && Auth::user()->role == 'vendor')
-        <div class="add-product-container">
-            <button class="add-product-button" onclick="window.location.href='{{ url("/vendors/$vendor->id/add-a-product") }}'">Add a Product</button>
-        </div>
+            <div class="add-product-container">
+                <button class="add-product-button"
+                    onclick="window.location.href='{{ url("/vendors/$vendor->id/add-a-product") }}'">Add a Product</button>
+            </div>
         @endif
 
         <div class="main-content">
@@ -375,39 +405,41 @@
                                 <p>{{ $product->description }}</p>
                                 <p><span class="product-price">{{ $product->price }}€</span></p>
                                 @if (Auth::check() && Auth::user()->role == 'vendor')
-                                <div class="edit-buttons">
-                                    <a href="#">
-                                        <img src="{{ asset('images/products/edit-button.png') }}" alt="Edit">
-                                    </a>
-                                    <a href="#">
-                                        <img src="{{ asset('images/products/upload-image-button.png') }}" alt="Upload Image">
-                                    </a>
-                                    <a href="#" class="delete-button" data-product-id="{{ $product->id }}">
-                                        <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
-                                    </a>
-                                </div>
+                                    <div class="edit-buttons">
+                                        <a href="{{ url('/vendors/' . $vendor->id . '/edit-product/' . $product->id) }}">
+                                            <img src="{{ asset('images/products/edit-button.png') }}" alt="Edit">
+                                        </a>
+
+                                        <a href="#">
+                                            <img src="{{ asset('images/products/upload-image-button.png') }}"
+                                                alt="Upload Image">
+                                        </a>
+                                        <a href="#" class="delete-button" data-product-id="{{ $product->id }}">
+                                            <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
+                                        </a>
+                                    </div>
                                 @endif
 
                                 @if (!Auth::check() || Auth::user()->role == 'customer')
-                                <div class="quantity-controls">
-                                    <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
-                                        <button class="decrease" type="submit">-</button>
-                                    </form>
-                                    @if (isset($basket[$product->id]))
-                                        <span class="quantity">{{ $basket[$product->id] }}</span>
-                                    @else
-                                        <span class="quantity">0</span>
-                                    @endif
-                                    <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
-                                        <button type="submit" class="increase">+</button>
-                                    </form>
-                                </div>
+                                    <div class="quantity-controls">
+                                        <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                            <button class="decrease" type="submit">-</button>
+                                        </form>
+                                        @if (isset($basket[$product->id]))
+                                            <span class="quantity">{{ $basket[$product->id] }}</span>
+                                        @else
+                                            <span class="quantity">0</span>
+                                        @endif
+                                        <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                            <button type="submit" class="increase">+</button>
+                                        </form>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -426,39 +458,41 @@
                                 <p>{{ $product->description }}</p>
                                 <p><span class="product-price">{{ $product->price }}€</span></p>
                                 @if (Auth::check() && Auth::user()->role == 'vendor')
-                                <div class="edit-buttons">
-                                    <a href="#">
-                                        <img src="{{ asset('images/products/edit-button.png') }}" alt="Edit">
-                                    </a>
-                                    <a href="#">
-                                        <img src="{{ asset('images/products/upload-image-button.png') }}" alt="Upload Image">
-                                    </a>
-                                    <a href="#" class="delete-button" data-product-id="{{ $product->id }}">
-                                        <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
-                                    </a>
-                                </div>
+                                    <div class="edit-buttons">
+                                        <a href="{{ url('/vendors/' . $vendor->id . '/edit-product/' . $product->id) }}">
+                                            <img src="{{ asset('images/products/edit-button.png') }}" alt="Edit">
+                                        </a>
+
+                                        <a href="#">
+                                            <img src="{{ asset('images/products/upload-image-button.png') }}"
+                                                alt="Upload Image">
+                                        </a>
+                                        <a href="#" class="delete-button" data-product-id="{{ $product->id }}">
+                                            <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
+                                        </a>
+                                    </div>
                                 @endif
 
                                 @if (!Auth::check() || Auth::user()->role == 'customer')
-                                <div class="quantity-controls">
-                                    <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
-                                        <button class="decrease" type="submit">-</button>
-                                    </form>
-                                    @if (isset($basket[$product->id]))
-                                        <span class="quantity">{{ $basket[$product->id] }}</span>
-                                    @else
-                                        <span class="quantity">0</span>
-                                    @endif
-                                    <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
-                                        <button type="submit" class="increase">+</button>
-                                    </form>
-                                </div>
+                                    <div class="quantity-controls">
+                                        <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                            <button class="decrease" type="submit">-</button>
+                                        </form>
+                                        @if (isset($basket[$product->id]))
+                                            <span class="quantity">{{ $basket[$product->id] }}</span>
+                                        @else
+                                            <span class="quantity">0</span>
+                                        @endif
+                                        <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                            <button type="submit" class="increase">+</button>
+                                        </form>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -475,39 +509,41 @@
                                 <p>{{ $product->description }}</p>
                                 <p><span class="product-price">{{ $product->price }}€</span></p>
                                 @if (Auth::check() && Auth::user()->role == 'vendor')
-                                <div class="edit-buttons">
-                                    <a href="#">
-                                        <img src="{{ asset('images/products/edit-button.png') }}" alt="Edit">
-                                    </a>
-                                    <a href="#">
-                                        <img src="{{ asset('images/products/upload-image-button.png') }}" alt="Upload Image">
-                                    </a>
-                                    <a href="#" class="delete-button" data-product-id="{{ $product->id }}">
-                                        <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
-                                    </a>
-                                </div>
+                                    <div class="edit-buttons">
+                                        <a href="{{ url('/vendors/' . $vendor->id . '/edit-product/' . $product->id) }}">
+                                            <img src="{{ asset('images/products/edit-button.png') }}" alt="Edit">
+                                        </a>
+
+                                        <a href="#">
+                                            <img src="{{ asset('images/products/upload-image-button.png') }}"
+                                                alt="Upload Image">
+                                        </a>
+                                        <a href="#" class="delete-button" data-product-id="{{ $product->id }}">
+                                            <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
+                                        </a>
+                                    </div>
                                 @endif
 
                                 @if (!Auth::check() || Auth::user()->role == 'customer')
-                                <div class="quantity-controls">
-                                    <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
-                                        <button class="decrease" type="submit">-</button>
-                                    </form>
-                                    @if (isset($basket[$product->id]))
-                                        <span class="quantity">{{ $basket[$product->id] }}</span>
-                                    @else
-                                        <span class="quantity">0</span>
-                                    @endif
-                                    <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
-                                        <button type="submit" class="increase">+</button>
-                                    </form>
-                                </div>
+                                    <div class="quantity-controls">
+                                        <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                            <button class="decrease" type="submit">-</button>
+                                        </form>
+                                        @if (isset($basket[$product->id]))
+                                            <span class="quantity">{{ $basket[$product->id] }}</span>
+                                        @else
+                                            <span class="quantity">0</span>
+                                        @endif
+                                        <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                            <button type="submit" class="increase">+</button>
+                                        </form>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -515,18 +551,18 @@
                 </div>
             </div>
             @if (!Auth::check() || Auth::user()->role == 'customer')
-            <div class="total-column">
-                <div class="fixed-bottom-container">
-                    <div class="total-container">
-                        <span class="total-price"><span id="total">{{ number_format($totalPrice, 2) }}€</span></span>
+                <div class="total-column">
+                    <div class="fixed-bottom-container">
+                        <div class="total-container">
+                            <span class="total-price"><span id="total">{{ number_format($totalPrice, 2) }}€</span></span>
+                        </div>
+                        <form action="{{ route('basket.index') }}" method="GET" class="mr-1">
+                            @csrf
+                            <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                            <button type="submit" class="order-button">Go to order</button>
+                        </form>
                     </div>
-                    <form action="{{ route('basket.index') }}" method="GET" class="mr-1">
-                        @csrf
-                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
-                        <button type="submit" class="order-button">Go to order</button>
-                    </form>
                 </div>
-            </div>
             @endif
         </div>
     </div>
@@ -546,19 +582,20 @@
                                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                             }
                         })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                // Remove the product element from the DOM
-                                this.closest('.product').remove();
-                            } else {
-                                alert('An error occurred while deleting the product.');
-                            }
-                        });
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    // Remove the product element from the DOM
+                                    this.closest('.product').remove();
+                                } else {
+                                    alert('An error occurred while deleting the product.');
+                                }
+                            });
                     }
                 });
             });
         });
     </script>
 </body>
+
 </html>

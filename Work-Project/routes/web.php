@@ -140,3 +140,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::get('/vendors/{vendor}/add-a-product', [ProductController::class, 'showAddProductForm'])->name('product.add');
 Route::post('/vendors/{vendor}/add-a-product', [ProductController::class, 'addProduct'])->name('product.store');
+
+Route::get('/vendors/{vendor}/edit-product/{product}', [ProductController::class, 'editProductForm'])->name('product.edit');
+Route::post('/vendors/{vendor}/edit-product/{product}', [ProductController::class, 'updateProduct'])->name('product.update');

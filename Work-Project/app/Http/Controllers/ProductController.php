@@ -161,5 +161,34 @@ public function addProduct(Request $request, $vendorId)
     return redirect()->route('vendors.show', $vendorId)->with('success', 'Product added successfully!');
 }
 
+public function editProductForm($vendorId, $productId)
+{
+    $vendor = Vendor::findOrFail($vendorId);
+    $product = Product::findOrFail($productId);
+
+    return view('vendors.edit_product', compact('vendor', 'product'));
+}
+
+public function updateProduct(Request $request, $vendorId, $productId)
+{
+    $vendor = Vendor::findOrFail($vendorId);
+    $product = Product::findOrFail($productId);
+
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string',
+        'description' => 'required|string',
+        'price' => 'required|numeric|min:0.01',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    $product->update($request->only(['name', 'description', 'price']));
+
+    return redirect()->route('vendors.show', $vendorId)->with('success', 'Product updated successfully!');
+}
+
+
 
 }
