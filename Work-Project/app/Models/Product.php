@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $table = 'product';
 
-    protected $fillable = ['cod','name','description','price','vendor_email','vendor_name','created_at','updated_at'];
+    protected $fillable = ['cod','name','description','price', 'category','vendor_email','vendor_name','created_at','updated_at'];
 
     public function vendor()
     {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Cowy Carnivory</title>
     <style>
         body, html {
@@ -12,7 +13,6 @@
             height: 100%;
             background-color: #fafcff;
             font-family: 'Verdana', sans-serif;  
-            <!--background-color: #120903;-->
         }
         .container {
             padding: 20px;
@@ -48,17 +48,24 @@
             margin: 5px 0;
             color: #444956
         }
+
+        .vendor-name {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-right: 20px;
+        }
         .main-content {
             display: flex;
             margin-top: 40px;
-            gap: 30px; /* Espacio entre columnas */
+            gap: 30px;
         }
         .products-column {
-            flex: 3; /* La columna de productos tomará 2/3 del espacio */
+            flex: 3;
         }
         .total-column {
             margin-top: 40px;
-            flex: 1; /* La columna del total tomará 1/3 del espacio */
+            flex: 1;
         }
         .products-title {
             font-size: 1.5em;
@@ -69,7 +76,7 @@
             border-radius: 8px;
         }
         .product {
-            position: relative; /* Añadido para el posicionamiento absoluto */
+            position: relative;
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 15px;
@@ -99,9 +106,9 @@
             color: #444956;
         }
         .quantity-controls {
-            position: absolute; /* Posicionamiento absoluto */
-            bottom: 15px; /* Espaciado desde la parte inferior */
-            right: 15px; /* Espaciado desde la parte derecha */
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -121,11 +128,9 @@
             align-items: center;
             justify-content: center;
         }
-
         .quantity-controls button:hover {
             background-color: rgba(65, 26, 204, 1);
         }
-
         .quantity-controls button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -137,7 +142,7 @@
         }
         .fixed-bottom-container {
             position: sticky;
-            top: 20px; /* Hace que el contenedor sea pegajoso y se quede en la parte superior */
+            top: 20px;
             background-color: #fafcff;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
             border-top: 1px solid #ddd;
@@ -152,12 +157,12 @@
             flex-direction: column;
             align-items: center;
             margin-top: 10px; 
-            margin-bottom: 10px; /* Espaciado entre el total y el botón */
+            margin-bottom: 10px;
         }
         .total-price {
             font-size: 1.5em;
             color: #07080c;
-            margin-bottom: 10px; /* Espaciado entre el total y el botón */
+            margin-bottom: 10px;
         }
         .order-button {
             padding: 10px 20px;
@@ -172,6 +177,71 @@
         .order-button:hover {
             background-color: #07080c;
         }
+
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: right;
+            margin-right: 20px;
+            align-items: center;
+
+        }
+
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 2.4em;
+            color: #dbdfec;
+            cursor: pointer;
+        }
+
+        .star-rating label:before {
+            content: '★';
+        }
+
+        .star-rating input[type="radio"]:checked ~ label {
+            color: #411acc;
+        }
+
+        .star-rating input[type="radio"]:checked + label {
+            color: #411acc;
+        }
+
+        .star-rating input[type="radio"]:not(:checked) + label:hover,
+        .star-rating input[type="radio"]:not(:checked) + label:hover ~ label {
+            color: #411acc;
+        }
+
+        .star-rating input[type="radio"]:checked + label:hover,
+        .star-rating input[type="radio"]:checked + label:hover ~ label,
+        .star-rating input[type="radio"]:checked ~ label:hover,
+        .star-rating input[type="radio"]:checked ~ label:hover ~ label {
+            color: #411acc;
+        }
+
+        .rate-button {
+            padding: 8px 15px;
+            margin-left: 20px;
+            margin-top: 5px;
+            height: 80%;
+            border: 1px solid #07080c;
+            background-color: #07080c;
+            color: #fafcff;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .rate-button:hover {
+            border: 1px solid #07080c;
+            background-color: #fafcff;
+            color: #07080c;
+        }
+
+
     </style>
 </head>
 <body>
@@ -193,19 +263,135 @@
         <div class="vendor-info">
             <img src="/images/vendors/{{ $vendor->name }}.jpg" alt="{{ $vendor->name }}">
             <div class="vendor-details">
-                <h1>{{ $vendor->name }}</h1>
+                <div class="vendor-name">
+                    <h1>{{ $vendor->name }}</h1>
+                    <div style="display:flex;align-items:center">
+                        <p>{{ number_format($vendor->average_rating, 1) }}</p>
+                        <i class="fas fa-star" style="font-size:1.5em;margin-left:13px"></i>
+                    </div>
+                </div>
                 <br>
                 <p>{{ $vendor->address }}</p>
                 <p>{{ $vendor->email }}</p>
                 <p>{{ $vendor->phone_number }}</p>
+                @auth 
+                    @if(!\App\Models\VendorVote::where('user_id', Auth::id())->where('vendor_id', $vendor->id)->exists())
+                        <form action="{{ route('vendor.rate', $vendor->id) }}" method="POST">
+                            @csrf
+                            <div class="star-rating">
+                                <button class="rate-button" type="submit">Rate</button>
+                                <input type="radio" id="5-stars" name="rating" value="5">
+                                <label for="5-stars" class="star"></label>
+                                <input type="radio" id="4-stars" name="rating" value="4">
+                                <label for="4-stars" class="star"></label>
+                                <input type="radio" id="3-stars" name="rating" value="3">
+                                <label for="3-stars" class="star"></label>
+                                <input type="radio" id="2-stars" name="rating" value="2">
+                                <label for="2-stars" class="star"></label>
+                                <input type="radio" id="1-star" name="rating" value="1">
+                                <label for="1-star" class="star"></label>
+                            </div>
+                        </form>
+                    @else
+                        <div class="star-rating">
+                            <p style="padding:11px">You have already rated this vendor.</p>
+                        </div>
+                    @endif
+                @endauth
+                @guest 
+                    <form action="{{ url('/login') }}" method="GET">
+                        @csrf
+                        <div class="star-rating">
+                            <button class="rate-button" type="submit">Rate</button>
+                            <input type="radio" id="5-stars" name="rating" value="5">
+                            <label for="5-stars" class="star"></label>
+                            <input type="radio" id="4-stars" name="rating" value="4">
+                            <label for="4-stars" class="star"></label>
+                            <input type="radio" id="3-stars" name="rating" value="3">
+                            <label for="3-stars" class="star"></label>
+                            <input type="radio" id="2-stars" name="rating" value="2">
+                            <label for="2-stars" class="star"></label>
+                            <input type="radio" id="1-star" name="rating" value="1">
+                            <label for="1-star" class="star"></label>
+                        </div>
+                    </form>
+                @endguest
             </div>
         </div>
         
         <div class="main-content">
             <div class="products-column">
                 <div class="products">
-                    <div class="products-title">Products</div>
-                    @foreach ($vendor->products as $product)
+                    <div class="products-title">Starters</div>
+                    @foreach ($vendor->products->where('category', 'Starter') as $product)
+                        <div class="product" data-price="{{ $product->price }}">
+                            <img src="{{ $product->image }}" alt="{{ $product->name }}">
+                            <div class="product-details">
+                                <h3>{{ $product->name }}</h3>
+                                <p>{{ $product->description }}</p>
+                                <p><span class="product-price">{{ $product->price }}€</span></p>
+                                <div class="quantity-controls">
+                                    <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                        <button class="decrease" type="submit">-</button>
+                                    </form>
+                                    @if (isset($basket[$product->id]))
+                                        <span class="quantity">{{ $basket[$product->id] }}</span>
+                                    @else
+                                        <span class="quantity">0</span>
+                                    @endif
+                                    <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                        <button type="submit" class="increase">+</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <br>
+
+                <div class="products">
+                    <div class="products-title">Main Courses</div>
+                    @foreach ($vendor->products->where('category', 'Main Course') as $product)
+                        <div class="product" data-price="{{ $product->price }}">
+                            <img src="{{ $product->image }}" alt="{{ $product->name }}">
+                            <div class="product-details">
+                                <h3>{{ $product->name }}</h3>
+                                <p>{{ $product->description }}</p>
+                                <p><span class="product-price">{{ $product->price }}€</span></p>
+                                <div class="quantity-controls">
+                                    <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                        <button class="decrease" type="submit">-</button>
+                                    </form>
+                                    @if (isset($basket[$product->id]))
+                                        <span class="quantity">{{ $basket[$product->id] }}</span>
+                                    @else
+                                        <span class="quantity">0</span>
+                                    @endif
+                                    <form action="{{ route('vendor.increment') }}" method="POST" class="mr-1">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="vendor_id" value="{{ $vendor->id }}">
+                                        <button type="submit" class="increase">+</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <br>
+                <div class="products">
+                    <div class="products-title">Desserts</div>
+                    @foreach ($vendor->products->where('category', 'Dessert') as $product)
                         <div class="product" data-price="{{ $product->price }}">
                             <img src="{{ $product->image }}" alt="{{ $product->name }}">
                             <div class="product-details">

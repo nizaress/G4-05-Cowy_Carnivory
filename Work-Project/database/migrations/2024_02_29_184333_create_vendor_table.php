@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('address');
             $table->string('accountNumber');
+            $table->string('category');
+            $table->index('category');
             $table->unique('email');
             $table->unique('name');  
             $table->timestamps();

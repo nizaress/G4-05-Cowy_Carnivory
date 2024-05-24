@@ -67,7 +67,6 @@ Route::get('/example', function () {
 
 
 
-
 Route::get('/vendor', [VendorController::class, 'index'])->name('list.vendors');
 Route::post('/vendor/delete', [VendorController::class, 'delete']);
 Route::patch('/vendor/update/{id}', [VendorController::class, 'update']);
@@ -79,6 +78,12 @@ Route::post('/vendor/decrement', [VendorController::class, 'decrement'])->name('
 Route::get('/vendor/sortaz', [VendorController::class, 'sortaz'])->name('vendors.sortaz');
 Route::get('/vendor/sortza', [VendorController::class, 'sortza'])->name('vendors.sortza');
 Route::get('/vendor/search', [VendorController::class, 'search'])->name('vendors.search');
+Route::get('/vendor/filter_hamburguer', [VendorController::class, 'filter_hamburguer'])->name('vendors.filter_hamburguer');
+Route::get('/vendor/filter_pizza', [VendorController::class, 'filter_pizza'])->name('vendors.filter_pizza');
+Route::get('/vendor/filter_asian', [VendorController::class, 'filter_asian'])->name('vendors.filter_asian');
+Route::get('/vendor/filter_mexican', [VendorController::class, 'filter_mexican'])->name('vendors.filter_mexican');
+Route::get('/vendor/filter_sandwich', [VendorController::class, 'filter_sandwich'])->name('vendors.filter_sandwich');
+Route::post('/vendor/rate/{id}', [VendorController::class, 'rate'])->name('vendor.rate');
 
 Route::get('/product', [ProductController::class, 'index'])->name('list.products');
 Route::post('/product/delete', [ProductController::class, 'delete']);
@@ -94,6 +99,12 @@ Route::post('/customer/store', [CustomerController::class, 'store'])->name('cust
 
 Route::get('/order', [OrderController::class, 'index'])->name('list.orders');
 Route::post('/order/delete', [OrderController::class, 'delete']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/pending', [OrderController::class, 'pendingOrders'])->name('pending');
+});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/last', [OrderController::class, 'lastOrders'])->name('last');
+});
 
 Route::get('/linorder', [LinorderController::class, 'index'])->name('list.linorders');
 Route::post('/linorder/delete', [LinorderController::class, 'delete']);

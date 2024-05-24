@@ -20,6 +20,6 @@ class Order extends Model
 
     public function lineorders()
     {
-        return $this->hasMany(LineOrder::class, 'order_id', 'id');
+        return $this->hasMany(Lineorder::class, 'order_id', 'id');
     }
 }
