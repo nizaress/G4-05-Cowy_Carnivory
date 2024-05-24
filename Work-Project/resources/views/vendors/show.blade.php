@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Cowy Carnivory</title>
@@ -381,7 +382,7 @@
                                     <a href="#">
                                         <img src="{{ asset('images/products/upload-image-button.png') }}" alt="Upload Image">
                                     </a>
-                                    <a href="#">
+                                    <a href="#" class="delete-button" data-product-id="{{ $product->id }}">
                                         <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
                                     </a>
                                 </div>
@@ -432,7 +433,7 @@
                                     <a href="#">
                                         <img src="{{ asset('images/products/upload-image-button.png') }}" alt="Upload Image">
                                     </a>
-                                    <a href="#">
+                                    <a href="#" class="delete-button" data-product-id="{{ $product->id }}">
                                         <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
                                     </a>
                                 </div>
@@ -481,7 +482,7 @@
                                     <a href="#">
                                         <img src="{{ asset('images/products/upload-image-button.png') }}" alt="Upload Image">
                                     </a>
-                                    <a href="#">
+                                    <a href="#" class="delete-button" data-product-id="{{ $product->id }}">
                                         <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
                                     </a>
                                 </div>
@@ -531,5 +532,33 @@
     </div>
 
     @include('layouts.footer')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.delete-button').forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    if (confirm('Are you sure you want to delete this product?')) {
+                        const productId = this.dataset.productId;
+                        fetch(`/products/${productId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Remove the product element from the DOM
+                                this.closest('.product').remove();
+                            } else {
+                                alert('An error occurred while deleting the product.');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

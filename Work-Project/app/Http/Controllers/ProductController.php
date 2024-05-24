@@ -120,4 +120,13 @@ class ProductController extends Controller
 
         return redirect()->route('list.products')->with('success', 'Product added successfully!');
     }
+
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return response()->json(['success' => true]);
+    }
+
 }

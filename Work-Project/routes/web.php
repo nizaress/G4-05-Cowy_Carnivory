@@ -134,3 +134,8 @@ Route::get('/info', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
