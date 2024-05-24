@@ -254,6 +254,31 @@
             height: 24px;
         }
 
+        .add-product-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px; /* Add some gap between the div and the button */
+        }
+
+        .add-product-button {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-product-button:hover {
+            background-color: #333;
+        }
+
+        .add-product-button:active {
+            transform: translateY(2px);
+        }
+
     </style>
 </head>
 <body>
@@ -330,7 +355,13 @@
                 @endguest
             </div>
         </div>
-        
+
+        @if (Auth::check() && Auth::user()->role == 'vendor')
+        <div class="add-product-container">
+            <button class="add-product-button">Add a Product</button>
+        </div>
+        @endif
+
         <div class="main-content">
             <div class="products-column">
                 <div class="products">
