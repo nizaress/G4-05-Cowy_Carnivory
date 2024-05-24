@@ -399,7 +399,7 @@
                     <div class="products-title">Starters</div>
                     @foreach ($vendor->products->where('category', 'Starter') as $product)
                         <div class="product" data-price="{{ $product->price }}">
-                        <img src="{{ asset('images/products/vendor_' . $vendor->id . '/product_4/pollo-default.png') }}" alt="{{ $product->name }}">
+                        <img src="{{ asset('images/products/vendor_' . $vendor->id . '/pollo-default.png') }}" alt="{{ $product->name }}">
                             <div class="product-details">
                                 <h3>{{ $product->name }}</h3>
                                 <p>{{ $product->description }}</p>
@@ -452,7 +452,7 @@
                     <div class="products-title">Main Courses</div>
                     @foreach ($vendor->products->where('category', 'Main Course') as $product)
                         <div class="product" data-price="{{ $product->price }}">
-                        <img src="{{ asset('images/products/vendor_' . $vendor->id . '/product_4/pollo-default.png') }}" alt="{{ $product->name }}">
+                        <img src="{{ asset('images/products/vendor_' . $vendor->id . '/pollo-default.png') }}" alt="{{ $product->name }}">
                             <div class="product-details">
                                 <h3>{{ $product->name }}</h3>
                                 <p>{{ $product->description }}</p>
@@ -503,7 +503,7 @@
                     <div class="products-title">Desserts</div>
                     @foreach ($vendor->products->where('category', 'Dessert') as $product)
                         <div class="product" data-price="{{ $product->price }}">
-                        <img src="{{ asset('images/products/vendor_' . $vendor->id . '/product_4/pollo-default.png') }}" alt="{{ $product->name }}">
+                        <img src="{{ asset('images/products/vendor_' . $vendor->id . '/pollo-default.png') }}" alt="{{ $product->name }}">
                             <div class="product-details">
                                 <h3>{{ $product->name }}</h3>
                                 <p>{{ $product->description }}</p>
