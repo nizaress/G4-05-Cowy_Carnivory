@@ -143,3 +143,5 @@ Route::post('/vendors/{vendor}/add-a-product', [ProductController::class, 'addPr
 
 Route::get('/vendors/{vendor}/edit-product/{product}', [ProductController::class, 'editProductForm'])->name('product.edit');
 Route::post('/vendors/{vendor}/edit-product/{product}', [ProductController::class, 'updateProduct'])->name('product.update');
+
+Route::post('/vendors/{vendor}/upload-product-image/{product}', [ProductController::class, 'uploadProductImage'])->name('product.uploadImage');

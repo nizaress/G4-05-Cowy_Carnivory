@@ -191,6 +191,32 @@ public function updateProduct(Request $request, $vendorId, $productId)
     return redirect()->route('vendors.show', $vendorId)->with('success', 'Product updated successfully!');
 }
 
+public function uploadProductImage(Request $request, $vendorId, $productId)
+{
+    $vendor = Vendor::findOrFail($vendorId);
+    $product = Product::findOrFail($productId);
+
+    $request->validate([
+        'product_image' => 'required|image|mimes:png|max:2048',
+    ], [
+        'product_image.mimes' => 'Only .png files are allowed',
+        'product_image.max' => 'The image size must be less than 2MB'
+    ]);
+
+    $categoryFolder = strtolower(str_replace(' ', '_', $product->category)) . 's';
+    $destinationPath = public_path('images/products/vendor_' . $vendor->id . '/' . $categoryFolder);
+    $fileName = 'product_' . $product->id . '.png';
+
+    if (!file_exists($destinationPath)) {
+        mkdir($destinationPath, 0777, true);
+    }
+
+    $request->file('product_image')->move($destinationPath, $fileName);
+
+    return redirect()->route('vendors.show', $vendorId)->with('success', 'Product image uploaded successfully!');
+}
+
+
 
 
 
