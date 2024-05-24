@@ -25,7 +25,7 @@ class CustomerTableSeeder extends Seeder
         Customer::create([
             'email' => 'customer@default.com',
             'name' => 'customer-default',
-            'password' => Hash::make('customer-default'),
+            'password' => Hash::make('customer'),
             'address' => 'customer default Street',
             'phone_number' => '616614321',
             'card_number' => '1111111122222222',

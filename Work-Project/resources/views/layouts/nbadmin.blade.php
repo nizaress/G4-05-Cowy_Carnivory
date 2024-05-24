@@ -113,7 +113,7 @@
 
     </header>
     
-    <div class= "nav">
+    <div class="nav">
         <ul class="navbar">
             <li><a class="bold" href="/">Home</a></li>
             <li><a href="/vendor">Vendors</a></li>
@@ -141,5 +141,14 @@
     <footer>
 
     </footer>
+
+    <script>
+        document.getElementById('logout-button').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (confirm('Are you sure you want to log out?')) {
+                document.getElementById('logout-form').submit();
+            }
+        });
+    </script>
 </body>
 </html>
