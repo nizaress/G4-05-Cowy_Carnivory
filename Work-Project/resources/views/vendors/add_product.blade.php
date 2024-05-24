@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container">
+    <br>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="{{ url('/vendors/' . $vendor->id) }}" class="btn btn-primary ml-auto">Go Back</a>
+    </div>
     <h2>Add a New Product</h2>
     <form action="{{ url('/vendors/' . $vendor->id . '/add-a-product') }}" method="POST">
         @csrf
