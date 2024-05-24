@@ -241,6 +241,18 @@
             color: #07080c;
         }
 
+        .edit-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .edit-buttons a img {
+            width: 24px;
+            height: 24px;
+        }
 
     </style>
 </head>
@@ -330,6 +342,20 @@
                                 <h3>{{ $product->name }}</h3>
                                 <p>{{ $product->description }}</p>
                                 <p><span class="product-price">{{ $product->price }}€</span></p>
+                                @if (Auth::check() && Auth::user()->role == 'vendor')
+                                <div class="edit-buttons">
+                                    <a href="#">
+                                        <img src="{{ asset('images/products/edit-button.png') }}" alt="Edit">
+                                    </a>
+                                    <a href="#">
+                                        <img src="{{ asset('images/products/upload-image-button.png') }}" alt="Upload Image">
+                                    </a>
+                                    <a href="#">
+                                        <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
+                                    </a>
+                                </div>
+                                @endif
+
                                 @if (!Auth::check() || Auth::user()->role == 'customer')
                                 <div class="quantity-controls">
                                     <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
@@ -367,6 +393,20 @@
                                 <h3>{{ $product->name }}</h3>
                                 <p>{{ $product->description }}</p>
                                 <p><span class="product-price">{{ $product->price }}€</span></p>
+                                @if (Auth::check() && Auth::user()->role == 'vendor')
+                                <div class="edit-buttons">
+                                    <a href="#">
+                                        <img src="{{ asset('images/products/edit-button.png') }}" alt="Edit">
+                                    </a>
+                                    <a href="#">
+                                        <img src="{{ asset('images/products/upload-image-button.png') }}" alt="Upload Image">
+                                    </a>
+                                    <a href="#">
+                                        <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
+                                    </a>
+                                </div>
+                                @endif
+
                                 @if (!Auth::check() || Auth::user()->role == 'customer')
                                 <div class="quantity-controls">
                                     <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
@@ -402,6 +442,20 @@
                                 <h3>{{ $product->name }}</h3>
                                 <p>{{ $product->description }}</p>
                                 <p><span class="product-price">{{ $product->price }}€</span></p>
+                                @if (Auth::check() && Auth::user()->role == 'vendor')
+                                <div class="edit-buttons">
+                                    <a href="#">
+                                        <img src="{{ asset('images/products/edit-button.png') }}" alt="Edit">
+                                    </a>
+                                    <a href="#">
+                                        <img src="{{ asset('images/products/upload-image-button.png') }}" alt="Upload Image">
+                                    </a>
+                                    <a href="#">
+                                        <img src="{{ asset('images/products/delete-button.jpg') }}" alt="Delete">
+                                    </a>
+                                </div>
+                                @endif
+
                                 @if (!Auth::check() || Auth::user()->role == 'customer')
                                 <div class="quantity-controls">
                                     <form action="{{ route('vendor.decrement') }}" method="POST" class="mr-1">
