@@ -3,6 +3,15 @@
 @section('content')
 <div class="container">
     <h2>Edit Product</h2>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ url('/vendors/' . $vendor->id . '/edit-product/' . $product->id) }}" method="POST">
         @csrf
         <div class="form-group">

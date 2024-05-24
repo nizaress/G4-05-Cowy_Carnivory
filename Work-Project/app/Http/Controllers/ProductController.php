@@ -178,6 +178,8 @@ public function updateProduct(Request $request, $vendorId, $productId)
         'name' => 'required|string',
         'description' => 'required|string',
         'price' => 'required|numeric|min:0.01',
+    ], [
+        'price.min' => 'Introduce a valid price (greater than 0)',
     ]);
 
     if ($validator->fails()) {
@@ -188,6 +190,7 @@ public function updateProduct(Request $request, $vendorId, $productId)
 
     return redirect()->route('vendors.show', $vendorId)->with('success', 'Product updated successfully!');
 }
+
 
 
 
