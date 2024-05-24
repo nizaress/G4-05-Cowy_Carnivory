@@ -359,7 +359,7 @@
 
         @if (Auth::check() && Auth::user()->role == 'vendor')
         <div class="add-product-container">
-            <button class="add-product-button">Add a Product</button>
+            <button class="add-product-button" onclick="window.location.href='{{ url("/vendors/$vendor->id/add-a-product") }}'">Add a Product</button>
         </div>
         @endif
 

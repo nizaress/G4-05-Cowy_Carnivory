@@ -129,4 +129,37 @@ class ProductController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function showAddProductForm($vendorId)
+{
+    $vendor = Vendor::findOrFail($vendorId);
+    return view('vendors.add_product', compact('vendor'));
+}
+
+public function addProduct(Request $request, $vendorId)
+{
+    $vendor = Vendor::findOrFail($vendorId);
+
+    $validator = Validator::make($request->all(), [
+        'cod' => 'required|integer|min:1',
+        'name' => 'required|string',
+        'description' => 'nullable|string',
+        'price' => 'nullable|numeric',
+        'category' => 'required|string',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    $requestData = $request->all();
+    $requestData['vendor_id'] = $vendor->id;
+    $requestData['vendor_email'] = $vendor->email;
+    $requestData['vendor_name'] = $vendor->name;
+
+    Product::create($requestData);
+
+    return redirect()->route('vendors.show', $vendorId)->with('success', 'Product added successfully!');
+}
+
+
 }
