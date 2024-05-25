@@ -9,7 +9,7 @@ use App\Models\Product;
 use App\Models\VendorVote;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User; 
+use App\Models\User;
 
 class VendorController extends Controller
 {
@@ -106,7 +106,7 @@ class VendorController extends Controller
         $userData = [
             'name' => $vendor->name,
             'email' => $vendor->email,
-            'password' => $vendor->password, 
+            'password' => $vendor->password,
             'address' => $vendor->address,
             'phone_number' => $vendor->phone_number,
             'card_number' => $vendor->accountNumber,
@@ -262,5 +262,29 @@ class VendorController extends Controller
 
         return redirect()->route('vendors.show', $vendor->id)->with('error', 'Invalid rating value.');
     }
+
+    public function uploadVendorImage(Request $request, $vendorId)
+    {
+        $vendor = Vendor::findOrFail($vendorId);
+
+        $request->validate([
+            'vendor_image' => 'required|image|mimes:jpg|max:2048',
+        ], [
+            'vendor_image.mimes' => 'Only .jpg files are allowed',
+            'vendor_image.max' => 'The image size must be less than 2MB'
+        ]);
+
+        $fileName = $vendor->name . '.jpg';
+        $destinationPath = public_path('images/vendors');
+
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0777, true);
+        }
+
+        $request->file('vendor_image')->move($destinationPath, $fileName);
+
+        return redirect()->route('vendors.show', $vendorId)->with('success', 'Vendor image uploaded successfully!');
+    }
+
 }
 

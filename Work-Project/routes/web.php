@@ -147,3 +147,5 @@ Route::get('/vendors/{vendor}/edit-product/{product}', [ProductController::class
 Route::post('/vendors/{vendor}/edit-product/{product}', [ProductController::class, 'updateProduct'])->name('product.update');
 
 Route::post('/vendors/{vendor}/upload-product-image/{product}', [ProductController::class, 'uploadProductImage'])->name('product.uploadImage');
+
+Route::post('/vendors/{vendor}/upload-vendor-image', [VendorController::class, 'uploadVendorImage'])->name('vendors.uploadVendorImage');

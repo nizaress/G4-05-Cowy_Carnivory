@@ -354,19 +354,18 @@
                 <p>{{ $vendor->phone_number }}</p>
 
                 @if (Auth::check() && Auth::user()->role == 'vendor')
-                    <form
-                        action="{{ url('/vendors/' . $vendor->id . '/upload-product-image') }}"
-                        method="POST" enctype="multipart/form-data" class="upload-form" style="margin-top: 10px;">
+                    <form action="{{ url('/vendors/' . $vendor->id . '/upload-vendor-image') }}" method="POST"
+                        enctype="multipart/form-data" class="upload-form" style="margin-top: 10px;">
                         @csrf
                         <label for="upload-image-{{ $vendor->id }}" class="upload-label">
-                            <img src="{{ asset('images/products/upload-image-button.png') }}"
-                                alt="Upload Image" class="upload-image">
+                            <img src="{{ asset('images/products/upload-image-button.png') }}" alt="Upload Image"
+                                class="upload-image">
                         </label>
-                        <input type="file" id="upload-image-{{ $vendor->id }}" name="vendor_image"
-                            accept=".png" style="display: none;" onchange="this.form.submit()">
+                        <input type="file" id="upload-image-{{ $vendor->id }}" name="vendor_image" accept=".jpg"
+                            style="display: none;" onchange="this.form.submit()">
                     </form>
                 @endif
-                
+
                 @auth 
                 @if (Auth::user()->role == 'customer')
                     @if(!\App\Models\VendorVote::where('user_id', Auth::id())->where('vendor_id', $vendor->id)->exists())
@@ -391,25 +390,25 @@
                             <p style="padding:11px">You have already rated this vendor.</p>
                         </div>
                     @endif
-                @endauth
-                @guest 
-                    <form action="{{ url('/login') }}" method="GET">
-                        @csrf
-                        <div class="star-rating">
-                            <button class="rate-button" type="submit">Rate</button>
-                            <input type="radio" id="5-stars" name="rating" value="5">
-                            <label for="5-stars" class="star"></label>
-                            <input type="radio" id="4-stars" name="rating" value="4">
-                            <label for="4-stars" class="star"></label>
-                            <input type="radio" id="3-stars" name="rating" value="3">
-                            <label for="3-stars" class="star"></label>
-                            <input type="radio" id="2-stars" name="rating" value="2">
-                            <label for="2-stars" class="star"></label>
-                            <input type="radio" id="1-star" name="rating" value="1">
-                            <label for="1-star" class="star"></label>
-                        </div>
-                    </form>
-                @endguest
+                    @endauth
+                    @guest 
+                        <form action="{{ url('/login') }}" method="GET">
+                            @csrf
+                            <div class="star-rating">
+                                <button class="rate-button" type="submit">Rate</button>
+                                <input type="radio" id="5-stars" name="rating" value="5">
+                                <label for="5-stars" class="star"></label>
+                                <input type="radio" id="4-stars" name="rating" value="4">
+                                <label for="4-stars" class="star"></label>
+                                <input type="radio" id="3-stars" name="rating" value="3">
+                                <label for="3-stars" class="star"></label>
+                                <input type="radio" id="2-stars" name="rating" value="2">
+                                <label for="2-stars" class="star"></label>
+                                <input type="radio" id="1-star" name="rating" value="1">
+                                <label for="1-star" class="star"></label>
+                            </div>
+                        </form>
+                    @endguest
                 @endif
             </div>
         </div>
