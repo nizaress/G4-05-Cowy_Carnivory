@@ -104,6 +104,13 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="text" class="form-control" id="password" name="password" required>
+                        @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="phone_number">Phone Number:</label>
                         <input type="text" class="form-control" id="phone_number" name="phone_number" required>
                         @error('phone_number')
@@ -121,6 +128,13 @@
                         <label for="accountNumber">Account Number:</label>
                         <input type="text" class="form-control" id="accountNumber" name="accountNumber" required>
                         @error('accountNumber')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <input type="text" class="form-control" id="category" name="category" required>
+                        @error('category')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>

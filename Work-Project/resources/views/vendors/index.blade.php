@@ -265,6 +265,7 @@
                         <th>Phone Number</th>
                         <th>Address</th>
                         <th>Account Number</th>
+                        <th>Category</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -292,6 +293,13 @@
                                     @csrf
                                     @method('PATCH')
                                     <input type="text" class="imp" name="accountNumber" value="{{ $vendor->accountNumber }}" onchange="this.form.submit()">
+                                </form>
+                            </td>
+                            <td>
+                                <form class="frm" action="{{ url('/vendor/update/'.$vendor->id) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <input type="text" class="imp" name="category" value="{{ $vendor->category }}" onchange="this.form.submit()">
                                 </form>
                             </td>
                         </tr>

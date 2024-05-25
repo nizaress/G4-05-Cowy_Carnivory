@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
 use App\Models\VendorVote;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class VendorController extends Controller
 {
@@ -65,6 +66,7 @@ class VendorController extends Controller
             'phone_number' => 'nullable|integer|min:1',
             'address' => 'nullable|string',
             'accountNumber' => 'nullable|integer|min:1',
+            'category' => 'nullable|string',
         ]);
 
         $vendor->update($data);
@@ -82,16 +84,23 @@ class VendorController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'name' => 'required|string',
+            'password' => 'nullable|string|min:8', // 'password' => 'required|string|min:8
             'phone_number' => 'nullable|integer|min:1',
             'address' => 'nullable|string',
             'accountNumber' => 'nullable|string',
+            'category' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        Vendor::create($request->all());
+        $data = $request->all();
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
+
+        Vendor::create($data);
 
         return redirect()->route('list.vendors')->with('success', 'Vendor added successfully!');
     }
