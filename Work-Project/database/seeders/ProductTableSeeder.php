@@ -398,8 +398,7 @@ class ProductTableSeeder extends Seeder
             Product::create($product);
         }
 
-        // Crear ejemplos adicionales usando la fábrica
-        // Recuperar todos los vendedores
+        /*
         $vendors = Vendor::all();
 
         foreach ($vendors as $vendor) {
@@ -412,6 +411,7 @@ class ProductTableSeeder extends Seeder
                 'vendor_name' => $vendorDetails->name,
             ]);
         }
+        */
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }

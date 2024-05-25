@@ -17,12 +17,15 @@ class LineOrderTableSeeder extends Seeder
      */
     public function run()
     {
+        
         DB::table('lineorder')->delete();
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Lineorder::truncate();
-        
-
-        Lineorder::factory()->count(300)->create();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        /*
+        Lineorder::factory()->count(300)->create();
+        */
+        
+        
     }
 }

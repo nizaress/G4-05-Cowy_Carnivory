@@ -17,11 +17,13 @@ class CustomerTableSeeder extends Seeder
      */
     public function run()
     {
+        
         DB::table('customer')->delete();
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Customer::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
+        
         Customer::create([
             'email' => 'customer@default.com',
             'name' => 'customer-default',
@@ -34,5 +36,6 @@ class CustomerTableSeeder extends Seeder
         ]);
 
         Customer::factory()->count(100)->create();
+        
     }
 }

@@ -17,10 +17,13 @@ class OrderTableSeeder extends Seeder
      */
     public function run()
     {
+        
         DB::table('order')->delete();
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Order::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        /*
         Order::factory()->count(500)->create();
+        */
     }
 }
