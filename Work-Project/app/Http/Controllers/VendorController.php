@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\VendorVote;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User; 
 
 class VendorController extends Controller
 {
@@ -100,13 +101,25 @@ class VendorController extends Controller
             $data['password'] = Hash::make($data['password']);
         }
 
-        Vendor::create($data);
+        $vendor = Vendor::create($data);
+
+        $userData = [
+            'name' => $vendor->name,
+            'email' => $vendor->email,
+            'password' => $vendor->password, 
+            'address' => $vendor->address,
+            'phone_number' => $vendor->phone_number,
+            'card_number' => $vendor->accountNumber,
+            'role' => 'vendor'
+        ];
+
+        User::create($userData);
 
         return redirect()->route('list.vendors')->with('success', 'Vendor added successfully!');
     }
 
     public function show($id)
-    {   
+    {
         $basket = session()->get('basket', []);
         foreach ($basket as $productId => $quantity) {
             $product = Product::findOrFail($productId);
@@ -178,9 +191,11 @@ class VendorController extends Controller
 
     public function filter_rating()
     {
-        $vendors = Vendor::withCount(['votes as average_rating' => function($query) {
-            $query->select(\DB::raw('coalesce(avg(rating),0)'));
-        }])->orderBy('average_rating', 'desc')->paginate(10);
+        $vendors = Vendor::withCount([
+            'votes as average_rating' => function ($query) {
+                $query->select(\DB::raw('coalesce(avg(rating),0)'));
+            }
+        ])->orderBy('average_rating', 'desc')->paginate(10);
 
         return view('vendors.index', compact('vendors'));
     }
@@ -194,8 +209,7 @@ class VendorController extends Controller
         $basket = session()->get('basket', []);
         if (isset($basket[$productId])) {
             $basket[$productId]++;
-        }
-        else {
+        } else {
             $basket[$productId] = 1;
         }
 
@@ -213,8 +227,7 @@ class VendorController extends Controller
         if (isset($basket[$productId])) {
             if ($basket[$productId] == 0) {
                 unset($basket[$productId]);
-            }
-            else {
+            } else {
                 $basket[$productId]--;
             }
         }

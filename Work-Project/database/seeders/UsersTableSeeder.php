@@ -21,8 +21,42 @@ class UsersTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
         DB::table('users')->insert([
 
+            
             [
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('admin'),
+                'address' => 'admin Street',
+                'phone_number' => 713578143,
+                'card_number' => 1111222233334444,
+                'role' => 'admin',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'vendor-default',
+                'email' => 'vendor@default.com',
+                'password' => Hash::make('vendor'),
+                'address' => 'vendor Street',
+                'phone_number' => 643218999,
+                'card_number' => 5555666677778888,
+                'role' => 'vendor',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'customer-default',
+                'email' => 'customer@default.com',
+                'password' => Hash::make('customer'),
+                'address' => 'customer Street',
+                'phone_number' => 616614321,
+                'card_number' => 1111111122222222,
+                'role' => 'customer',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
 
+            [
                 'email' => 'info@mcdonalds.com',
                 'name' => 'McDonald\'s',
                 'password' => Hash::make('vendor'),
@@ -233,39 +267,6 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
 
-            [
-                'name' => 'admin',
-                'email' => 'admin@admin.com',
-                'password' => Hash::make('admin'),
-                'address' => 'admin Street',
-                'phone_number' => 713578143,
-                'card_number' => 1111222233334444,
-                'role' => 'admin',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'vendor-default',
-                'email' => 'vendor@default.com',
-                'password' => Hash::make('vendor'),
-                'address' => 'vendor Street',
-                'phone_number' => 643218999,
-                'card_number' => 5555666677778888,
-                'role' => 'vendor',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'customer-default',
-                'email' => 'customer@default.com',
-                'password' => Hash::make('customer'),
-                'address' => 'customer Street',
-                'phone_number' => 616614321,
-                'card_number' => 1111111122222222,
-                'role' => 'customer',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
         ]);
     }
 }
