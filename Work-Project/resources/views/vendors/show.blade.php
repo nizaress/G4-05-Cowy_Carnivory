@@ -353,6 +353,7 @@
                 <p>{{ $vendor->email }}</p>
                 <p>{{ $vendor->phone_number }}</p>
                 @auth 
+                @if (Auth::user()->role == 'customer')
                     @if(!\App\Models\VendorVote::where('user_id', Auth::id())->where('vendor_id', $vendor->id)->exists())
                         <form action="{{ route('vendor.rate', $vendor->id) }}" method="POST">
                             @csrf
@@ -394,6 +395,7 @@
                         </div>
                     </form>
                 @endguest
+                @endif
             </div>
         </div>
 
