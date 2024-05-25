@@ -31,7 +31,7 @@ class VendorController extends Controller
             $query->getQuery()->orders = [];
         }
 
-        $vendors = $query->paginate(5);
+        $vendors = $query->paginate(4);
 
         $vendors->appends(['sort' => $sortOrder]);
 
