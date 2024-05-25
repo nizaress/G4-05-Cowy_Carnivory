@@ -89,10 +89,12 @@
                 <input type="number" name="customer_id" min="1" step="1" required placeholder="Enter Customer ID" style="flex: 1;">
                 <button class="btn" type="submit" style="margin-left: 10px;">Delete</button>
             </form>
+            <!--
             <form class="frm" method="GET" style="margin-right: 5%; margin-left: 4%;" action="{{ url('/customer/create') }}">
                 @csrf
                 <button class="btn" type="submit" type="button">Add a Customer</button>
             </form>
+            -->
             <div style="display: flex; align-items: center; margin-right: 6%; margin-left: 2%; flex-wrap: nowrap;">
                 <h4 style="margin-right: 10px; font-family: Arial, sans-serif; color: rgb(116, 116, 116); white-space: nowrap;">Sort by:</h4>
                 <form class="frm" action="{{ url('/customer') }}" method="GET" style="margin-left: 0; margin-right: 4%;">
@@ -118,10 +120,7 @@
                         <th>ID</th>
                         <th>Email</th>
                         <th>Name</th>
-                        <th>Password</th>
-                        <th>Address</th>
                         <th>Phone Number</th>
-                        <th>Card Number</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -130,6 +129,8 @@
                             <td><b>{{ $customer->id }}</b></td>
                             <td>{{ $customer->email }}</td>
                             <td>{{ $customer->name }}</td>
+                            <td>{{ $customer->phone_number }}</td>
+                            <!--
                             <td>
                                 <form class="frm" action="{{ url('/customer/update/'.$customer->id) }}" method="POST">
                                     @csrf
@@ -158,6 +159,7 @@
                                     <input type="text" name="card_number" value="{{ $customer->card_number }}" onchange="this.form.submit()">
                                 </form>
                             </td>
+                            -->
                         </tr>
                     @endforeach
                 </tbody>
