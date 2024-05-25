@@ -352,6 +352,21 @@
                 <p>{{ $vendor->address }}</p>
                 <p>{{ $vendor->email }}</p>
                 <p>{{ $vendor->phone_number }}</p>
+
+                @if (Auth::check() && Auth::user()->role == 'vendor')
+                    <form
+                        action="{{ url('/vendors/' . $vendor->id . '/upload-product-image') }}"
+                        method="POST" enctype="multipart/form-data" class="upload-form" style="margin-top: 10px;">
+                        @csrf
+                        <label for="upload-image-{{ $vendor->id }}" class="upload-label">
+                            <img src="{{ asset('images/products/upload-image-button.png') }}"
+                                alt="Upload Image" class="upload-image">
+                        </label>
+                        <input type="file" id="upload-image-{{ $vendor->id }}" name="vendor_image"
+                            accept=".png" style="display: none;" onchange="this.form.submit()">
+                    </form>
+                @endif
+                
                 @auth 
                 @if (Auth::user()->role == 'customer')
                     @if(!\App\Models\VendorVote::where('user_id', Auth::id())->where('vendor_id', $vendor->id)->exists())
