@@ -1704,47 +1704,6 @@ class ProductTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-
-
-            // Añadir más productos para Chick-fil-A
-            [
-                'cod' => $cod++,
-                'name' => 'Chicken Sandwich',
-                'description' => 'A classic chicken sandwich.',
-                'price' => 4.99,
-                'vendor_email' => 'info@chickfila.com',
-                'vendor_name' => 'Chick-fil-A',
-                'vendor_id' => 9,
-                'category' => 'Main Course',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'cod' => $cod++,
-                'name' => 'Waffle Fries',
-                'description' => 'Crispy waffle fries.',
-                'price' => 2.49,
-                'vendor_email' => 'info@chickfila.com',
-                'vendor_name' => 'Chick-fil-A',
-                'vendor_id' => 9,
-                'category' => 'Starter',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'cod' => $cod++,
-                'name' => 'Milkshake',
-                'description' => 'A creamy milkshake.',
-                'price' => 3.49,
-                'vendor_email' => 'info@chickfila.com',
-                'vendor_name' => 'Chick-fil-A',
-                'vendor_id' => 9,
-                'category' => 'Dessert',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-
-
         ];
 
         // Insertar productos específicos en la base de datos
