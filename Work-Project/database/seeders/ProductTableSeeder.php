@@ -22,25 +22,15 @@ class ProductTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Product::truncate();
 
+        static $cod = 1000;
+
         // Productos específicos para cada restaurante
         $products = [
             [
-                'cod' => rand(1000, 9999),
-                'name' => 'Big Mac',
-                'description' => 'A delicious Big Mac burger.',
-                'price' => 5.99,
-                'vendor_email' => 'info@mcdonalds.com',
-                'vendor_name' => 'McDonald\'s',
-                'vendor_id' => 1,
-                'category' => 'Main Course',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'cod' => rand(1000, 9999),
-                'name' => 'Chicken McNuggets',
-                'description' => 'Tasty Chicken McNuggets.',
-                'price' => 4.99,
+                'cod' => $cod++,
+                'name' => 'Crunchy Chicken McNuggets',
+                'description' => 'Crunchy McNuggets.',
+                'price' => 2.99,
                 'vendor_email' => 'info@mcdonalds.com',
                 'vendor_name' => 'McDonald\'s',
                 'vendor_id' => 1,
@@ -49,9 +39,93 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
-                'name' => 'McFlurry',
-                'description' => 'Creamy McFlurry dessert.',
+                'cod' => $cod++,
+                'name' => 'Spicy Chicken McNuggets',
+                'description' => 'Spicy McNuggets.',
+                'price' => 2.99,
+                'vendor_email' => 'info@mcdonalds.com',
+                'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
+                'category' => 'Starter',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'cod' => $cod++,
+                'name' => 'Salty Chicken McNuggets',
+                'description' => 'Salty McNuggets.',
+                'price' => 5.99,
+                'vendor_email' => 'info@mcdonalds.com',
+                'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
+                'category' => 'Starter',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'cod' => $cod++,
+                'name' => 'Hot Chicken McNuggets',
+                'description' => 'Hot McNuggets.',
+                'price' => 2.99,
+                'vendor_email' => 'info@mcdonalds.com',
+                'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
+                'category' => 'Starter',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'cod' => $cod++,
+                'name' => 'Cool Combo 1',
+                'description' => 'A delicious Menu for you',
+                'price' => 9.99,
+                'vendor_email' => 'info@mcdonalds.com',
+                'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
+                'category' => 'Main Course',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'cod' => $cod++,
+                'name' => 'Cool Combo 2',
+                'description' => 'A delicious Menu for you',
+                'price' => 7.99,
+                'vendor_email' => 'info@mcdonalds.com',
+                'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
+                'category' => 'Main Course',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'cod' => $cod++,
+                'name' => 'Cool Combo 3',
+                'description' => 'A delicious Menu for you',
+                'price' => 6.99,
+                'vendor_email' => 'info@mcdonalds.com',
+                'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
+                'category' => 'Main Course',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'cod' => $cod++,
+                'name' => 'Cool Wrapper Combo ',
+                'description' => 'A delicious Menu for you',
+                'price' => 12.99,
+                'vendor_email' => 'info@mcdonalds.com',
+                'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
+                'category' => 'Main Course',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'cod' => $cod++,
+                'name' => 'McFlurry Oreo',
+                'description' => 'Delicious Oreo.',
                 'price' => 2.99,
                 'vendor_email' => 'info@mcdonalds.com',
                 'vendor_name' => 'McDonald\'s',
@@ -61,7 +135,43 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
+                'name' => 'Chicken Bites',
+                'description' => 'Crunchy Chicken Bytes',
+                'price' => 3.99,
+                'vendor_email' => 'info@mcdonalds.com',
+                'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
+                'category' => 'Dessert',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'cod' => $cod++,
+                'name' => 'Apple',
+                'description' => 'Very Healthy',
+                'price' => 9.99,
+                'vendor_email' => 'info@mcdonalds.com',
+                'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
+                'category' => 'Dessert',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'cod' => $cod++,
+                'name' => 'Biscoff',
+                'description' => 'Delicious Biscoff',
+                'price' => 5.99,
+                'vendor_email' => 'info@mcdonalds.com',
+                'vendor_name' => 'McDonald\'s',
+                'vendor_id' => 1,
+                'category' => 'Dessert',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'cod' => $cod++,
                 'name' => 'Whopper',
                 'description' => 'A tasty Whopper burger.',
                 'price' => 6.99,
@@ -73,7 +183,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Chicken Fries',
                 'description' => 'Delicious Chicken Fries.',
                 'price' => 3.99,
@@ -85,7 +195,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'BK Sundae',
                 'description' => 'A sweet BK Sundae.',
                 'price' => 2.49,
@@ -97,7 +207,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Baconator',
                 'description' => 'A delicious Baconator burger.',
                 'price' => 7.49,
@@ -109,7 +219,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Frosty',
                 'description' => 'A creamy Frosty dessert.',
                 'price' => 1.99,
@@ -121,7 +231,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Spicy Chicken Sandwich',
                 'description' => 'A spicy chicken sandwich.',
                 'price' => 5.49,
@@ -134,7 +244,7 @@ class ProductTableSeeder extends Seeder
             ],
             // Añadir más productos para KFC
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Fried Chicken Bucket',
                 'description' => 'A bucket of KFC\'s famous fried chicken.',
                 'price' => 12.99,
@@ -146,7 +256,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Mashed Potatoes',
                 'description' => 'Creamy mashed potatoes with gravy.',
                 'price' => 2.99,
@@ -158,7 +268,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Chocolate Chip Cake',
                 'description' => 'A delicious chocolate chip cake.',
                 'price' => 4.99,
@@ -171,7 +281,7 @@ class ProductTableSeeder extends Seeder
             ],
             // Añadir más productos para Subway
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Turkey Sub',
                 'description' => 'A fresh turkey sub sandwich.',
                 'price' => 5.99,
@@ -183,7 +293,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Veggie Delight',
                 'description' => 'A healthy veggie delight sandwich.',
                 'price' => 4.99,
@@ -195,7 +305,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Chocolate Chip Cookie',
                 'description' => 'A freshly baked chocolate chip cookie.',
                 'price' => 1.49,
@@ -208,7 +318,7 @@ class ProductTableSeeder extends Seeder
             ],
             // Añadir más productos para Pizza Hut
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Pepperoni Pizza',
                 'description' => 'A classic pepperoni pizza.',
                 'price' => 8.99,
@@ -220,7 +330,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Garlic Breadsticks',
                 'description' => 'Garlic-flavored breadsticks.',
                 'price' => 3.49,
@@ -232,7 +342,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Cinnamon Sticks',
                 'description' => 'Sweet cinnamon sticks with icing.',
                 'price' => 4.99,
@@ -245,7 +355,7 @@ class ProductTableSeeder extends Seeder
             ],
             // Añadir más productos para Taco Bell
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Crunchy Taco',
                 'description' => 'A crunchy taco with beef and lettuce.',
                 'price' => 1.99,
@@ -257,7 +367,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Nachos',
                 'description' => 'Nachos with cheese and jalapeños.',
                 'price' => 2.99,
@@ -269,7 +379,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Churros',
                 'description' => 'Sweet churros with cinnamon sugar.',
                 'price' => 1.99,
@@ -282,7 +392,7 @@ class ProductTableSeeder extends Seeder
             ],
             // Añadir más productos para Domino's Pizza
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Margherita Pizza',
                 'description' => 'A classic margherita pizza.',
                 'price' => 7.99,
@@ -294,7 +404,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Cheesy Bread',
                 'description' => 'Breadsticks with cheese.',
                 'price' => 4.49,
@@ -306,7 +416,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Chocolate Lava Cake',
                 'description' => 'A warm chocolate lava cake.',
                 'price' => 3.99,
@@ -319,7 +429,7 @@ class ProductTableSeeder extends Seeder
             ],
             // Añadir más productos para Chick-fil-A
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Chicken Sandwich',
                 'description' => 'A classic chicken sandwich.',
                 'price' => 4.99,
@@ -331,7 +441,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Waffle Fries',
                 'description' => 'Crispy waffle fries.',
                 'price' => 2.49,
@@ -343,7 +453,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Milkshake',
                 'description' => 'A creamy milkshake.',
                 'price' => 3.49,
@@ -356,7 +466,7 @@ class ProductTableSeeder extends Seeder
             ],
             // Añadir más productos para Dunkin' Donuts
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Glazed Donut',
                 'description' => 'A classic glazed donut.',
                 'price' => 1.29,
@@ -368,7 +478,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Breakfast Sandwich',
                 'description' => 'A delicious breakfast sandwich.',
                 'price' => 3.99,
@@ -380,7 +490,7 @@ class ProductTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'cod' => rand(1000, 9999),
+                'cod' => $cod++,
                 'name' => 'Coffee',
                 'description' => 'A hot cup of coffee.',
                 'price' => 1.99,

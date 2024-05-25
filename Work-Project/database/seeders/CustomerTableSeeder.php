@@ -35,7 +35,7 @@ class CustomerTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        Customer::factory()->count(100)->create();
+        //Customer::factory()->count(100)->create();
         
     }
 }
