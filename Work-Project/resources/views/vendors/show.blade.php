@@ -278,9 +278,20 @@
             gap: 5px;
         }
 
-        .edit-buttons a img {
+        .edit-buttons a img,
+        .edit-buttons .upload-form img {
             width: 24px;
+            /* Match the size of the other buttons */
             height: 24px;
+            /* Match the size of the other buttons */
+            cursor: pointer;
+        }
+
+        .upload-label img {
+            width: 24px;
+            /* Match the size of the other buttons */
+            height: 24px;
+            /* Match the size of the other buttons */
         }
 
         .add-product-container {
@@ -413,11 +424,12 @@
 
                                         <form
                                             action="{{ url('/vendors/' . $vendor->id . '/upload-product-image/' . $product->id) }}"
-                                            method="POST" enctype="multipart/form-data" style="display:inline;">
+                                            method="POST" enctype="multipart/form-data" class="upload-form"
+                                            style="display:inline;">
                                             @csrf
-                                            <label for="upload-image-{{ $product->id }}">
+                                            <label for="upload-image-{{ $product->id }}" class="upload-label">
                                                 <img src="{{ asset('images/products/upload-image-button.png') }}"
-                                                    alt="Upload Image" style="cursor: pointer;">
+                                                    alt="Upload Image" class="upload-image">
                                             </label>
                                             <input type="file" id="upload-image-{{ $product->id }}" name="product_image"
                                                 accept=".png" style="display: none;" onchange="this.form.submit()">
@@ -475,11 +487,12 @@
 
                                         <form
                                             action="{{ url('/vendors/' . $vendor->id . '/upload-product-image/' . $product->id) }}"
-                                            method="POST" enctype="multipart/form-data" style="display:inline;">
+                                            method="POST" enctype="multipart/form-data" class="upload-form"
+                                            style="display:inline;">
                                             @csrf
-                                            <label for="upload-image-{{ $product->id }}">
+                                            <label for="upload-image-{{ $product->id }}" class="upload-label">
                                                 <img src="{{ asset('images/products/upload-image-button.png') }}"
-                                                    alt="Upload Image" style="cursor: pointer;">
+                                                    alt="Upload Image" class="upload-image">
                                             </label>
                                             <input type="file" id="upload-image-{{ $product->id }}" name="product_image"
                                                 accept=".png" style="display: none;" onchange="this.form.submit()">
@@ -535,11 +548,12 @@
 
                                         <form
                                             action="{{ url('/vendors/' . $vendor->id . '/upload-product-image/' . $product->id) }}"
-                                            method="POST" enctype="multipart/form-data" style="display:inline;">
+                                            method="POST" enctype="multipart/form-data" class="upload-form"
+                                            style="display:inline;">
                                             @csrf
-                                            <label for="upload-image-{{ $product->id }}">
+                                            <label for="upload-image-{{ $product->id }}" class="upload-label">
                                                 <img src="{{ asset('images/products/upload-image-button.png') }}"
-                                                    alt="Upload Image" style="cursor: pointer;">
+                                                    alt="Upload Image" class="upload-image">
                                             </label>
                                             <input type="file" id="upload-image-{{ $product->id }}" name="product_image"
                                                 accept=".png" style="display: none;" onchange="this.form.submit()">
