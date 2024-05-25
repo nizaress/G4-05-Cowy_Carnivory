@@ -117,10 +117,7 @@
         <ul class="navbar">
             <li><a class="bold" href="/">Home</a></li>
             <li><a href="/vendor">Vendors</a></li>
-            <li><a href="/product">Products</a></li>
             <li><a href="/customer">Customers</a></li>
-            <li><a href="/order">Orders</a></li>
-            <li><a href="/linorder">Linorders</a></li>
         </ul>
 
         <div class="navbar-buttons">
@@ -129,12 +126,6 @@
                 @csrf
             </form>
             <button id="logout-button" class="btn-logout" type="button">Log Out</button>
-
-            <!-- Profile Button -->
-            <form method="GET" action="{{ route('profile.show') }}">
-                @csrf
-                <button class="btn-profile" type="submit" type="button">Profile</button>
-            </form>
         </div>
     </div>
 
