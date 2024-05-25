@@ -84,15 +84,20 @@
         <br>
 
         <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1%; margin-bottom: 1%;">
+            <!--
             <form class="frm" action="{{ url('/product/delete') }}" method="POST" style="display: flex; align-items: center; margin-left: 5%; margin-right: 5%;">
                 @csrf
                 <input type="number" name="product_id" min="1" step="1" required placeholder="Enter Product ID" style="flex: 1;">
                 <button class="btn" type="submit" style="margin-left: 10px;">Delete</button>
             </form>
+            -->
+
+            <!--
             <form class="frm" method="GET" style="margin-right: 6%;" action="{{ url('/product/create') }}">
                 @csrf
                 <button class="btn" type="submit" type="button">Add a Product</button>
             </form>
+            -->
             <form class="frm" action="{{ url('/product') }}" method="GET" style="display: flex; justify-content: center; gap: 10px; align-items: center; margin-bottom: 1%;">
         <div>
             <input type="number" name="min_price" placeholder="Price greater than" style="width: 150px; padding: 10px; border-radius: 5px; background-color: #f8f8f8; border: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0,0,0,0.15);" min="0" step="0.1" value="{{ request('min_price') }}">
@@ -124,6 +129,8 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
+                        <th>Category</th>
+                        <th>Vendor ID</th>
                         <th>Vendor Email</th>
                         <th>Vendor Name</th>
                     </tr>
@@ -133,6 +140,15 @@
                         <tr>
                             <td><b>{{ $product->id }}</b></td>
                             <td>{{ $product->cod }}</td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->description }}</td>
+                            <td>{{ $product->price }}</td>
+                            <td>{{ $product->category }}</td>
+                            <td>{{ $product->vendor_id }}</td>
+                            <td>{{ $product->vendor_email }}</td>
+                            <td>{{ $product->vendor_name }}</td>
+
+                            <!--
                             <td>
                                 <form class="frm" action="{{ url('/product/update/'.$product->id) }}" method="POST">
                                     @csrf
@@ -162,6 +178,7 @@
                                     <input type="text" name="vendor_name" value="{{ $product->vendor_name }}" onchange="this.form.submit()">
                                 </form>
                             </td>
+                            -->
                         </tr>
                     @endforeach
                 </tbody>
