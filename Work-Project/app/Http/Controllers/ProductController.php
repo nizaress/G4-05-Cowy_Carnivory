@@ -143,7 +143,7 @@ public function addProduct(Request $request, $vendorId)
         'cod' => 'required|integer|min:1',
         'name' => 'required|string',
         'description' => 'nullable|string',
-        'price' => 'nullable|numeric',
+        'price' => 'nullable|numeric|min:0.01',
         'category' => 'required|string',
     ]);
 
