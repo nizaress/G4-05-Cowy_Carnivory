@@ -197,19 +197,6 @@
 </head>
 
 <body>
-  @php
-    Log::info("Debugging starts here");
-    $backgroundUrls = [
-        '/images/backgrounds/fondo1.jpg',
-        '/images/backgrounds/fondo2.jpg',
-        '/images/backgrounds/fondo3.png',
-        '/images/backgrounds/fondo4.jpg',
-        '/images/backgrounds/fondo5.jpg',
-        '/images/backgrounds/fondo6.jpg',
-        '/images/backgrounds/fondo7.jpg'
-    ];
-  @endphp
-
   @auth
   @if (Auth::user()->role == 'admin')
     @include('layouts.nbadmin')
@@ -292,6 +279,7 @@
       }
 
       setInterval(changeBackground, 4000);
+      changeBackground();
     });
   </script>
 </body>
