@@ -96,9 +96,9 @@
             <div class="col">
                 <h3>Follow Us</h3>
                 <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61559973187599" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://x.com/CowyCarnivory" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/cowycarnivory" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
