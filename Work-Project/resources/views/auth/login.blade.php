@@ -175,7 +175,7 @@
         const backgroundUrls = [
             '/images/backgrounds/fondo1.jpg',
             '/images/backgrounds/fondo2.jpg',
-            '/images/backgrounds/fondo3.png',
+            '/images/backgrounds/fondo3.jpg',
             '/images/backgrounds/fondo4.jpg',
             '/images/backgrounds/fondo5.jpg',
             '/images/backgrounds/fondo6.jpg',
